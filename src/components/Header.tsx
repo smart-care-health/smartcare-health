@@ -24,8 +24,8 @@ const Header = () => {
               <Activity className="h-6 w-6 text-white" />
             </div>
             <div>
-              <h1 className="font-heading font-bold text-xl text-primary">HealthTech Africa</h1>
-              <p className="text-xs text-muted-foreground">Transforming Healthcare</p>
+              <h1 className="font-heading font-bold text-xl text-primary">Smartcare Health Solutions</h1>
+              <p className="text-xs text-muted-foreground">Primary Healthcare Innovation</p>
             </div>
           </div>
 

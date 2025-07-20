@@ -14,16 +14,16 @@ const Hero = () => {
           <div className="space-y-8">
             <div className="space-y-4">
               <div className="inline-flex items-center bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium">
-                🌍 Transforming African Healthcare
+                🏥 Primary Healthcare Innovation
               </div>
               <h1 className="font-heading font-bold text-5xl lg:text-6xl text-foreground leading-tight">
-                Bridging Healthcare 
-                <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"> Gaps</span> 
+                Revolutionizing 
+                <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"> Primary Healthcare</span> 
                 <br />Across Africa
               </h1>
               <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl">
-                We're pioneering digital health innovation with cutting-edge remote diagnostics and integrated EHR/EMR platforms, 
-                working alongside governments, NGOs, and healthcare institutions to build scalable, locally-adapted solutions.
+                We deliver cutting-edge remote diagnostics and comprehensive EHR/EMR platforms that connect primary healthcare 
+                to secondary and tertiary providers, ensuring seamless continuum of care across African communities.
               </p>
             </div>
 
