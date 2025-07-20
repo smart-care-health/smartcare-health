@@ -2,41 +2,58 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/* HealthTech Africa Design System - Modern healthcare innovation theme 
+All colors MUST be HSL for proper theming.
 */
 
 @layer base {
   :root {
+    /* Core brand colors - Deep blue primary with teal accent */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
+    --foreground: 213 100% 15%;
+    
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
+    --card-foreground: 213 100% 15%;
+    
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
+    --popover-foreground: 213 100% 15%;
+    
+    /* Deep blue primary for trust and professionalism */
+    --primary: 213 100% 20%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 213 100% 25%;
+    
+    /* Teal accent for innovation and healthcare */
+    --accent: 180 100% 35%;
+    --accent-foreground: 0 0% 100%;
+    --accent-hover: 180 100% 40%;
+    
+    /* Soft gray backgrounds */
+    --secondary: 210 20% 96%;
+    --secondary-foreground: 213 100% 15%;
+    
+    --muted: 210 20% 95%;
+    --muted-foreground: 213 25% 45%;
+    
+    /* Healthcare-specific colors */
+    --health-primary: 213 100% 20%;
+    --health-accent: 180 100% 35%;
+    --health-success: 142 71% 45%;
+    --health-light: 210 20% 98%;
+    
+    /* Gradients for modern appeal */
+    --gradient-hero: linear-gradient(135deg, hsl(213 100% 20%), hsl(180 100% 35%));
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%), hsl(210 20% 98%));
+    --gradient-accent: linear-gradient(45deg, hsl(180 100% 35%), hsl(180 100% 40%));
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 210 20% 90%;
+    --input: 210 20% 90%;
+    --ring: 213 100% 20%;
+    
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
 
