@@ -3,90 +3,63 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Calendar,
-  Send,
-  MessageSquare,
-  Building2,
-  Users
-} from "lucide-react";
-
+import { Mail, Phone, MapPin, Calendar, Send, MessageSquare, Building2, Users } from "lucide-react";
 const Contact = () => {
-  const contactMethods = [
-    {
-      icon: Mail,
-      title: "Email Us",
-      description: "Get in touch via email",
-      contact: "partnerships@healthtech-africa.com",
-      action: "Send Email"
-    },
-    {
-      icon: Phone,
-      title: "Call Us",
-      description: "Speak with our team",
-      contact: "+234 (0) 803 123 4567",
-      action: "Call Now"
-    },
-    {
-      icon: MapPin,
-      title: "Visit Us",
-      description: "Our headquarters",
-      contact: "Victoria Island, Lagos, Nigeria",
-      action: "Get Directions"
-    },
-    {
-      icon: Calendar,
-      title: "Schedule Meeting",
-      description: "Book a consultation",
-      contact: "Available weekdays 9AM-5PM WAT",
-      action: "Book Meeting"
-    }
-  ];
-
-  const inquiryTypes = [
-    {
-      icon: Building2,
-      title: "Government Partnerships",
-      description: "Ministry of Health collaborations and policy integration"
-    },
-    {
-      icon: Users,
-      title: "Healthcare Provider Integration",
-      description: "Hospital and clinic technology implementations"
-    },
-    {
-      icon: MessageSquare,
-      title: "Investor Relations",
-      description: "Funding opportunities and growth partnerships"
-    }
-  ];
-
-  const offices = [
-    {
-      city: "Lagos, Nigeria",
-      address: "Plot 1234, Tiamiyu Savage Street, Victoria Island",
-      role: "Headquarters & R&D Center",
-      status: "Primary"
-    },
-    {
-      city: "Abuja, Nigeria",
-      address: "Central Business District, Federal Capital Territory",
-      role: "Government Relations Office",
-      status: "Regional"
-    },
-    {
-      city: "Accra, Ghana",
-      address: "East Legon, Greater Accra Region",
-      role: "West Africa Operations",
-      status: "Regional"
-    }
-  ];
-
-  return (
-    <section id="contact" className="py-20 bg-muted/30">
+  const contactMethods = [{
+    icon: Mail,
+    title: "Email Us",
+    description: "Get in touch via email",
+    contact: "partnerships@healthtech-africa.com",
+    action: "Send Email"
+  }, {
+    icon: Phone,
+    title: "Call Us",
+    description: "Speak with our team",
+    contact: "+234 (0) 803 123 4567",
+    action: "Call Now"
+  }, {
+    icon: MapPin,
+    title: "Visit Us",
+    description: "Our headquarters",
+    contact: "Victoria Island, Lagos, Nigeria",
+    action: "Get Directions"
+  }, {
+    icon: Calendar,
+    title: "Schedule Meeting",
+    description: "Book a consultation",
+    contact: "Available weekdays 9AM-5PM WAT",
+    action: "Book Meeting"
+  }];
+  const inquiryTypes = [{
+    icon: Building2,
+    title: "Government Partnerships",
+    description: "Ministry of Health collaborations and policy integration"
+  }, {
+    icon: Users,
+    title: "Healthcare Provider Integration",
+    description: "Hospital and clinic technology implementations"
+  }, {
+    icon: MessageSquare,
+    title: "Investor Relations",
+    description: "Funding opportunities and growth partnerships"
+  }];
+  const offices = [{
+    city: "Lagos, Nigeria",
+    address: "Plot 1234, Tiamiyu Savage Street, Victoria Island",
+    role: "Headquarters & R&D Center",
+    status: "Primary"
+  }, {
+    city: "Abuja, Nigeria",
+    address: "Central Business District, Federal Capital Territory",
+    role: "Government Relations Office",
+    status: "Regional"
+  }, {
+    city: "Accra, Ghana",
+    address: "East Legon, Greater Accra Region",
+    role: "West Africa Operations",
+    status: "Regional"
+  }];
+  return <section id="contact" className="py-20 bg-muted/30">
       <div className="container mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16">
@@ -140,10 +113,7 @@ const Contact = () => {
 
                 <div className="space-y-2">
                   <Label htmlFor="inquiryType">Inquiry Type</Label>
-                  <select 
-                    id="inquiryType" 
-                    className="w-full p-3 border border-border rounded-md bg-background text-foreground"
-                  >
+                  <select id="inquiryType" className="w-full p-3 border border-border rounded-md bg-background text-foreground">
                     <option value="">Select inquiry type</option>
                     <option value="partnership">Partnership Opportunities</option>
                     <option value="implementation">Technology Implementation</option>
@@ -155,11 +125,7 @@ const Contact = () => {
 
                 <div className="space-y-2">
                   <Label htmlFor="message">Message</Label>
-                  <Textarea 
-                    id="message" 
-                    placeholder="Tell us about your project, partnership interest, or how we can help..."
-                    rows={5}
-                  />
+                  <Textarea id="message" placeholder="Tell us about your project, partnership interest, or how we can help..." rows={5} />
                 </div>
 
                 <Button variant="hero" size="lg" className="w-full">
@@ -180,8 +146,7 @@ const Contact = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                {contactMethods.map((method, index) => (
-                  <div key={index} className="flex items-start space-x-3 p-3 rounded-lg hover:bg-muted/50 transition-colors">
+                {contactMethods.map((method, index) => <div key={index} className="flex items-start space-x-3 p-3 rounded-lg hover:bg-muted/50 transition-colors">
                     <div className="bg-primary/10 p-2 rounded-lg">
                       <method.icon className="h-4 w-4 text-primary" />
                     </div>
@@ -190,8 +155,7 @@ const Contact = () => {
                       <p className="text-xs text-muted-foreground mb-1">{method.description}</p>
                       <p className="text-sm text-foreground">{method.contact}</p>
                     </div>
-                  </div>
-                ))}
+                  </div>)}
               </CardContent>
             </Card>
 
@@ -203,8 +167,7 @@ const Contact = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                {inquiryTypes.map((type, index) => (
-                  <div key={index} className="flex items-start space-x-3">
+                {inquiryTypes.map((type, index) => <div key={index} className="flex items-start space-x-3">
                     <div className="bg-accent/10 p-2 rounded-lg">
                       <type.icon className="h-4 w-4 text-accent" />
                     </div>
@@ -212,41 +175,14 @@ const Contact = () => {
                       <h4 className="font-semibold text-foreground text-sm">{type.title}</h4>
                       <p className="text-xs text-muted-foreground">{type.description}</p>
                     </div>
-                  </div>
-                ))}
+                  </div>)}
               </CardContent>
             </Card>
           </div>
         </div>
 
         {/* Office Locations */}
-        <div className="mt-16">
-          <h3 className="font-heading font-bold text-2xl text-foreground text-center mb-8">
-            Our Locations
-          </h3>
-          <div className="grid md:grid-cols-3 gap-6">
-            {offices.map((office, index) => (
-              <Card key={index} className="border-0 shadow-md hover:shadow-lg transition-all duration-300 bg-white/50">
-                <CardContent className="p-6 text-center">
-                  <div className={`inline-flex px-3 py-1 rounded-full text-xs font-medium mb-4 ${
-                    office.status === "Primary" ? "bg-primary/10 text-primary" : "bg-accent/10 text-accent"
-                  }`}>
-                    {office.status}
-                  </div>
-                  <h4 className="font-heading font-semibold text-lg text-foreground mb-2">
-                    {office.city}
-                  </h4>
-                  <p className="text-sm text-muted-foreground mb-2">
-                    {office.address}
-                  </p>
-                  <p className="text-xs text-primary font-medium">
-                    {office.role}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
+        
 
         {/* CTA Section */}
         <div className="mt-16 text-center">
@@ -269,8 +205,6 @@ const Contact = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Contact;
