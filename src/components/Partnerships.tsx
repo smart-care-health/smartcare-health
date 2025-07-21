@@ -74,16 +74,15 @@ const Partnerships = () => {
       <div className="container mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center bg-accent/10 text-accent px-4 py-2 rounded-full text-sm font-medium mb-4">
-            🤝 Strategic Partnerships
+          <div className="inline-flex items-center bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-4">
+            🟠 Partner With Us
           </div>
           <h2 className="font-heading font-bold text-4xl lg:text-5xl text-foreground mb-6">
             Building Healthcare 
-            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"> Ecosystems</span>
+            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"> Solutions Together</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Collaborating with governments, NGOs, healthcare providers, and insurers to create sustainable, 
-            locally-adapted digital health solutions across the African continent.
+            We work with government agencies, HMOs, hospitals, NGOs, and international funders. Whether you're seeking to improve public health outcomes or expand digital care services, let's build a solution together.
           </p>
         </div>
 

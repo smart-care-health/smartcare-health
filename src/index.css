@@ -8,50 +8,50 @@ All colors MUST be HSL for proper theming.
 
 @layer base {
   :root {
-    /* Core brand colors - Deep blue primary with teal accent */
+    /* Brand color palette - Primary Blue #005082, Teal Accent #00A896, Light Gray #F4F4F4 */
     --background: 0 0% 100%;
-    --foreground: 213 100% 15%;
+    --foreground: 0 0% 18%;
     
     --card: 0 0% 100%;
-    --card-foreground: 213 100% 15%;
+    --card-foreground: 0 0% 18%;
     
     --popover: 0 0% 100%;
-    --popover-foreground: 213 100% 15%;
+    --popover-foreground: 0 0% 18%;
     
-    /* Deep blue primary for trust and professionalism */
-    --primary: 213 100% 20%;
+    /* Primary Blue #005082 for trust and professionalism */
+    --primary: 200 100% 25%;
     --primary-foreground: 0 0% 100%;
-    --primary-hover: 213 100% 25%;
+    --primary-hover: 200 100% 30%;
     
-    /* Teal accent for innovation and healthcare */
-    --accent: 180 100% 35%;
+    /* Teal Accent #00A896 for innovation and healthcare */
+    --accent: 174 100% 33%;
     --accent-foreground: 0 0% 100%;
-    --accent-hover: 180 100% 40%;
+    --accent-hover: 174 100% 38%;
     
-    /* Soft gray backgrounds */
-    --secondary: 210 20% 96%;
-    --secondary-foreground: 213 100% 15%;
+    /* Light Gray #F4F4F4 backgrounds */
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 18%;
     
-    --muted: 210 20% 95%;
-    --muted-foreground: 213 25% 45%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
     
     /* Healthcare-specific colors */
-    --health-primary: 213 100% 20%;
-    --health-accent: 180 100% 35%;
+    --health-primary: 200 100% 25%;
+    --health-accent: 174 100% 33%;
     --health-success: 142 71% 45%;
-    --health-light: 210 20% 98%;
+    --health-light: 0 0% 96%;
     
     /* Gradients for modern appeal */
-    --gradient-hero: linear-gradient(135deg, hsl(213 100% 20%), hsl(180 100% 35%));
-    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%), hsl(210 20% 98%));
-    --gradient-accent: linear-gradient(45deg, hsl(180 100% 35%), hsl(180 100% 40%));
+    --gradient-hero: linear-gradient(135deg, hsl(200 100% 25%), hsl(174 100% 33%));
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%), hsl(0 0% 96%));
+    --gradient-accent: linear-gradient(45deg, hsl(174 100% 33%), hsl(174 100% 38%));
     
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
     
-    --border: 210 20% 90%;
-    --input: 210 20% 90%;
-    --ring: 213 100% 20%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 200 100% 25%;
     
     --radius: 0.75rem;
 
