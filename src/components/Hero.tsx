@@ -12,25 +12,25 @@ const Hero = () => {
           <div className="space-y-8">
             <div className="space-y-4">
               <div className="inline-flex items-center bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium">
-                🏥 Digital Health Innovation
+                🏥 Primary Healthcare Innovation
               </div>
               <h1 className="font-heading font-bold text-5xl lg:text-6xl text-foreground leading-tight">
-                Building the Future of 
-                <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"> Digital Health</span> 
-                <br />in Africa
+                Revolutionizing 
+                <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"> Primary Healthcare</span> 
+                <br />Across Africa
               </h1>
-              <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl">We design and deploy innovative health technologies to improve access, strengthen systems, and deliver connected care — from smart diagnostics to locally adapted digital health platforms.</p>
+              <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl">By deploying cutting-edge remote diagnostics and building comprehensive EHR/EMR platforms that connect primary healthcare to secondary and tertiary providers, ensuring seamless continuum of care across African communities.</p>
             </div>
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
               <Button variant="hero" size="lg" className="group">
-                Partner With Us
+                Explore Our Solutions
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
               <Button variant="outline" size="lg" className="group">
                 <Play className="mr-2 h-5 w-5" />
-                See Our Work
+                Watch Demo
               </Button>
             </div>
 

@@ -20,7 +20,7 @@ const Contact = () => {
       icon: Mail,
       title: "Email Us",
       description: "Get in touch via email",
-      contact: "partnerships@smartcare.health",
+      contact: "partnerships@healthtech-africa.com",
       action: "Send Email"
     },
     {
@@ -98,7 +98,8 @@ const Contact = () => {
             <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"> Healthcare Together?</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Interested in partnering, piloting, or supporting our work? Use our form below and we'll get back to you within 48 hours.
+            Connect with our team to explore partnership opportunities, discuss implementation strategies, 
+            or learn more about our digital health solutions.
           </p>
         </div>
 
@@ -111,8 +112,7 @@ const Contact = () => {
                   Send Us a Message
                 </CardTitle>
                 <p className="text-muted-foreground">
-                  📧 Email: partnerships@smartcare.health<br/>
-                  📍 Based in Lagos, Nigeria
+                  Fill out the form below and we'll get back to you within 24 hours.
                 </p>
               </CardHeader>
               <CardContent className="space-y-6">
