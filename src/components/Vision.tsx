@@ -1,95 +1,52 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { 
-  Zap, 
-  Brain, 
-  Wifi, 
-  Users, 
-  Globe2, 
-  TrendingUp,
-  ArrowRight,
-  Lightbulb
-} from "lucide-react";
-
+import { Zap, Brain, Wifi, Users, Globe2, TrendingUp, ArrowRight, Lightbulb } from "lucide-react";
 const Vision = () => {
-  const visionPoints = [
-    {
-      icon: Brain,
-      title: "AI-Powered Diagnostics",
-      description: "Advanced machine learning algorithms trained on African population data, providing culturally and medically relevant diagnostic insights.",
-      timeline: "2025-2026"
-    },
-    {
-      icon: Wifi,
-      title: "Offline-First Architecture",
-      description: "Robust systems that function seamlessly in low-connectivity environments, with intelligent data synchronization when connectivity is restored.",
-      timeline: "2024-2025"
-    },
-    {
-      icon: Globe2,
-      title: "Continental Interoperability",
-      description: "Standardized protocols enabling seamless health data exchange across African borders, supporting patient mobility and coordinated care.",
-      timeline: "2026-2027"
-    },
-    {
-      icon: Users,
-      title: "Community Health Integration",
-      description: "Comprehensive platform connecting community health workers, traditional healers, and formal healthcare systems for holistic care delivery.",
-      timeline: "2025-2026"
-    }
-  ];
-
-  const futureCapabilities = [
-    {
-      category: "Clinical Intelligence",
-      features: [
-        "Predictive analytics for disease outbreaks",
-        "Personalized treatment recommendations",
-        "Population health risk stratification",
-        "Clinical decision support systems"
-      ]
-    },
-    {
-      category: "Operational Excellence",
-      features: [
-        "Automated resource allocation",
-        "Real-time supply chain optimization",
-        "Intelligent appointment scheduling",
-        "Performance dashboard analytics"
-      ]
-    },
-    {
-      category: "Patient Engagement",
-      features: [
-        "Multi-language patient portals",
-        "SMS-based health reminders",
-        "Telemedicine integration",
-        "Community health education platforms"
-      ]
-    }
-  ];
-
-  const impacts = [
-    {
-      metric: "10M+",
-      description: "Patients connected to digital health records by 2027"
-    },
-    {
-      metric: "50%",
-      description: "Reduction in diagnostic delays across rural areas"
-    },
-    {
-      metric: "15",
-      description: "African countries with integrated health systems"
-    },
-    {
-      metric: "85%",
-      description: "Healthcare facilities digitized and connected"
-    }
-  ];
-
-  return (
-    <section id="vision" className="py-20 bg-white">
+  const visionPoints = [{
+    icon: Brain,
+    title: "AI-Powered Diagnostics",
+    description: "Advanced machine learning algorithms trained on African population data, providing culturally and medically relevant diagnostic insights.",
+    timeline: "2025-2026"
+  }, {
+    icon: Wifi,
+    title: "Offline-First Architecture",
+    description: "Robust systems that function seamlessly in low-connectivity environments, with intelligent data synchronization when connectivity is restored.",
+    timeline: "2024-2025"
+  }, {
+    icon: Globe2,
+    title: "Continental Interoperability",
+    description: "Standardized protocols enabling seamless health data exchange across African borders, supporting patient mobility and coordinated care.",
+    timeline: "2026-2027"
+  }, {
+    icon: Users,
+    title: "Community Health Integration",
+    description: "Comprehensive platform connecting community health workers, traditional healers, and formal healthcare systems for holistic care delivery.",
+    timeline: "2025-2026"
+  }];
+  const futureCapabilities = [{
+    category: "Clinical Intelligence",
+    features: ["Predictive analytics for disease outbreaks", "Personalized treatment recommendations", "Population health risk stratification", "Clinical decision support systems"]
+  }, {
+    category: "Operational Excellence",
+    features: ["Automated resource allocation", "Real-time supply chain optimization", "Intelligent appointment scheduling", "Performance dashboard analytics"]
+  }, {
+    category: "Patient Engagement",
+    features: ["Multi-language patient portals", "SMS-based health reminders", "Telemedicine integration", "Community health education platforms"]
+  }];
+  const impacts = [{
+    metric: "10M+",
+    description: "Patients connected to digital health records by 2027"
+  }, {
+    metric: "50%",
+    description: "Reduction in diagnostic delays across rural areas"
+  }, {
+    metric: "15",
+    description: "African countries with integrated health systems"
+  }, {
+    metric: "85%",
+    description: "Healthcare facilities digitized and connected"
+  }];
+  return <section id="vision" className="py-20 bg-white">
       <div className="container mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16">
@@ -100,57 +57,23 @@ const Vision = () => {
             The Future of 
             <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"> African Healthcare</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Our roadmap to creating a fully integrated, AI-powered, and locally-adapted healthcare ecosystem 
-            that serves every community across the African continent.
-          </p>
+          
         </div>
 
         {/* Vision Timeline */}
-        <div className="mb-16">
-          <h3 className="font-heading font-bold text-2xl text-foreground text-center mb-12">
-            Platform Development Roadmap
-          </h3>
-          <div className="grid lg:grid-cols-2 gap-8">
-            {visionPoints.map((point, index) => (
-              <Card key={index} className="group hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-white to-health-light/30">
-                <CardHeader className="pb-4">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="bg-gradient-to-r from-primary to-accent p-3 rounded-xl">
-                      <point.icon className="h-6 w-6 text-white" />
-                    </div>
-                    <span className="text-xs px-3 py-1 bg-accent/10 text-accent rounded-full font-medium">
-                      {point.timeline}
-                    </span>
-                  </div>
-                  <CardTitle className="font-heading text-xl text-foreground group-hover:text-primary transition-colors">
-                    {point.title}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">
-                    {point.description}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
+        
 
         {/* Future Capabilities */}
         <div className="mb-16">
           <div className="text-center mb-12">
-            <h3 className="font-heading font-bold text-3xl text-foreground mb-4">
-              Platform Capabilities
-            </h3>
+            
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Comprehensive features designed to address the unique challenges of African healthcare systems.
             </p>
           </div>
 
           <div className="grid lg:grid-cols-3 gap-8">
-            {futureCapabilities.map((capability, index) => (
-              <div key={index} className="bg-muted/50 p-8 rounded-xl border border-border">
+            {futureCapabilities.map((capability, index) => <div key={index} className="bg-muted/50 p-8 rounded-xl border border-border">
                 <div className="flex items-center space-x-3 mb-6">
                   <Lightbulb className="h-6 w-6 text-primary" />
                   <h4 className="font-heading font-semibold text-xl text-foreground">
@@ -158,15 +81,12 @@ const Vision = () => {
                   </h4>
                 </div>
                 <div className="space-y-3">
-                  {capability.features.map((feature, idx) => (
-                    <div key={idx} className="flex items-start space-x-3">
+                  {capability.features.map((feature, idx) => <div key={idx} className="flex items-start space-x-3">
                       <div className="w-1.5 h-1.5 bg-accent rounded-full mt-2 flex-shrink-0" />
                       <span className="text-muted-foreground">{feature}</span>
-                    </div>
-                  ))}
+                    </div>)}
                 </div>
-              </div>
-            ))}
+              </div>)}
           </div>
         </div>
 
@@ -182,8 +102,7 @@ const Vision = () => {
           </div>
           
           <div className="grid md:grid-cols-4 gap-8">
-            {impacts.map((impact, index) => (
-              <div key={index} className="text-center">
+            {impacts.map((impact, index) => <div key={index} className="text-center">
                 <div className="bg-white/20 backdrop-blur-sm p-6 rounded-xl border border-white/30">
                   <div className="font-heading font-bold text-3xl lg:text-4xl mb-2">
                     {impact.metric}
@@ -192,8 +111,7 @@ const Vision = () => {
                     {impact.description}
                   </div>
                 </div>
-              </div>
-            ))}
+              </div>)}
           </div>
         </div>
 
@@ -253,8 +171,6 @@ const Vision = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Vision;
