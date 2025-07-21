@@ -162,9 +162,7 @@ const Contact = () => {
             {/* Inquiry Types */}
             <Card className="border-0 shadow-lg bg-white/70 backdrop-blur-sm">
               <CardHeader>
-                <CardTitle className="font-heading text-xl text-foreground">
-                  What We Can Help With
-                </CardTitle>
+                
               </CardHeader>
               <CardContent className="space-y-4">
                 {inquiryTypes.map((type, index) => <div key={index} className="flex items-start space-x-3">
