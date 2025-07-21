@@ -64,7 +64,7 @@ const Hero = () => {
               <div className="text-2xl font-bold text-health-success">Active</div>
             </div>
             
-            <div className="absolute -bottom-6 -left-6 bg-white p-4 rounded-xl shadow-lg border border-border">
+            <div className="absolute -bottom-6 -left-6 bg-white p-4 rounded-xl shadow-lg border border-border z-20">
               <div className="text-sm font-medium text-foreground">Remote Monitoring</div>
               <div className="text-2xl font-bold text-primary">24/7</div>
             </div>
