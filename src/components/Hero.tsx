@@ -1,10 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play } from "lucide-react";
 import heroImage from "@/assets/hero-healthcare.jpg";
-
 const Hero = () => {
-  return (
-    <section id="home" className="relative min-h-screen flex items-center bg-gradient-to-br from-health-light to-white overflow-hidden">
+  return <section id="home" className="relative min-h-screen flex items-center bg-gradient-to-br from-health-light to-white overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-accent/5" />
       
@@ -21,10 +19,7 @@ const Hero = () => {
                 <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"> Primary Healthcare</span> 
                 <br />Across Africa
               </h1>
-              <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl">
-                We deliver cutting-edge remote diagnostics and comprehensive EHR/EMR platforms that connect primary healthcare 
-                to secondary and tertiary providers, ensuring seamless continuum of care across African communities.
-              </p>
+              <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl">By deploying cutting-edge remote diagnostics and building comprehensive EHR/EMR platforms that connect primary healthcare to secondary and tertiary providers, ensuring seamless continuum of care across African communities.</p>
             </div>
 
             {/* CTA Buttons */}
@@ -59,11 +54,7 @@ const Hero = () => {
           {/* Hero Image */}
           <div className="relative">
             <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl">
-              <img 
-                src={heroImage}
-                alt="Healthcare professional using diagnostic device" 
-                className="w-full h-[600px] object-cover"
-              />
+              <img src={heroImage} alt="Healthcare professional using diagnostic device" className="w-full h-[600px] object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent" />
             </div>
             
@@ -80,8 +71,6 @@ const Hero = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Hero;
