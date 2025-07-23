@@ -30,24 +30,8 @@ const Hero = () => {
               </Button>
               <Button variant="outline" size="lg" className="group">
                 <Play className="mr-2 h-5 w-5" />
-                Watch Demo
+                Higo Demo
               </Button>
-            </div>
-
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-8 pt-8 border-t border-border">
-              <div>
-                <div className="font-heading font-bold text-3xl text-primary">50K+</div>
-                <div className="text-sm text-muted-foreground">Patients Served</div>
-              </div>
-              <div>
-                <div className="font-heading font-bold text-3xl text-accent">25+</div>
-                <div className="text-sm text-muted-foreground">Healthcare Partners</div>
-              </div>
-              <div>
-                <div className="font-heading font-bold text-3xl text-health-success">12</div>
-                <div className="text-sm text-muted-foreground">Countries Active</div>
-              </div>
             </div>
           </div>
 
