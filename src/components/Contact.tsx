@@ -9,19 +9,19 @@ const Contact = () => {
     icon: Mail,
     title: "Email Us",
     description: "Get in touch via email",
-    contact: "partnerships@healthtech-africa.com",
+    contact: "partnerships@smartcare.africa",
     action: "Send Email"
   }, {
     icon: Phone,
     title: "Call Us",
     description: "Speak with our team",
-    contact: "+234 (0) 810 925 2120",
+    contact: "+234 (0) 803 123 4567",
     action: "Call Now"
   }, {
     icon: MapPin,
     title: "Visit Us",
     description: "Our headquarters",
-    contact: "20B, Theophilus Oji Street, Lekki, Lagos, Nigeria",
+    contact: "Victoria Island, Lagos, Nigeria",
     action: "Get Directions"
   }, {
     icon: Calendar,
@@ -196,7 +196,7 @@ const Contact = () => {
               <Button variant="secondary" size="lg">
                 Download Partnership Brief
               </Button>
-              <Button variant="ghost" size="lg" className="border border-white/30 text-white hover:bg-white/10 hover:text-white">
+              <Button variant="outline" size="lg" className="border-white/30 text-white hover:bg-white/10">
                 Schedule Strategy Call
               </Button>
             </div>
