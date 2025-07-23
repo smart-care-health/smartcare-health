@@ -19,28 +19,28 @@ const Partnerships = () => {
       icon: Monitor,
       title: "Device Partners",
       description: "Medical device manufacturers and technology providers",
-      examples: ["Higosense"],
+      examples: [],
       focus: "Advanced diagnostic equipment and remote monitoring solutions"
     },
     {
       icon: Wifi,
       title: "Technology Partners",
       description: "Telecommunications and infrastructure providers",
-      examples: ["MTN"],
+      examples: [],
       focus: "Connectivity infrastructure and digital platform integration"
     },
     {
       icon: Building2,
       title: "Government Agencies",
       description: "Federal and state health ministries across Africa",
-      examples: ["Nigerian Federal Ministry of Health", "Ghana Health Service", "Kenya Ministry of Health", "NPHCDA"],
+      examples: ["NPHCDA"],
       focus: "Policy integration and population-scale deployment"
     },
     {
       icon: Globe,
       title: "International Organizations",
       description: "Global health and development partners",
-      examples: ["World Health Organization", "USAID", "Gates Foundation", "World Bank"],
+      examples: [],
       focus: "Funding and technical expertise for sustainable impact"
     },
     {
