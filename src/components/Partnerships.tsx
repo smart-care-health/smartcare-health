@@ -19,14 +19,14 @@ const Partnerships = () => {
       icon: Monitor,
       title: "Device Partners",
       description: "Medical device manufacturers and technology providers",
-      examples: [],
+      examples: ["Higosense"],
       focus: "Advanced diagnostic equipment and remote monitoring solutions"
     },
     {
       icon: Wifi,
       title: "Technology Partners",
       description: "Telecommunications and infrastructure providers",
-      examples: [],
+      examples: ["MTN"],
       focus: "Connectivity infrastructure and digital platform integration"
     },
     {
