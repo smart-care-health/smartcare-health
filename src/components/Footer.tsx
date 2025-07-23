@@ -1,31 +1,51 @@
 import { Activity, Mail, Phone, MapPin, Linkedin, Twitter } from "lucide-react";
-
 const Footer = () => {
-  const quickLinks = [
-    { name: "Home", href: "#home" },
-    { name: "Solutions", href: "#solutions" },
-    { name: "Projects", href: "#projects" },
-    { name: "Partnerships", href: "#partnerships" },
-    { name: "Vision", href: "#vision" },
-    { name: "Contact", href: "#contact" }
-  ];
-
-  const solutions = [
-    { name: "Remote Diagnostics", href: "#" },
-    { name: "EHR/EMR Platform", href: "#" },
-    { name: "Healthcare Networks", href: "#" },
-    { name: "Data Analytics", href: "#" }
-  ];
-
-  const resources = [
-    { name: "White Papers", href: "#" },
-    { name: "Case Studies", href: "#" },
-    { name: "Technical Documentation", href: "#" },
-    { name: "Partner Resources", href: "#" }
-  ];
-
-  return (
-    <footer className="bg-primary text-white">
+  const quickLinks = [{
+    name: "Home",
+    href: "#home"
+  }, {
+    name: "Solutions",
+    href: "#solutions"
+  }, {
+    name: "Projects",
+    href: "#projects"
+  }, {
+    name: "Partnerships",
+    href: "#partnerships"
+  }, {
+    name: "Vision",
+    href: "#vision"
+  }, {
+    name: "Contact",
+    href: "#contact"
+  }];
+  const solutions = [{
+    name: "Remote Diagnostics",
+    href: "#"
+  }, {
+    name: "EHR/EMR Platform",
+    href: "#"
+  }, {
+    name: "Healthcare Networks",
+    href: "#"
+  }, {
+    name: "Data Analytics",
+    href: "#"
+  }];
+  const resources = [{
+    name: "White Papers",
+    href: "#"
+  }, {
+    name: "Case Studies",
+    href: "#"
+  }, {
+    name: "Technical Documentation",
+    href: "#"
+  }, {
+    name: "Partner Resources",
+    href: "#"
+  }];
+  return <footer className="bg-primary text-white">
       <div className="container mx-auto px-6 py-16">
         <div className="grid lg:grid-cols-4 gap-8">
           {/* Company Info */}
@@ -35,7 +55,7 @@ const Footer = () => {
                 <Activity className="h-6 w-6 text-white" />
               </div>
               <div>
-                <h3 className="font-heading font-bold text-xl">HealthTech Africa</h3>
+                <h3 className="font-heading font-bold text-xl">Smartcare Health Solutions </h3>
                 <p className="text-white/80 text-sm">Transforming Healthcare</p>
               </div>
             </div>
@@ -48,11 +68,11 @@ const Footer = () => {
             <div className="space-y-2">
               <div className="flex items-center space-x-2 text-sm">
                 <Mail className="h-4 w-4 text-white/60" />
-                <span className="text-white/80">info@healthtech-africa.com</span>
+                <span className="text-white/80">info@smartcare.africa</span>
               </div>
               <div className="flex items-center space-x-2 text-sm">
                 <Phone className="h-4 w-4 text-white/60" />
-                <span className="text-white/80">+234 (0) 803 123 4567</span>
+                <span className="text-white/80">+234 (0) 810 925 2120</span>
               </div>
               <div className="flex items-center space-x-2 text-sm">
                 <MapPin className="h-4 w-4 text-white/60" />
@@ -75,16 +95,11 @@ const Footer = () => {
           <div>
             <h4 className="font-heading font-semibold text-lg mb-4">Quick Links</h4>
             <ul className="space-y-2">
-              {quickLinks.map((link, index) => (
-                <li key={index}>
-                  <a 
-                    href={link.href} 
-                    className="text-white/80 hover:text-white transition-colors text-sm"
-                  >
+              {quickLinks.map((link, index) => <li key={index}>
+                  <a href={link.href} className="text-white/80 hover:text-white transition-colors text-sm">
                     {link.name}
                   </a>
-                </li>
-              ))}
+                </li>)}
             </ul>
           </div>
 
@@ -92,16 +107,11 @@ const Footer = () => {
           <div>
             <h4 className="font-heading font-semibold text-lg mb-4">Solutions</h4>
             <ul className="space-y-2">
-              {solutions.map((solution, index) => (
-                <li key={index}>
-                  <a 
-                    href={solution.href} 
-                    className="text-white/80 hover:text-white transition-colors text-sm"
-                  >
+              {solutions.map((solution, index) => <li key={index}>
+                  <a href={solution.href} className="text-white/80 hover:text-white transition-colors text-sm">
                     {solution.name}
                   </a>
-                </li>
-              ))}
+                </li>)}
             </ul>
           </div>
 
@@ -109,16 +119,11 @@ const Footer = () => {
           <div>
             <h4 className="font-heading font-semibold text-lg mb-4">Resources</h4>
             <ul className="space-y-2">
-              {resources.map((resource, index) => (
-                <li key={index}>
-                  <a 
-                    href={resource.href} 
-                    className="text-white/80 hover:text-white transition-colors text-sm"
-                  >
+              {resources.map((resource, index) => <li key={index}>
+                  <a href={resource.href} className="text-white/80 hover:text-white transition-colors text-sm">
                     {resource.name}
                   </a>
-                </li>
-              ))}
+                </li>)}
             </ul>
             
             {/* Newsletter Signup */}
@@ -128,11 +133,7 @@ const Footer = () => {
                 Get the latest updates on our projects and partnerships.
               </p>
               <div className="flex space-x-2">
-                <input 
-                  type="email" 
-                  placeholder="Your email"
-                  className="flex-1 px-3 py-1.5 text-sm bg-white/20 border border-white/30 rounded text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50"
-                />
+                <input type="email" placeholder="Your email" className="flex-1 px-3 py-1.5 text-sm bg-white/20 border border-white/30 rounded text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50" />
                 <button className="px-3 py-1.5 bg-accent hover:bg-accent-hover text-white text-sm rounded transition-colors">
                   Subscribe
                 </button>
@@ -161,8 +162,6 @@ const Footer = () => {
           </div>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
