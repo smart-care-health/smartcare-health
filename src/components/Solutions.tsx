@@ -24,7 +24,7 @@ const Solutions = () => {
       title: "Integrated EHR/EMR Platform",
       description: "Comprehensive electronic health records system tailored for African healthcare needs, ensuring seamless data management and interoperability.",
       features: ["Offline-first architecture", "Multi-language support", "Government compliance", "Scalable infrastructure"],
-      status: "In Development"
+      status: "Pilot Phase"
     },
     {
       icon: Network,
