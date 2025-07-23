@@ -9,7 +9,7 @@ const Contact = () => {
     icon: Mail,
     title: "Email Us",
     description: "Get in touch via email",
-    contact: "partnerships@healthtech-africa.com",
+    contact: "partnerships@smartcare.africa",
     action: "Send Email"
   }, {
     icon: Phone,
