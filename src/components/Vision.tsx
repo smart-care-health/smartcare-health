@@ -93,9 +93,7 @@ const Vision = () => {
         {/* Projected Impact */}
         <div className="bg-gradient-to-r from-primary to-accent p-8 lg:p-12 rounded-2xl text-white mb-16">
           <div className="text-center mb-8">
-            <h3 className="font-heading font-bold text-3xl mb-4">
-              Projected Impact by 2027
-            </h3>
+            <h3 className="font-heading font-bold text-3xl mb-4">Projected Impact by 2028</h3>
             <p className="text-white/90 max-w-2xl mx-auto">
               Our vision extends beyond technology to create measurable improvements in health outcomes across Africa.
             </p>
