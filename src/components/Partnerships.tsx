@@ -8,16 +8,32 @@ import {
   Shield, 
   Handshake,
   ArrowRight,
-  CheckCircle
+  CheckCircle,
+  Monitor,
+  Wifi
 } from "lucide-react";
 
 const Partnerships = () => {
   const partnerTypes = [
     {
+      icon: Monitor,
+      title: "Device Partners",
+      description: "Medical device manufacturers and technology providers",
+      examples: ["Higosense"],
+      focus: "Advanced diagnostic equipment and remote monitoring solutions"
+    },
+    {
+      icon: Wifi,
+      title: "Technology Partners",
+      description: "Telecommunications and infrastructure providers",
+      examples: ["MTN"],
+      focus: "Connectivity infrastructure and digital platform integration"
+    },
+    {
       icon: Building2,
       title: "Government Agencies",
       description: "Federal and state health ministries across Africa",
-      examples: ["Nigerian Federal Ministry of Health", "Ghana Health Service", "Kenya Ministry of Health"],
+      examples: ["Nigerian Federal Ministry of Health", "Ghana Health Service", "Kenya Ministry of Health", "NPHCDA"],
       focus: "Policy integration and population-scale deployment"
     },
     {
@@ -30,15 +46,15 @@ const Partnerships = () => {
     {
       icon: Heart,
       title: "Healthcare Providers",
-      description: "Hospitals, clinics, and health networks",
-      examples: ["Lagos University Teaching Hospital", "Aga Khan Health Services", "Partners in Health"],
+      description: "Hospitals, Pharmacies, Laboratories, and health networks",
+      examples: [],
       focus: "Clinical validation and real-world implementation"
     },
     {
       icon: Shield,
       title: "Health Insurance",
       description: "HMOs and insurance providers",
-      examples: ["NHIS Nigeria", "Ghana National Health Insurance", "AAR Insurance"],
+      examples: [],
       focus: "Coverage expansion and cost-effective care delivery"
     }
   ];
@@ -105,16 +121,18 @@ const Partnerships = () => {
                 </p>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div>
-                  <h4 className="font-semibold text-foreground mb-2">Key Partners</h4>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {type.examples.map((example, idx) => (
-                      <Badge key={idx} variant="secondary" className="text-xs">
-                        {example}
-                      </Badge>
-                    ))}
+                {type.examples.length > 0 && (
+                  <div>
+                    <h4 className="font-semibold text-foreground mb-2">Key Partners</h4>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {type.examples.map((example, idx) => (
+                        <Badge key={idx} variant="secondary" className="text-xs">
+                          {example}
+                        </Badge>
+                      ))}
+                    </div>
                   </div>
-                </div>
+                )}
                 <div className="border-t border-border pt-4">
                   <div className="flex items-start space-x-2">
                     <Handshake className="h-4 w-4 text-primary mt-1 flex-shrink-0" />
