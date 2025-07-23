@@ -17,14 +17,14 @@ const Solutions = () => {
       title: "Remote Diagnostic Devices",
       description: "Cutting-edge portable diagnostic tools designed for underserved communities, enabling real-time health assessments in remote locations.",
       features: ["AI-powered diagnostics", "Cloud connectivity", "Multi-parameter monitoring", "Battery efficient design"],
-      status: "Currently Deployed"
+      status: "Pilot Phase"
     },
     {
       icon: Database,
       title: "Integrated EHR/EMR Platform",
       description: "Comprehensive electronic health records system tailored for African healthcare needs, ensuring seamless data management and interoperability.",
       features: ["Offline-first architecture", "Multi-language support", "Government compliance", "Scalable infrastructure"],
-      status: "Pilot Phase"
+      status: "In Development"
     },
     {
       icon: Network,
@@ -103,10 +103,6 @@ const Solutions = () => {
                     </div>
                   ))}
                 </div>
-                <Button variant="ghost" className="w-full group-hover:bg-primary group-hover:text-white transition-all mt-4">
-                  Learn More
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
               </CardContent>
             </Card>
           ))}
