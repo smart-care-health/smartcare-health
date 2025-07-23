@@ -15,13 +15,13 @@ const Contact = () => {
     icon: Phone,
     title: "Call Us",
     description: "Speak with our team",
-    contact: "+234 (0) 803 123 4567",
+    contact: "+234 (0) 810 925 2120",
     action: "Call Now"
   }, {
     icon: MapPin,
     title: "Visit Us",
     description: "Our headquarters",
-    contact: "Victoria Island, Lagos, Nigeria",
+    contact: "Lekki, Lagos, Nigeria",
     action: "Get Directions"
   }, {
     icon: Calendar,
