@@ -34,17 +34,17 @@ const Vision = () => {
     features: ["Multi-language patient portals", "SMS-based health reminders", "Telemedicine integration", "Community health education platforms"]
   }];
   const impacts = [{
-    metric: "10M+",
-    description: "Patients connected to digital health records by 2027"
+    metric: "100M+",
+    description: "Patients connected to digital health records by 2028"
   }, {
     metric: "50%",
-    description: "Reduction in diagnostic delays across rural areas"
+    description: "Reduction in diagnostic delays across underserved communities"
   }, {
     metric: "15",
     description: "African countries with integrated health systems"
   }, {
     metric: "85%",
-    description: "Healthcare facilities digitized and connected"
+    description: "Primary healthcare facilities digitized and connected"
   }];
   return <section id="vision" className="py-20 bg-white">
       <div className="container mx-auto px-6">
