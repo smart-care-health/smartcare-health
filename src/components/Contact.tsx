@@ -196,7 +196,7 @@ const Contact = () => {
               <Button variant="secondary" size="lg">
                 Download Partnership Brief
               </Button>
-              <Button variant="outline" size="lg" className="border-white/30 text-white hover:bg-white/10">
+              <Button variant="ghost" size="lg" className="border border-white/30 text-white hover:bg-white/10 hover:text-white">
                 Schedule Strategy Call
               </Button>
             </div>
