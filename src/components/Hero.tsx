@@ -59,7 +59,7 @@ const Hero = () => {
             </div>
             
             {/* Floating Elements */}
-            <div className="absolute -top-6 -right-6 bg-white p-4 rounded-xl shadow-lg border border-border">
+            <div className="absolute -top-6 -right-6 bg-white p-4 rounded-xl shadow-lg border border-border z-30">
               <div className="text-sm font-medium text-foreground">Live Diagnostics</div>
               <div className="text-2xl font-bold text-health-success">Active</div>
             </div>
