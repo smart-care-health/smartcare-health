@@ -9,19 +9,19 @@ const Contact = () => {
     icon: Mail,
     title: "Email Us",
     description: "Get in touch via email",
-    contact: "partnerships@smartcare.africa",
+    contact: "partnerships@healthtech-africa.com",
     action: "Send Email"
   }, {
     icon: Phone,
     title: "Call Us",
     description: "Speak with our team",
-    contact: "+234 (0) 803 123 4567",
+    contact: "+234 (0) 810 925 2120",
     action: "Call Now"
   }, {
     icon: MapPin,
     title: "Visit Us",
     description: "Our headquarters",
-    contact: "Victoria Island, Lagos, Nigeria",
+    contact: "20B, Theophilus Oji Street, Lekki, Lagos, Nigeria",
     action: "Get Directions"
   }, {
     icon: Calendar,
