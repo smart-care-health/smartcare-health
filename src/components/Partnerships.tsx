@@ -214,8 +214,8 @@ const Partnerships = () => {
           </div>
         </div>
 
-        {/* Success Stories */}
-        <div className="text-center">
+        {/* Success Stories - Hidden until we have relevant quote */}
+        {/* <div className="text-center">
           <div className="bg-gradient-to-r from-primary to-accent p-8 rounded-2xl text-white">
             <h3 className="font-heading font-bold text-2xl mb-4">
               Success Through Collaboration
@@ -228,7 +228,7 @@ const Partnerships = () => {
               — Dr. Amina Kanu, Director of Health Services, Lagos State
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );
