@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play } from "lucide-react";
-const heroImage = "/lovable-uploads/96eb90cd-d781-4468-a5ee-7a15a4614719.png";
+import heroImage from "@/assets/hero-healthcare.jpg";
 const Hero = () => {
   return <section id="home" className="relative min-h-screen flex items-center bg-gradient-to-br from-health-light to-white overflow-hidden">
       {/* Background Pattern */}
