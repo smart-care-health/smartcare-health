@@ -1,7 +1,25 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play } from "lucide-react";
 import heroImage from "@/assets/hero-healthcare.jpg";
+import { useState } from "react";
+import ImageGenerator from "./ImageGenerator";
 const Hero = () => {
+  const [currentHeroImage, setCurrentHeroImage] = useState(heroImage);
+  const [showGenerator, setShowGenerator] = useState(false);
+
+  const handleImageGenerated = async (imageUrl: string) => {
+    // Download and save the image
+    try {
+      const response = await fetch(imageUrl);
+      const blob = await response.blob();
+      const objectUrl = URL.createObjectURL(blob);
+      setCurrentHeroImage(objectUrl);
+      setShowGenerator(false);
+    } catch (error) {
+      console.error("Failed to load generated image:", error);
+    }
+  };
+
   return <section id="home" className="relative min-h-screen flex items-center bg-gradient-to-br from-health-light to-white overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-accent/5" />
@@ -36,9 +54,14 @@ const Hero = () => {
                 Explore Our Solutions
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
-              <Button variant="outline" size="lg" className="group">
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="group"
+                onClick={() => setShowGenerator(true)}
+              >
                 <Play className="mr-2 h-5 w-5" />
-                Higo Demo
+                Generate New Hero Image
               </Button>
             </div>
           </div>
@@ -46,7 +69,7 @@ const Hero = () => {
           {/* Hero Image */}
           <div className="relative">
             <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl">
-              <img src={heroImage} alt="Healthcare professional using diagnostic device" className="w-full h-[600px] object-cover" />
+              <img src={currentHeroImage} alt="Healthcare professional using diagnostic device" className="w-full h-[600px] object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent" />
             </div>
             
@@ -62,6 +85,23 @@ const Hero = () => {
             </div>
           </div>
         </div>
+        
+        {/* Image Generator Modal */}
+        {showGenerator && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+            <div className="relative">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setShowGenerator(false)}
+                className="absolute -top-12 right-0 text-white hover:text-white/80"
+              >
+                Close
+              </Button>
+              <ImageGenerator onImageGenerated={handleImageGenerated} />
+            </div>
+          </div>
+        )}
       </div>
     </section>;
 };
