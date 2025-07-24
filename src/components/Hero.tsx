@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play } from "lucide-react";
-import heroImage from "@/assets/hero-healthcare-new.jpg";
+const heroImage = "/lovable-uploads/62ee4cd1-618f-4bee-a8c2-860ec24e8f5b.png";
 const Hero = () => {
 
   return <section id="home" className="relative min-h-screen flex items-center bg-gradient-to-br from-health-light to-white overflow-hidden">
@@ -55,7 +55,7 @@ const Hero = () => {
           {/* Hero Image */}
           <div className="relative">
             <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl">
-              <img src={heroImage} alt="African healthcare worker using digital device with patient" className="w-full h-[600px] object-cover" />
+              <img src={heroImage} alt="African healthcare worker with stethoscope holding tablet, with digital connectivity icons and solar panels in rural setting" className="w-full h-[600px] object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent" />
             </div>
             
