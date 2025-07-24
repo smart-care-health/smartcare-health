@@ -145,9 +145,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-white/20 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <div className="text-white/60 text-sm">
-              © 2024 HealthTech Africa. All rights reserved.
-            </div>
+            <div className="text-white/60 text-sm">© 2024 Smartcare Health Solutions . All rights reserved.</div>
             <div className="flex space-x-6 text-sm">
               <a href="#" className="text-white/60 hover:text-white transition-colors">
                 Privacy Policy
