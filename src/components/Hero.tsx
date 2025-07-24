@@ -47,7 +47,7 @@ const Hero = () => {
                 }}
               >
                 <Play className="mr-2 h-5 w-5" />
-                Watch Demo
+                Higo Demo
               </Button>
             </div>
           </div>
