@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play } from "lucide-react";
-import heroImage from "@/assets/hero-healthcare-fixed.jpg";
+import heroImage from "@/assets/hero-healthcare-new.jpg";
 const Hero = () => {
 
   return <section id="home" className="relative min-h-screen flex items-center bg-gradient-to-br from-health-light to-white overflow-hidden">
