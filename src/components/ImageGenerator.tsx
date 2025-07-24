@@ -26,10 +26,13 @@ const ImageGenerator = ({ onImageGenerated }: ImageGeneratorProps) => {
     try {
       const runware = new RunwareService(apiKey);
       
-      const prompt = `A warm, hopeful scene of an African healthcare worker (nurse or community health worker) using a digital tablet or diagnostic device while caring for a patient in a semi-urban African setting. The healthcare worker should be professionally dressed, showing compassion and expertise. The patient could be a child, pregnant woman, or elderly person, creating a sense of trust and care. The background should subtly include elements like a local clinic, solar panel, or telecommunications mast suggesting digital infrastructure and connectivity. Natural lighting with soft background blur, conveying hope, innovation, and human-centered healthcare transformation. Professional photography style, suitable for a healthcare technology company website hero banner. Ultra high resolution, 16:10 aspect ratio.`;
+      const positivePrompt = `A scene capturing the transformation of primary healthcare in Africa through digital connectivity. An African healthcare worker (nurse or community health worker) in professional medical attire is shown in a rural or semi-urban setting, providing care to patients in an underserved area. The scene conveys that healthcare is being extended to remote communities through technology-enabled, connected care. Hands positioned naturally at sides or holding simple medical equipment. Background elements include a local clinic with subtle digital infrastructure - solar panels on the roof, telecommunications mast in the distance, and hints of modern connectivity bringing healthcare transformation to rural Africa. Natural lighting with soft background blur, conveying hope, innovation, and the digital revolution in African healthcare. Professional photography style, suitable for a healthcare technology company website hero banner. Ultra high resolution, 16:10 aspect ratio.`;
+      
+      const negativePrompt = `distorted hands, extra fingers, missing fingers, deformed hands, mutated hands, poorly drawn hands, fused fingers, too many fingers, malformed hands, ugly hands, bad anatomy, disfigured, blurry, low quality, artifacts, urban cityscape, modern hospital interior, wealthy setting, developed country infrastructure`;
 
       const result = await runware.generateImage({
-        positivePrompt: prompt,
+        positivePrompt,
+        negativePrompt,
         model: "runware:100@1",
         outputFormat: "WEBP",
         numberResults: 1
