@@ -7,9 +7,6 @@ const Footer = () => {
     name: "Solutions",
     href: "#solutions"
   }, {
-    name: "Projects",
-    href: "#projects"
-  }, {
     name: "Partnerships",
     href: "#partnerships"
   }, {
@@ -19,32 +16,18 @@ const Footer = () => {
     name: "Contact",
     href: "#contact"
   }];
-  const solutions = [{
-    name: "Remote Diagnostics",
-    href: "#"
-  }, {
-    name: "EHR/EMR Platform",
-    href: "#"
-  }, {
-    name: "Healthcare Networks",
-    href: "#"
-  }, {
-    name: "Data Analytics",
-    href: "#"
-  }];
-  const resources = [{
-    name: "White Papers",
-    href: "#"
-  }, {
-    name: "Case Studies",
-    href: "#"
-  }, {
-    name: "Technical Documentation",
-    href: "#"
-  }, {
-    name: "Partner Resources",
-    href: "#"
-  }];
+  const solutions = [
+    "Remote Diagnostics",
+    "EHR/EMR Platform", 
+    "Healthcare Networks",
+    "Data Analytics"
+  ];
+  const resources = [
+    "White Papers",
+    "Case Studies",
+    "Technical Documentation", 
+    "Partner Resources"
+  ];
   return <footer className="bg-primary text-white">
       <div className="container mx-auto px-6 py-16">
         <div className="grid lg:grid-cols-4 gap-8">
@@ -107,11 +90,13 @@ const Footer = () => {
           <div>
             <h4 className="font-heading font-semibold text-lg mb-4">Solutions</h4>
             <ul className="space-y-2">
-              {solutions.map((solution, index) => <li key={index}>
-                  <a href={solution.href} className="text-white/80 hover:text-white transition-colors text-sm">
-                    {solution.name}
-                  </a>
-                </li>)}
+              {solutions.map((solution, index) => (
+                <li key={index}>
+                  <span className="text-white/80 text-sm">
+                    {solution}
+                  </span>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -119,11 +104,13 @@ const Footer = () => {
           <div>
             <h4 className="font-heading font-semibold text-lg mb-4">Resources</h4>
             <ul className="space-y-2">
-              {resources.map((resource, index) => <li key={index}>
-                  <a href={resource.href} className="text-white/80 hover:text-white transition-colors text-sm">
-                    {resource.name}
-                  </a>
-                </li>)}
+              {resources.map((resource, index) => (
+                <li key={index}>
+                  <span className="text-white/80 text-sm">
+                    {resource}
+                  </span>
+                </li>
+              ))}
             </ul>
             
             {/* Newsletter Signup */}
@@ -147,13 +134,13 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-white/60 text-sm">© 2024 Smartcare Health Solutions . All rights reserved.</div>
             <div className="flex space-x-6 text-sm">
-              <a href="#" className="text-white/60 hover:text-white transition-colors">
+              <a href="/privacy-policy" className="text-white/60 hover:text-white transition-colors">
                 Privacy Policy
               </a>
-              <a href="#" className="text-white/60 hover:text-white transition-colors">
+              <a href="/terms-of-service" className="text-white/60 hover:text-white transition-colors">
                 Terms of Service
               </a>
-              <a href="#" className="text-white/60 hover:text-white transition-colors">
+              <a href="/data-protection" className="text-white/60 hover:text-white transition-colors">
                 Data Protection
               </a>
             </div>
