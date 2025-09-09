@@ -17,7 +17,7 @@ const Solutions = () => {
       title: "Remote Diagnostic Devices",
       description: "Cutting-edge portable diagnostic tools designed for underserved communities, enabling real-time health assessments in remote locations.",
       features: ["AI-powered diagnostics", "Cloud connectivity", "Multi-parameter monitoring", "Battery efficient design"],
-      status: "Pilot Phase"
+      status: "Coming Soon"
     },
     {
       icon: Database,
@@ -31,7 +31,7 @@ const Solutions = () => {
       title: "Healthcare Network Integration",
       description: "Connect hospitals, clinics, and health workers across the continent through our unified digital ecosystem for coordinated care delivery.",
       features: ["Real-time data sharing", "Referral management", "Resource optimization", "Quality assurance"],
-      status: "Pilot Phase"
+      status: "Coming Soon"
     }
   ];
 
