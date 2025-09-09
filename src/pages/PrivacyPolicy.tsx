@@ -11,7 +11,7 @@ const PrivacyPolicy = () => {
         <div className="space-y-8">
           <div className="text-center space-y-4">
             <h1 className="font-heading text-4xl font-bold text-primary">Privacy Policy</h1>
-            <p className="text-muted-foreground">Last updated: January 2024</p>
+            <p className="text-muted-foreground">Last updated: July 2025</p>
           </div>
           
           <Separator />
@@ -87,7 +87,6 @@ const PrivacyPolicy = () => {
               </p>
               <div className="bg-muted p-4 rounded-lg">
                 <p className="text-foreground font-medium">Email: info@smartcare.africa</p>
-                <p className="text-foreground font-medium">Phone: +234 (0) 810 925 2120</p>
                 <p className="text-foreground font-medium">Address: Lagos, Nigeria</p>
               </div>
             </section>
