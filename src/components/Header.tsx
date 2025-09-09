@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Activity } from "lucide-react";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -20,11 +20,9 @@ const Header = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center space-x-3">
-            <img 
-              src="/lovable-uploads/251e1dfa-47fc-4213-9e74-0f030d1b9e3f.png" 
-              alt="Smartcare Health Solutions Logo" 
-              className="h-12 w-auto"
-            />
+            <div className="bg-gradient-to-r from-primary to-accent p-2 rounded-lg">
+              <Activity className="h-6 w-6 text-white" />
+            </div>
             <div>
               <h1 className="font-heading font-bold text-xl text-primary">Smartcare Health Solutions</h1>
               <p className="text-xs text-muted-foreground">Primary Healthcare Innovation</p>
