@@ -3,8 +3,82 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Mail, Phone, MapPin, Calendar, Send, MessageSquare, Building2, Users } from "lucide-react";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Mail, Phone, MapPin, Calendar, Send, MessageSquare, Building2, Users, Loader2 } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
+
+// Form validation schema
+const contactFormSchema = z.object({
+  firstName: z.string().min(2, "First name must be at least 2 characters"),
+  lastName: z.string().min(2, "Last name must be at least 2 characters"),
+  email: z.string().email("Please enter a valid email address"),
+  organization: z.string().optional(),
+  inquiryType: z.string().min(1, "Please select an inquiry type"),
+  message: z.string().min(10, "Message must be at least 10 characters"),
+});
+
+type ContactFormData = z.infer<typeof contactFormSchema>;
+
 const Contact = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
+  
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    reset,
+    formState: { errors },
+  } = useForm<ContactFormData>({
+    resolver: zodResolver(contactFormSchema),
+  });
+
+  const onSubmit = async (data: ContactFormData) => {
+    setIsSubmitting(true);
+    
+    try {
+      console.log('Submitting contact form:', data);
+      
+      const { data: response, error } = await supabase.functions.invoke('submit-contact-form', {
+        body: data
+      });
+
+      if (error) {
+        console.error('Supabase function error:', error);
+        throw error;
+      }
+
+      if (response?.error) {
+        throw new Error(response.error);
+      }
+
+      console.log('Contact form submission successful:', response);
+      
+      toast({
+        title: "Message sent successfully! ✉️",
+        description: "Thank you for reaching out. We'll get back to you within 24 hours.",
+      });
+
+      // Reset form
+      reset();
+      
+    } catch (error: any) {
+      console.error('Contact form submission error:', error);
+      toast({
+        title: "Failed to send message",
+        description: error.message || "Something went wrong. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   const contactMethods = [{
     icon: Mail,
     title: "Email Us",
@@ -89,49 +163,110 @@ const Contact = () => {
                 </p>
               </CardHeader>
               <CardContent className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="firstName">First Name</Label>
-                    <Input id="firstName" placeholder="John" />
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="firstName">First Name</Label>
+                      <Input 
+                        id="firstName" 
+                        placeholder="John"
+                        {...register("firstName")}
+                      />
+                      {errors.firstName && (
+                        <p className="text-sm text-red-500">{errors.firstName.message}</p>
+                      )}
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="lastName">Last Name</Label>
+                      <Input 
+                        id="lastName" 
+                        placeholder="Doe" 
+                        {...register("lastName")}
+                      />
+                      {errors.lastName && (
+                        <p className="text-sm text-red-500">{errors.lastName.message}</p>
+                      )}
+                    </div>
                   </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="lastName">Last Name</Label>
-                    <Input id="lastName" placeholder="Doe" />
+                  
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="email">Email</Label>
+                      <Input 
+                        id="email" 
+                        type="email" 
+                        placeholder="john.doe@example.com"
+                        {...register("email")}
+                      />
+                      {errors.email && (
+                        <p className="text-sm text-red-500">{errors.email.message}</p>
+                      )}
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="organization">Organization</Label>
+                      <Input 
+                        id="organization" 
+                        placeholder="Your Organization"
+                        {...register("organization")}
+                      />
+                      {errors.organization && (
+                        <p className="text-sm text-red-500">{errors.organization.message}</p>
+                      )}
+                    </div>
                   </div>
-                </div>
-                
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email</Label>
-                    <Input id="email" type="email" placeholder="john.doe@example.com" />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="organization">Organization</Label>
-                    <Input id="organization" placeholder="Your Organization" />
-                  </div>
-                </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="inquiryType">Inquiry Type</Label>
-                  <select id="inquiryType" className="w-full p-3 border border-border rounded-md bg-background text-foreground">
-                    <option value="">Select inquiry type</option>
-                    <option value="partnership">Partnership Opportunities</option>
-                    <option value="implementation">Technology Implementation</option>
-                    <option value="investment">Investment & Funding</option>
-                    <option value="research">Research Collaboration</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="inquiryType">Inquiry Type</Label>
+                    <Select onValueChange={(value) => setValue("inquiryType", value)}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select inquiry type" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="partnership">Partnership Opportunities</SelectItem>
+                        <SelectItem value="implementation">Technology Implementation</SelectItem>
+                        <SelectItem value="investment">Investment & Funding</SelectItem>
+                        <SelectItem value="research">Research Collaboration</SelectItem>
+                        <SelectItem value="other">Other</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    {errors.inquiryType && (
+                      <p className="text-sm text-red-500">{errors.inquiryType.message}</p>
+                    )}
+                  </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="message">Message</Label>
-                  <Textarea id="message" placeholder="Tell us about your project, partnership interest, or how we can help..." rows={5} />
-                </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="message">Message</Label>
+                    <Textarea 
+                      id="message" 
+                      placeholder="Tell us about your project, partnership interest, or how we can help..." 
+                      rows={5}
+                      {...register("message")}
+                    />
+                    {errors.message && (
+                      <p className="text-sm text-red-500">{errors.message.message}</p>
+                    )}
+                  </div>
 
-                <Button variant="hero" size="lg" className="w-full">
-                  <Send className="mr-2 h-4 w-4" />
-                  Send Message
-                </Button>
+                  <Button 
+                    type="submit" 
+                    variant="hero" 
+                    size="lg" 
+                    className="w-full" 
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="mr-2 h-4 w-4" />
+                        Send Message
+                      </>
+                    )}
+                  </Button>
+                </form>
               </CardContent>
             </Card>
           </div>
