@@ -128,7 +128,7 @@ const handler = async (req: Request): Promise<Response> => {
       const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
       
       const welcomeEmailResponse = await resend.emails.send({
-        from: "Smartcare Health Solutions <newsletter@smartcare.africa>",
+        from: "Smartcare Health Solutions <onboarding@resend.dev>",
         to: [email],
         subject: "Welcome to Smartcare Health Solutions Newsletter 🌟",
         html: `

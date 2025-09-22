@@ -222,6 +222,9 @@ const Footer = () => {
               <a href="/data-protection" className="text-white/60 hover:text-white transition-colors">
                 Data Protection
               </a>
+              <a href="/admin" className="text-white/40 hover:text-white/60 transition-colors text-xs">
+                Admin
+              </a>
             </div>
           </div>
         </div>
