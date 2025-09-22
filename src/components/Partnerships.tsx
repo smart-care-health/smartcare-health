@@ -202,7 +202,11 @@ const Partnerships = () => {
                 Join our network of healthcare innovators and help us scale digital health solutions across Africa.
               </p>
               <div className="space-y-3">
-                <Button variant="hero" className="w-full">
+                <Button 
+                  variant="hero" 
+                  className="w-full"
+                  onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                >
                   Submit Partnership Proposal
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
