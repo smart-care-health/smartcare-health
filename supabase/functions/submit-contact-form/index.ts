@@ -85,7 +85,7 @@ const handler = async (req: Request): Promise<Response> => {
     console.log('Sending auto-reply email to user');
     try {
       const userEmailResponse = await resend.emails.send({
-        from: "Smartcare Health Solutions <onboarding@resend.dev>",
+        from: "Smartcare Health Solutions <no-reply@smartcare.africa.com>",
         to: [formData.email],
         subject: "Thank you for contacting Smartcare Health Solutions",
         html: `
@@ -143,7 +143,7 @@ const handler = async (req: Request): Promise<Response> => {
     console.log('Sending notification email to admin team');
     try {
       const adminEmailResponse = await resend.emails.send({
-        from: "Smartcare Contact Form <onboarding@resend.dev>",
+        from: "Smartcare Contact Form <no-reply@smartcare.africa.com>",
         to: ["drseyi@smartcare.africa"], // You can add multiple admin emails here
         subject: `New Contact Form Submission - ${formData.inquiryType}`,
         html: `
