@@ -1,9 +1,17 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Activity } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Menu, X, Activity, User, LogOut } from "lucide-react";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, profile, isAdmin, signOut } = useAuth();
+
+  const handleSignOut = async () => {
+    await signOut();
+  };
 
   const navItems = [
     { name: "Home", href: "#home" },
@@ -44,9 +52,32 @@ const Header = () => {
                 {item.name}
               </a>
             ))}
-            <Button variant="hero" size="sm">
-              Get Started
-            </Button>
+            {isAdmin && (
+              <Link to="/admin" className="text-foreground hover:text-primary transition-colors duration-200 font-medium flex items-center">
+                Admin
+                <Badge variant="secondary" className="ml-2">Admin</Badge>
+              </Link>
+            )}
+            
+            {/* Auth Section */}
+            {user ? (
+              <div className="flex items-center space-x-2">
+                <span className="text-sm text-muted-foreground">
+                  {profile?.first_name || profile?.email}
+                </span>
+                <Button onClick={handleSignOut} variant="outline" size="sm">
+                  <LogOut className="h-4 w-4 mr-2" />
+                  Sign Out
+                </Button>
+              </div>
+            ) : (
+              <Link to="/auth">
+                <Button variant="outline" size="sm">
+                  <User className="h-4 w-4 mr-2" />
+                  Sign In
+                </Button>
+              </Link>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -82,9 +113,36 @@ const Header = () => {
                   {item.name}
                 </a>
               ))}
-              <Button variant="hero" size="sm" className="w-fit">
-                Get Started
-              </Button>
+              {isAdmin && (
+                <Link 
+                  to="/admin" 
+                  className="text-foreground hover:text-primary transition-colors duration-200 font-medium"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Admin
+                </Link>
+              )}
+              
+              <div className="border-t pt-4 mt-4">
+                {user ? (
+                  <div className="space-y-2">
+                    <div className="text-sm text-muted-foreground">
+                      Welcome, {profile?.first_name || profile?.email}
+                    </div>
+                    <Button onClick={handleSignOut} variant="outline" size="sm" className="w-full">
+                      <LogOut className="h-4 w-4 mr-2" />
+                      Sign Out
+                    </Button>
+                  </div>
+                ) : (
+                  <Link to="/auth" onClick={() => setIsMenuOpen(false)}>
+                    <Button variant="outline" size="sm" className="w-full">
+                      <User className="h-4 w-4 mr-2" />
+                      Sign In
+                    </Button>
+                  </Link>
+                )}
+              </div>
             </div>
           </div>
         )}

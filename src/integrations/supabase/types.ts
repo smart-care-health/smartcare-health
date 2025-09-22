@@ -24,6 +24,9 @@ export type Database = {
           last_name: string
           message: string
           organization: string | null
+          responded_at: string | null
+          responded_by: string | null
+          response_notes: string | null
           status: string | null
           updated_at: string
         }
@@ -36,6 +39,9 @@ export type Database = {
           last_name: string
           message: string
           organization?: string | null
+          responded_at?: string | null
+          responded_by?: string | null
+          response_notes?: string | null
           status?: string | null
           updated_at?: string
         }
@@ -48,10 +54,21 @@ export type Database = {
           last_name?: string
           message?: string
           organization?: string | null
+          responded_at?: string | null
+          responded_by?: string | null
+          response_notes?: string | null
           status?: string | null
           updated_at?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "contact_submissions_responded_by_fkey"
+            columns: ["responded_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["user_id"]
+          },
+        ]
       }
       newsletter_subscribers: {
         Row: {
@@ -80,12 +97,48 @@ export type Database = {
         }
         Relationships: []
       }
+      profiles: {
+        Row: {
+          created_at: string
+          email: string
+          first_name: string | null
+          id: string
+          last_name: string | null
+          role: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          first_name?: string | null
+          id?: string
+          last_name?: string | null
+          role?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          first_name?: string | null
+          id?: string
+          last_name?: string | null
+          role?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_admin: {
+        Args: { user_uuid?: string }
+        Returns: boolean
+      }
     }
     Enums: {
       [_ in never]: never
