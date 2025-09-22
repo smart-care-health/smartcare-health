@@ -210,8 +210,12 @@ const Partnerships = () => {
                   Submit Partnership Proposal
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
-                <Button variant="outline" className="w-full">
-                  Schedule Consultation
+                <Button 
+                  variant="outline" 
+                  className="w-full"
+                  onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                >
+                  Request Consultation
                 </Button>
               </div>
             </div>
