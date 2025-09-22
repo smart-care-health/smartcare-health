@@ -59,8 +59,8 @@ const Header = () => {
               </Link>
             )}
             
-            {/* Auth Section */}
-            {user ? (
+            {/* Auth Section - Only show for logged in users */}
+            {user && (
               <div className="flex items-center space-x-2">
                 <span className="text-sm text-muted-foreground">
                   {profile?.first_name || profile?.email}
@@ -70,13 +70,6 @@ const Header = () => {
                   Sign Out
                 </Button>
               </div>
-            ) : (
-              <Link to="/auth">
-                <Button variant="outline" size="sm">
-                  <User className="h-4 w-4 mr-2" />
-                  Sign In
-                </Button>
-              </Link>
             )}
           </div>
 
@@ -123,8 +116,9 @@ const Header = () => {
                 </Link>
               )}
               
-              <div className="border-t pt-4 mt-4">
-                {user ? (
+              {/* Auth Section - Only show for logged in users */}
+              {user && (
+                <div className="border-t pt-4 mt-4">
                   <div className="space-y-2">
                     <div className="text-sm text-muted-foreground">
                       Welcome, {profile?.first_name || profile?.email}
@@ -134,15 +128,8 @@ const Header = () => {
                       Sign Out
                     </Button>
                   </div>
-                ) : (
-                  <Link to="/auth" onClick={() => setIsMenuOpen(false)}>
-                    <Button variant="outline" size="sm" className="w-full">
-                      <User className="h-4 w-4 mr-2" />
-                      Sign In
-                    </Button>
-                  </Link>
-                )}
-              </div>
+                </div>
+              )}
             </div>
           </div>
         )}
