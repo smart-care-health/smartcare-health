@@ -6,9 +6,12 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { Navigate } from 'react-router-dom';
-import { Users, Mail, MessageSquare, TrendingUp, LogOut } from 'lucide-react';
+import { Users, Mail, MessageSquare, TrendingUp, LogOut, Eye, MessageCircle } from 'lucide-react';
 
 interface ContactSubmission {
   id: string;
@@ -40,6 +43,9 @@ const AdminDashboard = () => {
   const [contacts, setContacts] = useState<ContactSubmission[]>([]);
   const [subscribers, setSubscribers] = useState<NewsletterSubscriber[]>([]);
   const [loadingData, setLoadingData] = useState(true);
+  const [selectedContact, setSelectedContact] = useState<ContactSubmission | null>(null);
+  const [responseNotes, setResponseNotes] = useState('');
+  const [isRespondDialogOpen, setIsRespondDialogOpen] = useState(false);
 
   useEffect(() => {
     if (user && isAdmin) {
@@ -91,14 +97,15 @@ const AdminDashboard = () => {
     }
   };
 
-  const updateContactStatus = async (id: string, status: string) => {
+  const updateContactStatus = async (id: string, status: string, notes?: string) => {
     try {
       const { error } = await supabase
         .from('contact_submissions')
         .update({ 
           status,
           responded_at: status === 'responded' ? new Date().toISOString() : null,
-          responded_by: status === 'responded' ? user?.id : null
+          responded_by: status === 'responded' ? user?.id : null,
+          response_notes: notes || null
         })
         .eq('id', id);
 
@@ -116,6 +123,21 @@ const AdminDashboard = () => {
         variant: "destructive",
       });
     }
+  };
+
+  const handleRespondClick = (contact: ContactSubmission) => {
+    setSelectedContact(contact);
+    setResponseNotes(contact.response_notes || '');
+    setIsRespondDialogOpen(true);
+  };
+
+  const handleRespondSubmit = async () => {
+    if (!selectedContact) return;
+    
+    await updateContactStatus(selectedContact.id, 'responded', responseNotes);
+    setIsRespondDialogOpen(false);
+    setSelectedContact(null);
+    setResponseNotes('');
   };
 
   if (loading) {
@@ -164,7 +186,7 @@ const AdminDashboard = () => {
 
       <main className="container mx-auto px-4 py-8">
         {/* Stats Overview */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Total Contacts</CardTitle>
@@ -208,7 +230,7 @@ const AdminDashboard = () => {
 
         {/* Data Tables */}
         <Tabs defaultValue="contacts" className="space-y-4">
-          <TabsList>
+          <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="contacts">Contact Submissions</TabsTrigger>
             <TabsTrigger value="subscribers">Newsletter Subscribers</TabsTrigger>
           </TabsList>
@@ -218,55 +240,131 @@ const AdminDashboard = () => {
               <CardHeader>
                 <CardTitle>Contact Submissions</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="overflow-x-auto">
                 {loadingData ? (
                   <div className="text-center py-8">Loading...</div>
                 ) : (
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>Name</TableHead>
-                        <TableHead>Email</TableHead>
-                        <TableHead>Type</TableHead>
-                        <TableHead>Status</TableHead>
-                        <TableHead>Date</TableHead>
-                        <TableHead>Actions</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {contacts.map((contact) => (
-                        <TableRow key={contact.id}>
-                          <TableCell>
-                            {contact.first_name} {contact.last_name}
-                          </TableCell>
-                          <TableCell>{contact.email}</TableCell>
-                          <TableCell className="capitalize">
-                            {contact.inquiry_type.replace('_', ' ')}
-                          </TableCell>
-                          <TableCell>
-                            <Badge 
-                              variant={contact.status === 'new' ? 'destructive' : 'default'}
-                            >
-                              {contact.status}
-                            </Badge>
-                          </TableCell>
-                          <TableCell>
-                            {new Date(contact.created_at).toLocaleDateString()}
-                          </TableCell>
-                          <TableCell>
-                            {contact.status === 'new' && (
-                              <Button
-                                size="sm"
-                                onClick={() => updateContactStatus(contact.id, 'responded')}
-                              >
-                                Mark Responded
-                              </Button>
-                            )}
-                          </TableCell>
+                  <div className="min-w-full">
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead className="min-w-[120px]">Name</TableHead>
+                          <TableHead className="min-w-[180px]">Email</TableHead>
+                          <TableHead className="min-w-[120px]">Type</TableHead>
+                          <TableHead className="min-w-[100px]">Status</TableHead>
+                          <TableHead className="min-w-[100px]">Date</TableHead>
+                          <TableHead className="min-w-[140px]">Actions</TableHead>
                         </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
+                      </TableHeader>
+                      <TableBody>
+                        {contacts.map((contact) => (
+                          <TableRow key={contact.id}>
+                            <TableCell className="font-medium">
+                              {contact.first_name} {contact.last_name}
+                              {contact.organization && (
+                                <div className="text-xs text-muted-foreground">
+                                  {contact.organization}
+                                </div>
+                              )}
+                            </TableCell>
+                            <TableCell>
+                              <a href={`mailto:${contact.email}`} className="text-primary hover:underline">
+                                {contact.email}
+                              </a>
+                            </TableCell>
+                            <TableCell className="capitalize">
+                              {contact.inquiry_type.replace('_', ' ')}
+                            </TableCell>
+                            <TableCell>
+                              <Badge 
+                                variant={contact.status === 'new' ? 'destructive' : 'default'}
+                              >
+                                {contact.status}
+                              </Badge>
+                            </TableCell>
+                            <TableCell>
+                              <div className="text-xs">
+                                {new Date(contact.created_at).toLocaleDateString()}
+                              </div>
+                              <div className="text-xs text-muted-foreground">
+                                {new Date(contact.created_at).toLocaleTimeString()}
+                              </div>
+                            </TableCell>
+                            <TableCell>
+                              <div className="flex flex-col sm:flex-row gap-2">
+                                <Dialog>
+                                  <DialogTrigger asChild>
+                                    <Button size="sm" variant="outline">
+                                      <Eye className="h-3 w-3 mr-1" />
+                                      View
+                                    </Button>
+                                  </DialogTrigger>
+                                  <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+                                    <DialogHeader>
+                                      <DialogTitle>Contact Details</DialogTitle>
+                                      <DialogDescription>
+                                        Full details for {contact.first_name} {contact.last_name}
+                                      </DialogDescription>
+                                    </DialogHeader>
+                                    <div className="space-y-4">
+                                      <div className="grid grid-cols-2 gap-4">
+                                        <div>
+                                          <Label className="text-sm font-medium">Name</Label>
+                                          <p className="text-sm">{contact.first_name} {contact.last_name}</p>
+                                        </div>
+                                        <div>
+                                          <Label className="text-sm font-medium">Email</Label>
+                                          <p className="text-sm">{contact.email}</p>
+                                        </div>
+                                        <div>
+                                          <Label className="text-sm font-medium">Organization</Label>
+                                          <p className="text-sm">{contact.organization || 'Not provided'}</p>
+                                        </div>
+                                        <div>
+                                          <Label className="text-sm font-medium">Inquiry Type</Label>
+                                          <p className="text-sm capitalize">{contact.inquiry_type.replace('_', ' ')}</p>
+                                        </div>
+                                      </div>
+                                      <div>
+                                        <Label className="text-sm font-medium">Message</Label>
+                                        <div className="mt-1 p-3 bg-muted rounded-md">
+                                          <p className="text-sm whitespace-pre-wrap">{contact.message}</p>
+                                        </div>
+                                      </div>
+                                      {contact.response_notes && (
+                                        <div>
+                                          <Label className="text-sm font-medium">Response Notes</Label>
+                                          <div className="mt-1 p-3 bg-primary/5 rounded-md">
+                                            <p className="text-sm whitespace-pre-wrap">{contact.response_notes}</p>
+                                          </div>
+                                        </div>
+                                      )}
+                                      <div className="flex justify-between text-xs text-muted-foreground">
+                                        <span>Submitted: {new Date(contact.created_at).toLocaleString()}</span>
+                                        {contact.responded_at && (
+                                          <span>Responded: {new Date(contact.responded_at).toLocaleString()}</span>
+                                        )}
+                                      </div>
+                                    </div>
+                                  </DialogContent>
+                                </Dialog>
+                                
+                                {contact.status === 'new' && (
+                                  <Button
+                                    size="sm"
+                                    onClick={() => handleRespondClick(contact)}
+                                  >
+                                    <MessageCircle className="h-3 w-3 mr-1" />
+                                    Respond
+                                  </Button>
+                                )}
+                              </div>
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </div>
                 )}
               </CardContent>
             </Card>
@@ -277,43 +375,98 @@ const AdminDashboard = () => {
               <CardHeader>
                 <CardTitle>Newsletter Subscribers</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="overflow-x-auto">
                 {loadingData ? (
                   <div className="text-center py-8">Loading...</div>
                 ) : (
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>Email</TableHead>
-                        <TableHead>Status</TableHead>
-                        <TableHead>Source</TableHead>
-                        <TableHead>Subscribed Date</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {subscribers.map((subscriber) => (
-                        <TableRow key={subscriber.id}>
-                          <TableCell>{subscriber.email}</TableCell>
-                          <TableCell>
-                            <Badge 
-                              variant={subscriber.status === 'active' ? 'default' : 'secondary'}
-                            >
-                              {subscriber.status}
-                            </Badge>
-                          </TableCell>
-                          <TableCell className="capitalize">{subscriber.source}</TableCell>
-                          <TableCell>
-                            {new Date(subscriber.subscribed_at).toLocaleDateString()}
-                          </TableCell>
+                  <div className="min-w-full">
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead className="min-w-[200px]">Email</TableHead>
+                          <TableHead className="min-w-[100px]">Status</TableHead>
+                          <TableHead className="min-w-[100px]">Source</TableHead>
+                          <TableHead className="min-w-[120px]">Subscribed Date</TableHead>
                         </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
+                      </TableHeader>
+                      <TableBody>
+                        {subscribers.map((subscriber) => (
+                          <TableRow key={subscriber.id}>
+                            <TableCell>
+                              <a href={`mailto:${subscriber.email}`} className="text-primary hover:underline">
+                                {subscriber.email}
+                              </a>
+                            </TableCell>
+                            <TableCell>
+                              <Badge 
+                                variant={subscriber.status === 'active' ? 'default' : 'secondary'}
+                              >
+                                {subscriber.status}
+                              </Badge>
+                            </TableCell>
+                            <TableCell className="capitalize">{subscriber.source}</TableCell>
+                            <TableCell>
+                              <div className="text-xs">
+                                {new Date(subscriber.subscribed_at).toLocaleDateString()}
+                              </div>
+                              <div className="text-xs text-muted-foreground">
+                                {new Date(subscriber.subscribed_at).toLocaleTimeString()}
+                              </div>
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </div>
                 )}
               </CardContent>
             </Card>
           </TabsContent>
         </Tabs>
+
+        {/* Response Dialog */}
+        <Dialog open={isRespondDialogOpen} onOpenChange={setIsRespondDialogOpen}>
+          <DialogContent className="max-w-2xl">
+            <DialogHeader>
+              <DialogTitle>Mark as Responded</DialogTitle>
+              <DialogDescription>
+                Add response notes for {selectedContact?.first_name} {selectedContact?.last_name}
+              </DialogDescription>
+            </DialogHeader>
+            
+            {selectedContact && (
+              <div className="space-y-4">
+                <div className="p-4 bg-muted rounded-lg">
+                  <h4 className="font-medium mb-2">Original Message:</h4>
+                  <p className="text-sm whitespace-pre-wrap">{selectedContact.message}</p>
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="response-notes">Response Notes (Optional)</Label>
+                  <Textarea
+                    id="response-notes"
+                    value={responseNotes}
+                    onChange={(e) => setResponseNotes(e.target.value)}
+                    placeholder="Add any notes about your response, follow-up actions, or resolution..."
+                    className="min-h-[100px]"
+                  />
+                  <p className="text-xs text-muted-foreground">
+                    These notes are for internal tracking and will help you remember what actions were taken.
+                  </p>
+                </div>
+              </div>
+            )}
+            
+            <DialogFooter>
+              <Button variant="outline" onClick={() => setIsRespondDialogOpen(false)}>
+                Cancel
+              </Button>
+              <Button onClick={handleRespondSubmit}>
+                Mark as Responded
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </main>
     </div>
   );
