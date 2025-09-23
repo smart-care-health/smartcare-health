@@ -328,14 +328,6 @@ const Contact = () => {
               Whether you're a government agency, healthcare provider, or investor, we're ready to explore 
               how our digital health solutions can transform healthcare in your region.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="secondary" size="lg">
-                Download Partnership Brief
-              </Button>
-              <Button variant="outline" size="lg" className="border-white/30 text-white hover:bg-white/10">
-                Schedule Strategy Call
-              </Button>
-            </div>
           </div>
         </div>
       </div>
