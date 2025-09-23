@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Play } from "lucide-react";
 const heroImage = "/lovable-uploads/62ee4cd1-618f-4bee-a8c2-860ec24e8f5b.png";
 const Hero = () => {
-
   return <section id="home" className="relative min-h-screen flex items-center bg-gradient-to-br from-health-light to-white overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-accent/5" />
@@ -20,32 +19,26 @@ const Hero = () => {
                 <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"> Primary Healthcare</span> 
                 <br />Across Africa
               </h1>
-              <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl">By deploying cutting-edge remote diagnostics and building comprehensive EHR/EMR platforms that connect primary healthcare to secondary and tertiary providers, ensuring seamless continuum of care across African communities.</p>
+              <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl">By deploying cutting-edge remote diagnostics and comprehensive EHR/EMR platforms that connect primary healthcare to secondary and tertiary providers, ensuring seamless continuum of care across African communities.</p>
             </div>
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button 
-                variant="hero" 
-                size="lg" 
-                className="group"
-                onClick={() => {
-                  const element = document.querySelector('#solutions');
-                  element?.scrollIntoView({ behavior: 'smooth' });
-                }}
-              >
+              <Button variant="hero" size="lg" className="group" onClick={() => {
+              const element = document.querySelector('#solutions');
+              element?.scrollIntoView({
+                behavior: 'smooth'
+              });
+            }}>
                 Explore Our Solutions
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
-              <Button 
-                variant="outline" 
-                size="lg" 
-                className="group"
-                onClick={() => {
-                  const element = document.querySelector('#vision');
-                  element?.scrollIntoView({ behavior: 'smooth' });
-                }}
-              >
+              <Button variant="outline" size="lg" className="group" onClick={() => {
+              const element = document.querySelector('#vision');
+              element?.scrollIntoView({
+                behavior: 'smooth'
+              });
+            }}>
                 <Play className="mr-2 h-5 w-5" />
                 Higo Demo
               </Button>
