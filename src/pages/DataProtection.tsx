@@ -146,7 +146,7 @@ const DataProtection = () => {
                 Data Protection Officer:
               </p>
               <div className="bg-muted p-4 rounded-lg">
-                <p className="text-foreground font-medium">Email: dpo@smartcare.africa</p>
+                <p className="text-foreground font-medium">Email: compliance@smartcare.africa</p>
                 <p className="text-foreground font-medium">Address: Lagos, Nigeria</p>
               </div>
             </section>
