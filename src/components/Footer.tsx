@@ -1,60 +1,17 @@
-import { Activity, Mail, Phone, MapPin, Linkedin, Twitter, Loader2 } from "lucide-react";
-import { useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
-import { useToast } from "@/hooks/use-toast";
-const Footer = () => {
-  const [email, setEmail] = useState("");
-  const [isSubscribing, setIsSubscribing] = useState(false);
-  const {
-    toast
-  } = useToast();
-  const handleNewsletterSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email) {
-      toast({
-        title: "Please enter your email",
-        description: "Email address is required to subscribe to our newsletter.",
-        variant: "destructive"
-      });
-      return;
-    }
-    setIsSubscribing(true);
-    try {
-      console.log('Subscribing to newsletter:', email);
-      const {
-        data: response,
-        error
-      } = await supabase.functions.invoke('subscribe-newsletter', {
-        body: {
-          email
-        }
-      });
-      if (error) {
-        console.error('Supabase function error:', error);
-        throw error;
-      }
-      if (response?.error) {
-        throw new Error(response.error);
-      }
-      console.log('Newsletter subscription successful:', response);
-      toast({
-        title: response.alreadySubscribed ? "Already subscribed! 📧" : "Successfully subscribed! 🎉",
-        description: response.alreadySubscribed ? "You're already receiving our updates." : "Welcome! Check your email for a confirmation message."
-      });
+import { Activity, Mail, Phone, MapPin, Linkedin, Twitter } from "lucide-react";
+import { useEffect } from "react";
 
-      // Clear email input
-      setEmail("");
-    } catch (error: any) {
-      console.error('Newsletter subscription error:', error);
-      toast({
-        title: "Subscription failed",
-        description: error.message || "Something went wrong. Please try again.",
-        variant: "destructive"
-      });
-    } finally {
-      setIsSubscribing(false);
-    }
-  };
+const Footer = () => {
+  useEffect(() => {
+    // Load Brevo form script
+    const script = document.createElement('script');
+    script.src = 'https://sibforms.com/forms/end-form/build/main.js';
+    script.async = true;
+    document.body.appendChild(script);
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
   const quickLinks = [{
     name: "Home",
     href: "#home"
@@ -154,21 +111,38 @@ const Footer = () => {
                 </li>)}
             </ul>
             
-            {/* Newsletter Signup */}
-            <div className="mt-6 p-4 bg-white/10 rounded-lg">
-              <h5 className="font-semibold mb-2 text-sm">Stay Updated</h5>
-              <p className="text-white/80 text-xs mb-3">
-                Get the latest updates on our projects and partnerships.
-              </p>
-              <form onSubmit={handleNewsletterSubmit} className="flex space-x-2">
-                <input type="email" placeholder="Your email" value={email} onChange={e => setEmail(e.target.value)} disabled={isSubscribing} className="flex-1 px-3 py-1.5 text-sm bg-white/20 border border-white/30 rounded text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 disabled:opacity-50" />
-                <button type="submit" disabled={isSubscribing} className="px-3 py-1.5 bg-accent hover:bg-accent-hover text-white text-sm rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center">
-                  {isSubscribing ? <>
-                      <Loader2 className="h-3 w-3 animate-spin mr-1" />
-                      <span className="hidden sm:inline">Subscribing...</span>
-                    </> : "Subscribe"}
-                </button>
-              </form>
+            {/* Brevo Newsletter Signup */}
+            <div className="mt-6 rounded-lg overflow-hidden">
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: `
+                    <div id="sib-form-container" class="sib-form-container">
+                      <div id="sib-container" style="text-align:center; background-color:transparent; max-width:100%; border:none; direction:ltr">
+                        <form id="sib-form" method="POST" action="https://sibforms.com/serve/muIFAF_MQHb9pGj4O3Ns6sK0_2gDSbYBOc7yKKG3i7r8TJ7PZPMhMUwP4PUiVAuLHkHV3gBzjGcFzGcHzlD6cYQsJq7Dv1m3sYM6S-r9gC4E4dqVWnRqR9oJj5E0gK7a1B2cD3eF4gH5iJ6kL7mN8oP9qR0sT1uV2wX3yZ4" data-type="subscription">
+                          <div style="padding:0 0 8px 0;">
+                            <p style="font-size:14px; font-weight:700; color:#FFFFFF; text-align:left; margin:0;">Stay Updated</p>
+                          </div>
+                          <div style="padding:0 0 8px 0;">
+                            <p style="font-size:12px; color:rgba(255,255,255,0.8); text-align:left; margin:0;">Get the latest news on our projects and partnerships</p>
+                          </div>
+                          <div style="padding:4px 0;">
+                            <input type="email" id="EMAIL" name="EMAIL" autocomplete="off" placeholder="Enter your email address" required style="font-size:13px; padding:8px 12px; background:rgba(255,255,255,0.2); border:1px solid rgba(255,255,255,0.3); border-radius:6px; color:#fff; width:100%; box-sizing:border-box;" />
+                          </div>
+                          <div style="padding:6px 0; display:flex; align-items:flex-start; gap:8px;">
+                            <input type="checkbox" value="1" id="OPT_IN" name="OPT_IN" style="margin-top:3px; flex-shrink:0;" />
+                            <label for="OPT_IN" style="font-size:11px; color:rgba(255,255,255,0.7); cursor:pointer; text-align:left;">I agree to receive newsletters and accept the data privacy policy.</label>
+                          </div>
+                          <div style="padding:8px 0;">
+                            <button type="submit" form="sib-form" style="font-size:13px; font-weight:600; color:#FFFFFF; background-color:hsl(142 71% 45%); border:none; border-radius:6px; padding:8px 20px; cursor:pointer; width:100%;">SUBSCRIBE</button>
+                          </div>
+                          <input type="text" name="email_address_check" value="" style="display:none;">
+                          <input type="hidden" name="locale" value="en">
+                        </form>
+                      </div>
+                    </div>
+                  `
+                }}
+              />
             </div>
           </div>
         </div>
