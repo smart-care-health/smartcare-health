@@ -15,9 +15,3 @@ additional_redirect_urls = ["https://lovable.dev"]
 jwt_expiry = 3600
 enable_signup = true
 enable_confirmations = false
-
-[functions.submit-contact-form]
-verify_jwt = false
-
-[functions.subscribe-newsletter]
-verify_jwt = false
