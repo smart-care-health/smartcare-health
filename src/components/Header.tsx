@@ -1,17 +1,8 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { useAuth } from "@/contexts/AuthContext";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Menu, X, Activity, User, LogOut } from "lucide-react";
+import { Menu, X, Activity } from "lucide-react";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { user, profile, isAdmin, signOut } = useAuth();
-
-  const handleSignOut = async () => {
-    await signOut();
-  };
 
   const navItems = [
     { name: "Home", href: "#home" },
@@ -25,7 +16,6 @@ const Header = () => {
     <header className="bg-white/95 backdrop-blur-sm shadow-sm sticky top-0 z-50">
       <nav className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          {/* Logo */}
           <div className="flex items-center space-x-3">
             <div className="bg-gradient-to-r from-primary to-accent p-2 rounded-lg">
               <Activity className="h-6 w-6 text-white" />
@@ -36,7 +26,6 @@ const Header = () => {
             </div>
           </div>
 
-          {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-8">
             {navItems.map((item) => (
               <a
@@ -52,28 +41,8 @@ const Header = () => {
                 {item.name}
               </a>
             ))}
-            {isAdmin && (
-              <Link to="/admin" className="text-foreground hover:text-primary transition-colors duration-200 font-medium flex items-center">
-                Admin
-                <Badge variant="secondary" className="ml-2">Admin</Badge>
-              </Link>
-            )}
-            
-            {/* Auth Section - Only show for logged in users */}
-            {user && (
-              <div className="flex items-center space-x-2">
-                <span className="text-sm text-muted-foreground">
-                  {profile?.first_name || profile?.email}
-                </span>
-                <Button onClick={handleSignOut} variant="outline" size="sm">
-                  <LogOut className="h-4 w-4 mr-2" />
-                  Sign Out
-                </Button>
-              </div>
-            )}
           </div>
 
-          {/* Mobile Menu Button */}
           <button
             className="lg:hidden p-2"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -87,7 +56,6 @@ const Header = () => {
           </button>
         </div>
 
-        {/* Mobile Navigation */}
         {isMenuOpen && (
           <div className="lg:hidden mt-4 pb-4 border-t border-border">
             <div className="flex flex-col space-y-4 pt-4">
@@ -106,30 +74,6 @@ const Header = () => {
                   {item.name}
                 </a>
               ))}
-              {isAdmin && (
-                <Link 
-                  to="/admin" 
-                  className="text-foreground hover:text-primary transition-colors duration-200 font-medium"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Admin
-                </Link>
-              )}
-              
-              {/* Auth Section - Only show for logged in users */}
-              {user && (
-                <div className="border-t pt-4 mt-4">
-                  <div className="space-y-2">
-                    <div className="text-sm text-muted-foreground">
-                      Welcome, {profile?.first_name || profile?.email}
-                    </div>
-                    <Button onClick={handleSignOut} variant="outline" size="sm" className="w-full">
-                      <LogOut className="h-4 w-4 mr-2" />
-                      Sign Out
-                    </Button>
-                  </div>
-                </div>
-              )}
             </div>
           </div>
         )}
