@@ -101,19 +101,65 @@ const Footer = () => {
                 </li>)}
             </ul>
             
-            {/* Brevo Newsletter Embed */}
-            <div className="mt-6 rounded-lg overflow-hidden">
-              <iframe
-                src="https://27493079.sibforms.com/serve/MUIFAPs1FPaxIFkUM6FMMihidGY71t9STqvrauFDIzaY3mRzPoMOspnBtXVxJl3OztKC-b3XklYkkr3d1z0CUkAbgGe0EvS7OSkyhfgkL8td2Ibsl6cc2WlUpCOrGJmLvdh8s81pBg9pq0QDgJdpzM8dcPYUuLBZdQO5YRSIs7poIBzzjuv3fAE7awD8NDQwlzIsoverw5Dpp6xLbw=="
-                width="100%"
-                height="350"
-                frameBorder="0"
-                scrolling="auto"
-                allowFullScreen
-                style={{ border: 'none', maxWidth: '100%' }}
-                title="Newsletter signup"
-              />
-            </div>
+            {/* Brevo Newsletter Form */}
+            <div className="mt-6 brevo-footer-form" dangerouslySetInnerHTML={{ __html: `
+              <div id="sib-form-container" class="sib-form-container">
+                <div id="error-message" class="sib-form-message-panel" style="font-size:14px; text-align:left; display:none;">
+                  <div class="sib-form-message-panel__text sib-form-message-panel__text--center">
+                    <span class="sib-form-message-panel__inner-text">Your subscription could not be saved. Please try again.</span>
+                  </div>
+                </div>
+                <div id="success-message" class="sib-form-message-panel" style="font-size:14px; text-align:left; display:none;">
+                  <div class="sib-form-message-panel__text sib-form-message-panel__text--center">
+                    <span class="sib-form-message-panel__inner-text">Your subscription has been successful.</span>
+                  </div>
+                </div>
+                <div id="sib-container" class="sib-container--large sib-container--vertical" style="text-align:center; border:none; max-width:100%; direction:ltr;">
+                  <form id="sib-form" method="POST" action="https://27493079.sibforms.com/serve/MUIFAPs1FPaxIFkUM6FMMihidGY71t9STqvrauFDIzaY3mRzPoMOspnBtXVxJl3OztKCb3XklYkkr3d1z0CUkAbgGe0EvS7OSkyhfgkL8td2Ibsl6cc2WlUpCOrGJmLvdh8s81pBg9pq0QDgJdpzM8dcPYUuLBZdQO5YRSIs7poIBzzjuv3fAE7awD8NDQwlzIsoverw5Dpp6xLbw==" data-type="subscription">
+                    <div style="padding: 6px 0;">
+                      <div class="sib-input sib-form-block">
+                        <div class="form__entry entry_block">
+                          <div class="form__label-row">
+                            <label class="entry__label" for="EMAIL" data-required="*" style="font-size:14px;">Enter your email address to subscribe</label>
+                          </div>
+                          <div class="entry__field">
+                            <input class="input" type="text" id="EMAIL" name="EMAIL" autocomplete="off" placeholder="EMAIL" data-required="true" required />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div style="padding: 6px 0;">
+                      <div class="sib-optin sib-form-block" data-required="true">
+                        <div class="form__entry entry_mcq">
+                          <div class="form__label-row">
+                            <label class="entry__label" for="OPT_IN" data-required="*" style="font-size:14px;">Kindly Confirm</label>
+                          </div>
+                          <div class="entry__choice" style="">
+                            <label>
+                              <input type="checkbox" class="input_replaced" value="1" id="OPT_IN" name="OPT_IN" required />
+                              <span class="checkbox checkbox_tick_positive" style="margin-left:0"></span>
+                              <span style="font-size:13px;">I agree to receive your newsletters and agree to the data privacy policy. I can unsubscribe at any time.</span>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div style="padding: 6px 0;">
+                      <div class="g-recaptcha-v3" data-sitekey="6LdTDoAsAAAAAChxrzLMFNj7Aj0enHnuVs5C04B7" style="display: none;"></div>
+                    </div>
+                    <div style="padding: 6px 0;">
+                      <div class="sib-form-block" style="text-align: left;">
+                        <button class="sib-form-block__button sib-form-block__button-with-loader" style="font-size:14px; font-weight:700; border-radius:3px; border-width:0px;" form="sib-form" type="submit">
+                          SUBSCRIBE
+                        </button>
+                      </div>
+                    </div>
+                    <input type="text" name="email_address_check" value="" class="input--hidden" />
+                    <input type="hidden" name="locale" value="en" />
+                  </form>
+                </div>
+              </div>
+            ` }} />
           </div>
         </div>
 
