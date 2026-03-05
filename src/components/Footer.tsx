@@ -1,13 +1,11 @@
 import { Activity, Mail, Phone, MapPin, Linkedin, Twitter, Loader2 } from "lucide-react";
 import { useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 const Footer = () => {
   const [email, setEmail] = useState("");
+  const [website, setWebsite] = useState("");
   const [isSubscribing, setIsSubscribing] = useState(false);
-  const {
-    toast
-  } = useToast();
+  const { toast } = useToast();
   const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) {
@@ -20,36 +18,20 @@ const Footer = () => {
     }
     setIsSubscribing(true);
     try {
-      console.log('Subscribing to newsletter:', email);
-      const {
-        data: response,
-        error
-      } = await supabase.functions.invoke('subscribe-newsletter', {
-        body: {
-          email
-        }
+      const res = await fetch("https://smartcare-site-api.royal-union-6758.workers.dev/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, website }),
       });
-      if (error) {
-        console.error('Supabase function error:', error);
-        throw error;
-      }
-      if (response?.error) {
-        throw new Error(response.error);
-      }
-      console.log('Newsletter subscription successful:', response);
+      if (!res.ok) throw new Error("Request failed");
       toast({
-        title: response.alreadySubscribed ? "Already subscribed! 📧" : "Successfully subscribed! 🎉",
-        description: response.alreadySubscribed ? "You're already receiving our updates." : "Welcome! Check your email for a confirmation message."
+        title: "Thanks — you're subscribed. 🎉",
       });
-
-      // Clear email input
       setEmail("");
-    } catch (error: any) {
-      console.error('Newsletter subscription error:', error);
+    } catch {
       toast({
-        title: "Subscription failed",
-        description: error.message || "Something went wrong. Please try again.",
-        variant: "destructive"
+        title: "Subscription failed — please try again.",
+        variant: "destructive",
       });
     } finally {
       setIsSubscribing(false);
@@ -161,6 +143,7 @@ const Footer = () => {
                 Get the latest updates on our projects and partnerships.
               </p>
               <form onSubmit={handleNewsletterSubmit} className="flex space-x-2">
+                <input type="text" name="website" value={website} onChange={e => setWebsite(e.target.value)} className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" />
                 <input type="email" placeholder="Your email" value={email} onChange={e => setEmail(e.target.value)} disabled={isSubscribing} className="flex-1 px-3 py-1.5 text-sm bg-white/20 border border-white/30 rounded text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 disabled:opacity-50" />
                 <button type="submit" disabled={isSubscribing} className="px-3 py-1.5 bg-accent hover:bg-accent-hover text-white text-sm rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center">
                   {isSubscribing ? <>
