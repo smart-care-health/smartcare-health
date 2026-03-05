@@ -1,5 +1,5 @@
 import { Activity, Mail, Phone, MapPin, Linkedin, Twitter } from "lucide-react";
-import NewsletterForm from "./NewsletterForm";
+import BrevoNewsletterForm from "./BrevoNewsletterForm";
 
 const Footer = () => {
   const quickLinks = [{
@@ -102,7 +102,7 @@ const Footer = () => {
                 </li>)}
             </ul>
             
-            <NewsletterForm />
+            <BrevoNewsletterForm />
           </div>
         </div>
 

@@ -120,3 +120,58 @@ All colors MUST be HSL for proper theming.
     @apply bg-background text-foreground;
   }
 }
+
+/* Brevo newsletter form dark theme overrides */
+.brevo-footer-form .sib-form {
+  background-color: transparent !important;
+}
+
+.brevo-footer-form #sib-container {
+  background-color: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+.brevo-footer-form .sib-form-message-panel {
+  max-width: 100% !important;
+}
+
+.brevo-footer-form .entry__field .input,
+.brevo-footer-form .entry__field input {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  color: #fff !important;
+  border-radius: 0.5rem !important;
+  padding: 0.5rem 0.75rem !important;
+  font-size: 0.875rem !important;
+}
+
+.brevo-footer-form .entry__field .input::placeholder,
+.brevo-footer-form .entry__field input::placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.brevo-footer-form .entry__field .input:focus,
+.brevo-footer-form .entry__field input:focus {
+  outline: none !important;
+  ring: 2px solid hsl(180, 100%, 35%) !important;
+  border-color: hsl(180, 100%, 35%) !important;
+}
+
+.brevo-footer-form .entry__specification {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.brevo-footer-form .input--hidden {
+  display: none !important;
+}
+
+.brevo-footer-form .sib-form-block__button {
+  background-color: hsl(180, 100%, 35%) !important;
+  border-radius: 0.5rem !important;
+  transition: background-color 0.2s !important;
+}
+
+.brevo-footer-form .sib-form-block__button:hover {
+  background-color: hsl(180, 100%, 40%) !important;
+}
