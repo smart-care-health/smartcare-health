@@ -1,38 +1,30 @@
 
 
-## Plan: Update Privacy Policy and Standardize Contact Email
+## Plan: Embed Brevo Newsletter Form in Footer
 
-### Adjustments per user instructions:
-1. **Cookies**: Keep cookie/analytics references as-is from the document. Adjust cookie banner language to say "when we use cookies, a cookie banner will be displayed" (future-tense).
-2. **Azure/Cloudflare**: Keep as-is (used in broader Smartcare infrastructure).
-3. **Contact email**: Use `compliance@smartcare.africa` for all compliance/DPO references. Remove `dpo@smartcare.africa`.
-4. **Retain** other email references (`info@smartcare.africa`, `partnerships@smartcare.africa`).
+### Approach
 
-### Implementation Steps
+The best approach is to use an **iframe embed** from Brevo rather than injecting raw Brevo HTML/JS (which often conflicts with React's DOM management and brings its own heavy styling). This keeps the footer clean and avoids style clashes.
 
-**1. Rewrite `src/pages/PrivacyPolicy.tsx`**
-Replace the entire page content with the document's full text, structured into these sections:
-- Introduction (with NDP Act/CFRN references)
-- Guiding Principles on Data Processing
-- Scope of Data Processing (data collection table rendered as a styled table)
-- Rights of Data Subjects (including SNAG process)
-- Transfer of Data to Third Parties and Countries
-- Disclosure of Information
-- Technical Information and Cookies — adjust cookie banner sentence to: "When cookies are used on our website, you will be presented with a cookie banner requesting your consent."
-- Data Security and Integrity
-- Purpose and Storage Limitation
-- Data Retention
-- Children
-- Alteration of Privacy Policy
-- Contact Information: `compliance@smartcare.africa`, effective date "February 2026"
+However, if you have a **Brevo embedded form HTML snippet**, we can also inject it using `dangerouslySetInnerHTML` inside a container div, with CSS overrides scoped to that container to match the footer's dark theme (white text, transparent/dark backgrounds, teal accent button).
 
-**2. Update `src/pages/DataProtection.tsx`**
-- Change `dpo@smartcare.africa` to `compliance@smartcare.africa` in the Data Protection Officer section
+### Recommended option: Brevo iframe embed
 
-**3. Update `src/components/Footer.tsx`**
-- No changes needed (already uses generic link text)
+1. In Brevo, when creating your form, choose the **iframe** share option — this gives a self-contained `<iframe>` URL.
+2. We replace the current custom newsletter form with an `<iframe>` pointing to your Brevo form, styled to fit seamlessly (no border, matching width, transparent background if Brevo supports it).
 
-### Files modified:
-- `src/pages/PrivacyPolicy.tsx` — full rewrite with document content
-- `src/pages/DataProtection.tsx` — email change only
+### Alternative: Raw HTML embed with style overrides
+
+1. Replace the current form with a `div` that renders the Brevo HTML snippet via `dangerouslySetInnerHTML` + a `useEffect` to load any required Brevo scripts.
+2. Add scoped CSS overrides in `index.css` targeting Brevo's form classes to force dark-theme styling (white text, dark inputs, teal submit button).
+
+### Implementation steps
+
+1. **Remove Supabase newsletter logic** from `Footer.tsx` — delete the `useState`, `handleNewsletterSubmit`, supabase import, toast import, and Loader2 import.
+2. **Add Brevo embed** — replace the `<form>` block (lines 163-172) with either an iframe or a raw HTML container, depending on which embed type you provide.
+3. **Style overrides** — if using raw HTML, add CSS in `index.css` to override Brevo's default form styles to match the footer (dark bg, white text, teal button).
+
+### What I need from you
+
+Please share your Brevo embed code (either the iframe snippet or the HTML snippet). I'll integrate it and apply style overrides to match the footer's look.
 
