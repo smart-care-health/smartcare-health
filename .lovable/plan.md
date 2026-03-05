@@ -1,30 +1,20 @@
 
 
-## Plan: Embed Brevo Newsletter Form in Footer
+## Plan: Embed Brevo Newsletter Form via iframe in Footer
 
-### Approach
+### What changes
 
-The best approach is to use an **iframe embed** from Brevo rather than injecting raw Brevo HTML/JS (which often conflicts with React's DOM management and brings its own heavy styling). This keeps the footer clean and avoids style clashes.
+**`src/components/Footer.tsx`**
+- Remove all Supabase newsletter logic: `useState`, `handleNewsletterSubmit`, `supabase` import, `useToast` import, `Loader2` import
+- Replace the current `<form>` block inside the "Stay Updated" card with an `<iframe>` pointing to:
+  ```
+  https://27493079.sibforms.com/serve/MUIFAPs1FPaxIFkUM6FMMihidGY71t9STqvrauFDIzaY3mRzPoMOspnBtXVxJl3OztKC-b3XklYkkr3d1z0CUkAbgGe0EvS7OSkyhfgkL8td2Ibsl6cc2WlUpCOrGJmLvdh8s81pBg9pq0QDgJdpzM8dcPYUuLBZdQO5YRSIs7poIBzzjuv3fAE7awD8NDQwlzIsoverw5Dpp6xLbw==
+  ```
+- The iframe will be styled: `width: 100%`, `height: ~350px`, `frameBorder="0"`, `border: none`, with `allowFullScreen` and `scrolling="auto"`
+- Keep the "Stay Updated" heading and description text above the iframe, or remove them if the Brevo form already includes its own heading (which it does based on the earlier snippet — "Stay Updated" + "Get the latest news...")
 
-However, if you have a **Brevo embedded form HTML snippet**, we can also inject it using `dangerouslySetInnerHTML` inside a container div, with CSS overrides scoped to that container to match the footer's dark theme (white text, transparent/dark backgrounds, teal accent button).
+Since the Brevo form already contains its own "Stay Updated" title and description, we'll remove the duplicate heading/description from the footer card and just show the iframe inside the styled container.
 
-### Recommended option: Brevo iframe embed
-
-1. In Brevo, when creating your form, choose the **iframe** share option — this gives a self-contained `<iframe>` URL.
-2. We replace the current custom newsletter form with an `<iframe>` pointing to your Brevo form, styled to fit seamlessly (no border, matching width, transparent background if Brevo supports it).
-
-### Alternative: Raw HTML embed with style overrides
-
-1. Replace the current form with a `div` that renders the Brevo HTML snippet via `dangerouslySetInnerHTML` + a `useEffect` to load any required Brevo scripts.
-2. Add scoped CSS overrides in `index.css` targeting Brevo's form classes to force dark-theme styling (white text, dark inputs, teal submit button).
-
-### Implementation steps
-
-1. **Remove Supabase newsletter logic** from `Footer.tsx` — delete the `useState`, `handleNewsletterSubmit`, supabase import, toast import, and Loader2 import.
-2. **Add Brevo embed** — replace the `<form>` block (lines 163-172) with either an iframe or a raw HTML container, depending on which embed type you provide.
-3. **Style overrides** — if using raw HTML, add CSS in `index.css` to override Brevo's default form styles to match the footer (dark bg, white text, teal button).
-
-### What I need from you
-
-Please share your Brevo embed code (either the iframe snippet or the HTML snippet). I'll integrate it and apply style overrides to match the footer's look.
+### Files modified
+1. **`src/components/Footer.tsx`** — Remove Supabase logic, embed iframe
 
