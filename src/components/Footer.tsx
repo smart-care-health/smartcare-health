@@ -1,17 +1,6 @@
 import { Activity, Mail, Phone, MapPin, Linkedin, Twitter } from "lucide-react";
-import { useEffect } from "react";
 
 const Footer = () => {
-  useEffect(() => {
-    // Load Brevo form script
-    const script = document.createElement('script');
-    script.src = 'https://sibforms.com/forms/end-form/build/main.js';
-    script.async = true;
-    document.body.appendChild(script);
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
   const quickLinks = [{
     name: "Home",
     href: "#home"
@@ -113,35 +102,14 @@ const Footer = () => {
             
             {/* Brevo Newsletter Signup */}
             <div className="mt-6 rounded-lg overflow-hidden">
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: `
-                    <div id="sib-form-container" class="sib-form-container">
-                      <div id="sib-container" style="text-align:center; background-color:transparent; max-width:100%; border:none; direction:ltr">
-                        <form id="sib-form" method="POST" action="https://sibforms.com/serve/muIFAF_MQHb9pGj4O3Ns6sK0_2gDSbYBOc7yKKG3i7r8TJ7PZPMhMUwP4PUiVAuLHkHV3gBzjGcFzGcHzlD6cYQsJq7Dv1m3sYM6S-r9gC4E4dqVWnRqR9oJj5E0gK7a1B2cD3eF4gH5iJ6kL7mN8oP9qR0sT1uV2wX3yZ4" data-type="subscription">
-                          <div style="padding:0 0 8px 0;">
-                            <p style="font-size:14px; font-weight:700; color:#FFFFFF; text-align:left; margin:0;">Stay Updated</p>
-                          </div>
-                          <div style="padding:0 0 8px 0;">
-                            <p style="font-size:12px; color:rgba(255,255,255,0.8); text-align:left; margin:0;">Get the latest news on our projects and partnerships</p>
-                          </div>
-                          <div style="padding:4px 0;">
-                            <input type="email" id="EMAIL" name="EMAIL" autocomplete="off" placeholder="Enter your email address" required style="font-size:13px; padding:8px 12px; background:rgba(255,255,255,0.2); border:1px solid rgba(255,255,255,0.3); border-radius:6px; color:#fff; width:100%; box-sizing:border-box;" />
-                          </div>
-                          <div style="padding:6px 0; display:flex; align-items:flex-start; gap:8px;">
-                            <input type="checkbox" value="1" id="OPT_IN" name="OPT_IN" style="margin-top:3px; flex-shrink:0;" />
-                            <label for="OPT_IN" style="font-size:11px; color:rgba(255,255,255,0.7); cursor:pointer; text-align:left;">I agree to receive newsletters and accept the data privacy policy.</label>
-                          </div>
-                          <div style="padding:8px 0;">
-                            <button type="submit" form="sib-form" style="font-size:13px; font-weight:600; color:#FFFFFF; background-color:hsl(142 71% 45%); border:none; border-radius:6px; padding:8px 20px; cursor:pointer; width:100%;">SUBSCRIBE</button>
-                          </div>
-                          <input type="text" name="email_address_check" value="" style="display:none;">
-                          <input type="hidden" name="locale" value="en">
-                        </form>
-                      </div>
-                    </div>
-                  `
-                }}
+              <iframe
+                src="https://27493079.sibforms.com/serve/MUIFAPs1FPaxIFkUM6FMMihidGY71t9STqvrauFDIzaY3mRzPoMOspnBtXVxJl3OztKC-b3XklYkkr3d1z0CUkAbgGe0EvS7OSkyhfgkL8td2Ibsl6cc2WlUpCOrGJmLvdh8s81pBg9pq0QDgJdpzM8dcPYUuLBZdQO5YRSIs7poIBzzjuv3fAE7awD8NDQwlzIsoverw5Dpp6xLbw=="
+                width="100%"
+                height="305"
+                frameBorder="0"
+                scrolling="auto"
+                allowFullScreen
+                style={{ display: 'block', maxWidth: '100%', border: 'none' }}
               />
             </div>
           </div>
