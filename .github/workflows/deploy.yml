@@ -1,7 +1,9 @@
 name: Deploy to GitHub Pages
 
 on:
-  workflow_dispatch
+  push:
+    branches: [ main ]             # auto-deploys on pushes to main
+  workflow_dispatch:                # also allow manual runs
 
 permissions:
   contents: write                   # required to push to gh-pages
