@@ -120,3 +120,81 @@ All colors MUST be HSL for proper theming.
     @apply bg-background text-foreground;
   }
 }
+
+/* Brevo newsletter form dark theme overrides for footer */
+.brevo-footer-form #sib-container {
+  background-color: transparent !important;
+  border: none !important;
+  max-width: 100% !important;
+  padding: 0 !important;
+}
+
+.brevo-footer-form .sib-form-block,
+.brevo-footer-form .sib-text-form-block,
+.brevo-footer-form .entry__label,
+.brevo-footer-form .entry__specification,
+.brevo-footer-form .entry__choice span,
+.brevo-footer-form label {
+  color: rgba(255, 255, 255, 0.8) !important;
+  background-color: transparent !important;
+  font-family: inherit !important;
+}
+
+.brevo-footer-form .entry__field input,
+.brevo-footer-form .input {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  color: white !important;
+  border-radius: 0.5rem !important;
+  padding: 0.5rem 0.75rem !important;
+  font-size: 14px !important;
+}
+
+.brevo-footer-form .entry__field input::placeholder,
+.brevo-footer-form .input::placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.brevo-footer-form .sib-form-block__button {
+  background-color: hsl(180 100% 35%) !important;
+  color: white !important;
+  padding: 0.5rem 1.5rem !important;
+  border-radius: 0.5rem !important;
+  transition: background-color 0.2s !important;
+}
+
+.brevo-footer-form .sib-form-block__button:hover {
+  background-color: hsl(180 100% 40%) !important;
+}
+
+.brevo-footer-form #error-message {
+  background-color: rgba(220, 38, 38, 0.2) !important;
+  border: 1px solid rgba(220, 38, 38, 0.4) !important;
+  border-radius: 0.5rem !important;
+  color: #fca5a5 !important;
+}
+
+.brevo-footer-form #success-message {
+  background-color: rgba(34, 197, 94, 0.2) !important;
+  border: 1px solid rgba(34, 197, 94, 0.4) !important;
+  border-radius: 0.5rem !important;
+  color: #86efac !important;
+}
+
+.brevo-footer-form .sib-form-message-panel__inner-text {
+  color: inherit !important;
+}
+
+.brevo-footer-form .entry__error {
+  color: #fca5a5 !important;
+  background-color: transparent !important;
+  border: none !important;
+}
+
+.brevo-footer-form .input--hidden {
+  display: none !important;
+}
+
+.brevo-footer-form .checkbox_tick_positive {
+  border-color: rgba(255, 255, 255, 0.4) !important;
+}
