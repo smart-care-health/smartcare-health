@@ -1,38 +1,38 @@
 
 
-## Plan: Embed Brevo Newsletter Form Natively in Footer
+## Plan: Update Privacy Policy and Standardize Contact Email
 
-Now that I have the complete Brevo embed code, I can build a proper integration. The form submits to `https://27493079.sibforms.com/serve/MUIFAP...` via POST, includes an email field, opt-in checkbox, honeypot spam field, hidden locale field, and reCAPTCHA v3.
+### Adjustments per user instructions:
+1. **Cookies**: Keep cookie/analytics references as-is from the document. Adjust cookie banner language to say "when we use cookies, a cookie banner will be displayed" (future-tense).
+2. **Azure/Cloudflare**: Keep as-is (used in broader Smartcare infrastructure).
+3. **Contact email**: Use `compliance@smartcare.africa` for all compliance/DPO references. Remove `dpo@smartcare.africa`.
+4. **Retain** other email references (`info@smartcare.africa`, `partnerships@smartcare.africa`).
 
-### Approach
+### Implementation Steps
 
-Rather than injecting the raw Brevo HTML (which clashes with React's DOM and brings its own white-background styling), I will build a **native React form** that posts to Brevo's endpoint, styled to match the footer's dark theme perfectly.
+**1. Rewrite `src/pages/PrivacyPolicy.tsx`**
+Replace the entire page content with the document's full text, structured into these sections:
+- Introduction (with NDP Act/CFRN references)
+- Guiding Principles on Data Processing
+- Scope of Data Processing (data collection table rendered as a styled table)
+- Rights of Data Subjects (including SNAG process)
+- Transfer of Data to Third Parties and Countries
+- Disclosure of Information
+- Technical Information and Cookies — adjust cookie banner sentence to: "When cookies are used on our website, you will be presented with a cookie banner requesting your consent."
+- Data Security and Integrity
+- Purpose and Storage Limitation
+- Data Retention
+- Children
+- Alteration of Privacy Policy
+- Contact Information: `compliance@smartcare.africa`, effective date "February 2026"
 
-### Changes
+**2. Update `src/pages/DataProtection.tsx`**
+- Change `dpo@smartcare.africa` to `compliance@smartcare.africa` in the Data Protection Officer section
 
-**1. `src/components/Footer.tsx`**
-- Remove the current iframe embed
-- Add a native React newsletter form component with:
-  - Email input (dark-styled, white text, border matching footer)
-  - Consent checkbox with privacy text
-  - "Subscribe" button in teal accent color
-  - Hidden honeypot field (`email_address_check`) and locale field
-  - Form submits via standard POST to Brevo's sibforms URL
-  - Success/error states handled via form submission response
+**3. Update `src/components/Footer.tsx`**
+- No changes needed (already uses generic link text)
 
-**2. `index.html`**
-- Add reCAPTCHA v3 script: `https://www.google.com/recaptcha/api.js?render=6LdTDoAsAAAAAChxrzLMFNj7Aj0enHnuVs5C04B7`
-- Add Brevo's main form script: `https://sibforms.com/forms/end-form/build/main.js`
-- Add Brevo's stylesheet: `https://sibforms.com/forms/end-form/build/sib-styles.css`
-
-**3. `src/index.css`**
-- Add scoped CSS overrides targeting `#sib-container` and `.sib-form` classes to force dark theme styling (transparent/dark backgrounds, white text, teal button, matching border colors)
-
-### Technical detail
-
-Since Brevo's `main.js` script handles form validation, reCAPTCHA token injection, and AJAX submission, the cleanest approach is to render the actual Brevo HTML structure (using `dangerouslySetInnerHTML` inside a wrapper div) and let Brevo's script manage it. The CSS overrides will restyle everything to match the dark footer. This ensures full Brevo functionality (validation messages, success/error panels, reCAPTCHA) without rebuilding their logic.
-
-The wrapper will:
-- Use `dangerouslySetInnerHTML` with the exact Brevo form HTML (minus the `<style>` and `<script>` tags, which go in `index.html`)
-- Be wrapped in a container with scoped dark-theme class
+### Files modified:
+- `src/pages/PrivacyPolicy.tsx` — full rewrite with document content
+- `src/pages/DataProtection.tsx` — email change only
 
