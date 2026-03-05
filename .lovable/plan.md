@@ -1,20 +1,38 @@
 
 
-## Plan: Embed Brevo Newsletter Form via iframe in Footer
+## Plan: Embed Brevo Newsletter Form Natively in Footer
 
-### What changes
+Now that I have the complete Brevo embed code, I can build a proper integration. The form submits to `https://27493079.sibforms.com/serve/MUIFAP...` via POST, includes an email field, opt-in checkbox, honeypot spam field, hidden locale field, and reCAPTCHA v3.
 
-**`src/components/Footer.tsx`**
-- Remove all Supabase newsletter logic: `useState`, `handleNewsletterSubmit`, `supabase` import, `useToast` import, `Loader2` import
-- Replace the current `<form>` block inside the "Stay Updated" card with an `<iframe>` pointing to:
-  ```
-  https://27493079.sibforms.com/serve/MUIFAPs1FPaxIFkUM6FMMihidGY71t9STqvrauFDIzaY3mRzPoMOspnBtXVxJl3OztKC-b3XklYkkr3d1z0CUkAbgGe0EvS7OSkyhfgkL8td2Ibsl6cc2WlUpCOrGJmLvdh8s81pBg9pq0QDgJdpzM8dcPYUuLBZdQO5YRSIs7poIBzzjuv3fAE7awD8NDQwlzIsoverw5Dpp6xLbw==
-  ```
-- The iframe will be styled: `width: 100%`, `height: ~350px`, `frameBorder="0"`, `border: none`, with `allowFullScreen` and `scrolling="auto"`
-- Keep the "Stay Updated" heading and description text above the iframe, or remove them if the Brevo form already includes its own heading (which it does based on the earlier snippet — "Stay Updated" + "Get the latest news...")
+### Approach
 
-Since the Brevo form already contains its own "Stay Updated" title and description, we'll remove the duplicate heading/description from the footer card and just show the iframe inside the styled container.
+Rather than injecting the raw Brevo HTML (which clashes with React's DOM and brings its own white-background styling), I will build a **native React form** that posts to Brevo's endpoint, styled to match the footer's dark theme perfectly.
 
-### Files modified
-1. **`src/components/Footer.tsx`** — Remove Supabase logic, embed iframe
+### Changes
+
+**1. `src/components/Footer.tsx`**
+- Remove the current iframe embed
+- Add a native React newsletter form component with:
+  - Email input (dark-styled, white text, border matching footer)
+  - Consent checkbox with privacy text
+  - "Subscribe" button in teal accent color
+  - Hidden honeypot field (`email_address_check`) and locale field
+  - Form submits via standard POST to Brevo's sibforms URL
+  - Success/error states handled via form submission response
+
+**2. `index.html`**
+- Add reCAPTCHA v3 script: `https://www.google.com/recaptcha/api.js?render=6LdTDoAsAAAAAChxrzLMFNj7Aj0enHnuVs5C04B7`
+- Add Brevo's main form script: `https://sibforms.com/forms/end-form/build/main.js`
+- Add Brevo's stylesheet: `https://sibforms.com/forms/end-form/build/sib-styles.css`
+
+**3. `src/index.css`**
+- Add scoped CSS overrides targeting `#sib-container` and `.sib-form` classes to force dark theme styling (transparent/dark backgrounds, white text, teal button, matching border colors)
+
+### Technical detail
+
+Since Brevo's `main.js` script handles form validation, reCAPTCHA token injection, and AJAX submission, the cleanest approach is to render the actual Brevo HTML structure (using `dangerouslySetInnerHTML` inside a wrapper div) and let Brevo's script manage it. The CSS overrides will restyle everything to match the dark footer. This ensures full Brevo functionality (validation messages, success/error panels, reCAPTCHA) without rebuilding their logic.
+
+The wrapper will:
+- Use `dangerouslySetInnerHTML` with the exact Brevo form HTML (minus the `<style>` and `<script>` tags, which go in `index.html`)
+- Be wrapped in a container with scoped dark-theme class
 
