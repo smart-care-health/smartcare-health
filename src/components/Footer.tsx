@@ -143,7 +143,7 @@ const Footer = () => {
                 Get the latest updates on our projects and partnerships.
               </p>
               <form onSubmit={handleNewsletterSubmit} className="flex space-x-2">
-                <input type="text" name="website" value={website} onChange={e => setWebsite(e.target.value)} className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" />
+                <input type="text" name="website" value={website} onChange={e => setWebsite(e.target.value)} style={{ position: 'absolute', left: '-5000px' }} tabIndex={-1} autoComplete="off" aria-hidden="true" />
                 <input type="email" placeholder="Your email" value={email} onChange={e => setEmail(e.target.value)} disabled={isSubscribing} className="flex-1 px-3 py-1.5 text-sm bg-white/20 border border-white/30 rounded text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 disabled:opacity-50" />
                 <button type="submit" disabled={isSubscribing} className="px-3 py-1.5 bg-accent hover:bg-accent-hover text-white text-sm rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center">
                   {isSubscribing ? <>
