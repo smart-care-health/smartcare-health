@@ -1,38 +1,18 @@
+## Plan: Update Contact Form to Submit via Cloudflare Worker
 
+### Changes — single file: `src/components/Contact.tsx`
 
-## Plan: Update Privacy Policy and Standardize Contact Email
-
-### Adjustments per user instructions:
-1. **Cookies**: Keep cookie/analytics references as-is from the document. Adjust cookie banner language to say "when we use cookies, a cookie banner will be displayed" (future-tense).
-2. **Azure/Cloudflare**: Keep as-is (used in broader Smartcare infrastructure).
-3. **Contact email**: Use `compliance@smartcare.africa` for all compliance/DPO references. Remove `dpo@smartcare.africa`.
-4. **Retain** other email references (`info@smartcare.africa`, `partnerships@smartcare.africa`).
-
-### Implementation Steps
-
-**1. Rewrite `src/pages/PrivacyPolicy.tsx`**
-Replace the entire page content with the document's full text, structured into these sections:
-- Introduction (with NDP Act/CFRN references)
-- Guiding Principles on Data Processing
-- Scope of Data Processing (data collection table rendered as a styled table)
-- Rights of Data Subjects (including SNAG process)
-- Transfer of Data to Third Parties and Countries
-- Disclosure of Information
-- Technical Information and Cookies — adjust cookie banner sentence to: "When cookies are used on our website, you will be presented with a cookie banner requesting your consent."
-- Data Security and Integrity
-- Purpose and Storage Limitation
-- Data Retention
-- Children
-- Alteration of Privacy Policy
-- Contact Information: `compliance@smartcare.africa`, effective date "February 2026"
-
-**2. Update `src/pages/DataProtection.tsx`**
-- Change `dpo@smartcare.africa` to `compliance@smartcare.africa` in the Data Protection Officer section
-
-**3. Update `src/components/Footer.tsx`**
-- No changes needed (already uses generic link text)
-
-### Files modified:
-- `src/pages/PrivacyPolicy.tsx` — full rewrite with document content
-- `src/pages/DataProtection.tsx` — email change only
-
+1. **Remove Supabase import**, replace with Turnstile setup (reusing the same pattern from `Footer.tsx`):
+  - Add `useEffect`, `useRef`, `useCallback` imports
+  - Add Turnstile script loading + widget rendering with site key `0x4AAAAAACnuw5pi2ptqYO_p`
+  - Add `turnstileToken` state, `turnstileRef`, `widgetIdRef`
+2. **Add honeypot field** (`website`) — hidden input with `position: absolute; left: -5000px`, same pattern as Footer
+3. **Update `onSubmit**` to:
+  - Check for Turnstile token before submitting
+  - POST to `https://smartcare-site-api.royal-union-6758.workers.dev/api/contact`
+  - Send JSON body: `{ firstName, lastName, email, organization, inquiryType, message, website, turnstileToken }`
+  - On success toast: "Thank you — your message has been received. We will respond shortly."
+  - On error toast: "Message submission failed. Please try again."
+  - Reset form + Turnstile widget on success
+4. **Add Turnstile widget container** in the form, just before the submit button
+5. **No layout/styling changes** — everything else stays identical
