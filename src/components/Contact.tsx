@@ -8,8 +8,7 @@ import { Mail, Phone, MapPin, Calendar, Send, MessageSquare, Building2, Users, L
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useToast } from "@/hooks/use-toast";
 
 // Form validation schema
@@ -26,6 +25,10 @@ type ContactFormData = z.infer<typeof contactFormSchema>;
 
 const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [website, setWebsite] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const turnstileRef = useRef<HTMLDivElement>(null);
+  const widgetIdRef = useRef<string | null>(null);
   const { toast } = useToast();
   
   const {
@@ -39,40 +42,77 @@ const Contact = () => {
     resolver: zodResolver(contactFormSchema),
   });
 
+  const renderWidget = useCallback(() => {
+    if (window.turnstile && turnstileRef.current && !widgetIdRef.current) {
+      widgetIdRef.current = window.turnstile.render(turnstileRef.current, {
+        sitekey: "0x4AAAAAACnuw5pi2ptqYO_p",
+        theme: "light",
+        callback: (token: string) => setTurnstileToken(token),
+        "expired-callback": () => setTurnstileToken(null),
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (window.turnstile) {
+      renderWidget();
+      return;
+    }
+    const script = document.createElement("script");
+    script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onTurnstileLoad";
+    script.async = true;
+    (window as unknown as Record<string, unknown>).onTurnstileLoad = renderWidget;
+    document.head.appendChild(script);
+    return () => {
+      if (widgetIdRef.current && window.turnstile) {
+        window.turnstile.remove(widgetIdRef.current);
+        widgetIdRef.current = null;
+      }
+    };
+  }, [renderWidget]);
+
   const onSubmit = async (data: ContactFormData) => {
+    if (!turnstileToken) {
+      toast({
+        title: "Please complete the verification",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
     
     try {
-      console.log('Submitting contact form:', data);
-      
-      const { data: response, error } = await supabase.functions.invoke('submit-contact-form', {
-        body: data
+      const res = await fetch("https://smartcare-site-api.royal-union-6758.workers.dev/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName: data.firstName,
+          lastName: data.lastName,
+          email: data.email,
+          organization: data.organization || "",
+          inquiryType: data.inquiryType,
+          message: data.message,
+          website: website || "",
+          turnstileToken,
+        }),
       });
 
-      if (error) {
-        console.error('Supabase function error:', error);
-        throw error;
-      }
+      if (!res.ok) throw new Error("Request failed");
 
-      if (response?.error) {
-        throw new Error(response.error);
-      }
-
-      console.log('Contact form submission successful:', response);
-      
       toast({
-        title: "Message sent successfully! ✉️",
-        description: "Thank you for reaching out. We'll get back to you within 24 hours.",
+        title: "Thank you — your message has been received. We will respond shortly.",
       });
 
-      // Reset form
       reset();
-      
+      setWebsite("");
+      setTurnstileToken(null);
+      if (widgetIdRef.current && window.turnstile) {
+        window.turnstile.reset(widgetIdRef.current);
+      }
     } catch (error: any) {
-      console.error('Contact form submission error:', error);
       toast({
-        title: "Failed to send message",
-        description: error.message || "Something went wrong. Please try again.",
+        title: "Message submission failed. Please try again.",
         variant: "destructive",
       });
     } finally {
@@ -247,6 +287,23 @@ const Contact = () => {
                       <p className="text-sm text-red-500">{errors.message.message}</p>
                     )}
                   </div>
+
+                  {/* Honeypot field */}
+                  <div style={{ position: "absolute", left: "-5000px" }} aria-hidden="true">
+                    <label htmlFor="website">Website</label>
+                    <input
+                      type="text"
+                      id="website"
+                      name="website"
+                      value={website}
+                      onChange={(e) => setWebsite(e.target.value)}
+                      tabIndex={-1}
+                      autoComplete="off"
+                    />
+                  </div>
+
+                  {/* Turnstile widget */}
+                  <div ref={turnstileRef} className="flex justify-center" />
 
                   <Button 
                     type="submit" 
