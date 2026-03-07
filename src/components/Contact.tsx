@@ -58,10 +58,33 @@ const Contact = () => {
       renderWidget();
       return;
     }
+
+    // Check if the Turnstile script is already being loaded by another component
+    const existingScript = document.querySelector(
+      'script[src*="challenges.cloudflare.com/turnstile"]'
+    );
+
+    if (existingScript) {
+      // Script exists but turnstile not ready yet — poll until available
+      const interval = setInterval(() => {
+        if (window.turnstile) {
+          clearInterval(interval);
+          renderWidget();
+        }
+      }, 100);
+      return () => {
+        clearInterval(interval);
+        if (widgetIdRef.current && window.turnstile) {
+          window.turnstile.remove(widgetIdRef.current);
+          widgetIdRef.current = null;
+        }
+      };
+    }
+
     const script = document.createElement("script");
-    script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onTurnstileLoad";
+    script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
     script.async = true;
-    (window as unknown as Record<string, unknown>).onTurnstileLoad = renderWidget;
+    script.onload = () => renderWidget();
     document.head.appendChild(script);
     return () => {
       if (widgetIdRef.current && window.turnstile) {
