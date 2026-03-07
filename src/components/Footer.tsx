@@ -1,11 +1,53 @@
 import { Activity, Mail, Phone, MapPin, Linkedin, Twitter, Loader2 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useToast } from "@/hooks/use-toast";
+
+declare global {
+  interface Window {
+    turnstile?: {
+      render: (container: string | HTMLElement, options: Record<string, unknown>) => string;
+      reset: (widgetId: string) => void;
+      remove: (widgetId: string) => void;
+    };
+  }
+}
 const Footer = () => {
   const [email, setEmail] = useState("");
   const [website, setWebsite] = useState("");
   const [isSubscribing, setIsSubscribing] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const turnstileRef = useRef<HTMLDivElement>(null);
+  const widgetIdRef = useRef<string | null>(null);
   const { toast } = useToast();
+
+  const renderWidget = useCallback(() => {
+    if (window.turnstile && turnstileRef.current && !widgetIdRef.current) {
+      widgetIdRef.current = window.turnstile.render(turnstileRef.current, {
+        sitekey: "0x4AAAAAACnuw5pi2ptqYO_p",
+        theme: "dark",
+        callback: (token: string) => setTurnstileToken(token),
+        "expired-callback": () => setTurnstileToken(null),
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (window.turnstile) {
+      renderWidget();
+      return;
+    }
+    const script = document.createElement("script");
+    script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onTurnstileLoad";
+    script.async = true;
+    (window as unknown as Record<string, unknown>).onTurnstileLoad = renderWidget;
+    document.head.appendChild(script);
+    return () => {
+      if (widgetIdRef.current && window.turnstile) {
+        window.turnstile.remove(widgetIdRef.current);
+        widgetIdRef.current = null;
+      }
+    };
+  }, [renderWidget]);
   const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) {
@@ -18,16 +60,28 @@ const Footer = () => {
     }
     setIsSubscribing(true);
     try {
+      if (!turnstileToken) {
+        toast({
+          title: "Please complete the verification",
+          variant: "destructive",
+        });
+        setIsSubscribing(false);
+        return;
+      }
       const res = await fetch("https://smartcare-site-api.royal-union-6758.workers.dev/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, website }),
+        body: JSON.stringify({ email, website, turnstileToken }),
       });
       if (!res.ok) throw new Error("Request failed");
       toast({
         title: "Thanks — you're subscribed. 🎉",
       });
       setEmail("");
+      setTurnstileToken(null);
+      if (widgetIdRef.current && window.turnstile) {
+        window.turnstile.reset(widgetIdRef.current);
+      }
     } catch {
       toast({
         title: "Subscription failed — please try again.",
@@ -142,15 +196,18 @@ const Footer = () => {
               <p className="text-white/80 text-xs mb-3">
                 Get the latest updates on our projects and partnerships.
               </p>
-              <form onSubmit={handleNewsletterSubmit} className="flex space-x-2">
+              <form onSubmit={handleNewsletterSubmit} className="space-y-2">
                 <input type="text" name="website" value={website} onChange={e => setWebsite(e.target.value)} style={{ position: 'absolute', left: '-5000px' }} tabIndex={-1} autoComplete="off" aria-hidden="true" />
-                <input type="email" placeholder="Your email" value={email} onChange={e => setEmail(e.target.value)} disabled={isSubscribing} className="flex-1 px-3 py-1.5 text-sm bg-white/20 border border-white/30 rounded text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 disabled:opacity-50" />
-                <button type="submit" disabled={isSubscribing} className="px-3 py-1.5 bg-accent hover:bg-accent-hover text-white text-sm rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center">
-                  {isSubscribing ? <>
-                      <Loader2 className="h-3 w-3 animate-spin mr-1" />
-                      <span className="hidden sm:inline">Subscribing...</span>
-                    </> : "Subscribe"}
-                </button>
+                <div className="flex space-x-2">
+                  <input type="email" placeholder="Your email" value={email} onChange={e => setEmail(e.target.value)} disabled={isSubscribing} className="flex-1 px-3 py-1.5 text-sm bg-white/20 border border-white/30 rounded text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 disabled:opacity-50" />
+                  <button type="submit" disabled={isSubscribing} className="px-3 py-1.5 bg-accent hover:bg-accent-hover text-white text-sm rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center">
+                    {isSubscribing ? <>
+                        <Loader2 className="h-3 w-3 animate-spin mr-1" />
+                        <span className="hidden sm:inline">Subscribing...</span>
+                      </> : "Subscribe"}
+                  </button>
+                </div>
+                <div ref={turnstileRef} className="mt-2" />
               </form>
             </div>
           </div>
