@@ -229,6 +229,9 @@ const Footer = () => {
                   </button>
                 </div>
                 <div ref={turnstileRef} className="mt-2" />
+                <p className="text-xs text-white/50 mt-2">
+                  By subscribing, you agree to receive updates from Smartcare Health Solutions. You can unsubscribe at any time.
+                </p>
               </form>
             </div>
           </div>
