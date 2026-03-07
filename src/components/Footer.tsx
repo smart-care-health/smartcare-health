@@ -36,10 +36,31 @@ const Footer = () => {
       renderWidget();
       return;
     }
+
+    const existingScript = document.querySelector(
+      'script[src*="challenges.cloudflare.com/turnstile"]'
+    );
+
+    if (existingScript) {
+      const interval = setInterval(() => {
+        if (window.turnstile) {
+          clearInterval(interval);
+          renderWidget();
+        }
+      }, 100);
+      return () => {
+        clearInterval(interval);
+        if (widgetIdRef.current && window.turnstile) {
+          window.turnstile.remove(widgetIdRef.current);
+          widgetIdRef.current = null;
+        }
+      };
+    }
+
     const script = document.createElement("script");
-    script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onTurnstileLoad";
+    script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
     script.async = true;
-    (window as unknown as Record<string, unknown>).onTurnstileLoad = renderWidget;
+    script.onload = () => renderWidget();
     document.head.appendChild(script);
     return () => {
       if (widgetIdRef.current && window.turnstile) {
