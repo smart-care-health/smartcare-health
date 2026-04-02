@@ -42,6 +42,12 @@ const App = () => (
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route path="/data-protection" element={<DataProtection />} />
+            <Route path="/higo-pilot" element={<PilotLanding />} />
+            <Route path="/higo-pilot/how-it-works" element={<HowItWorks />} />
+            <Route path="/higo-pilot/participants" element={<Participants />} />
+            <Route path="/higo-pilot/partners" element={<Partners />} />
+            <Route path="/higo-pilot/updates" element={<PilotUpdates />} />
+            <Route path="/higo-pilot/privacy" element={<PilotPrivacy />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
