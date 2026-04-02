@@ -12,6 +12,12 @@ import NotFound from "./pages/NotFound";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import DataProtection from "./pages/DataProtection";
+import PilotLanding from "./pages/pilot/PilotLanding";
+import HowItWorks from "./pages/pilot/HowItWorks";
+import Participants from "./pages/pilot/Participants";
+import Partners from "./pages/pilot/Partners";
+import PilotUpdates from "./pages/pilot/PilotUpdates";
+import PilotPrivacy from "./pages/pilot/PilotPrivacy";
 
 const queryClient = new QueryClient();
 
@@ -36,6 +42,12 @@ const App = () => (
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route path="/data-protection" element={<DataProtection />} />
+            <Route path="/higo-pilot" element={<PilotLanding />} />
+            <Route path="/higo-pilot/how-it-works" element={<HowItWorks />} />
+            <Route path="/higo-pilot/participants" element={<Participants />} />
+            <Route path="/higo-pilot/partners" element={<Partners />} />
+            <Route path="/higo-pilot/updates" element={<PilotUpdates />} />
+            <Route path="/higo-pilot/privacy" element={<PilotPrivacy />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

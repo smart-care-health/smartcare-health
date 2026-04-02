@@ -285,12 +285,13 @@ const Contact = () => {
                         <SelectValue placeholder="Select inquiry type" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="healthcare-provider">Healthcare Provider / Facility Integration</SelectItem>
-                        <SelectItem value="government">Government / Public Sector Partnership</SelectItem>
-                        <SelectItem value="technology">Technology / Implementation Partnership</SelectItem>
-                        <SelectItem value="research">Research / Academic Collaboration</SelectItem>
-                        <SelectItem value="investment">Investment / Strategic Interest</SelectItem>
-                        <SelectItem value="other">Other</SelectItem>
+                        <SelectItem value="higo-pilot">Participation in the Higo Pilot (Lagos or Akwa Ibom only)</SelectItem>
+                        <SelectItem value="healthcare-provider">Healthcare Provider or Facility Inquiry</SelectItem>
+                        <SelectItem value="government">Government or Public Sector Inquiry</SelectItem>
+                        <SelectItem value="technology">Technology or Implementation Partnership</SelectItem>
+                        <SelectItem value="research">Research or Academic Collaboration</SelectItem>
+                        <SelectItem value="investment">Investment or Strategic Partnership</SelectItem>
+                        <SelectItem value="general">General Inquiry</SelectItem>
                       </SelectContent>
                     </Select>
                     {errors.inquiryType && (
