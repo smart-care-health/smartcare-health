@@ -12,6 +12,12 @@ import NotFound from "./pages/NotFound";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import DataProtection from "./pages/DataProtection";
+import PilotLanding from "./pages/pilot/PilotLanding";
+import HowItWorks from "./pages/pilot/HowItWorks";
+import Participants from "./pages/pilot/Participants";
+import Partners from "./pages/pilot/Partners";
+import PilotUpdates from "./pages/pilot/PilotUpdates";
+import PilotPrivacy from "./pages/pilot/PilotPrivacy";
 
 const queryClient = new QueryClient();
 
