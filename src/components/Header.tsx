@@ -150,14 +150,35 @@ const Header = () => {
           <div className="lg:hidden mt-4 pb-4 border-t border-border">
             <div className="flex flex-col space-y-4 pt-4">
               {navItems.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className="text-foreground hover:text-primary transition-colors duration-200 font-medium cursor-pointer"
-                  onClick={(e) => handleNavClick(e, item.href)}
-                >
-                  {item.name}
-                </a>
+                <div key={item.name}>
+                  <a
+                    href={item.href}
+                    className="text-foreground hover:text-primary transition-colors duration-200 font-medium cursor-pointer block"
+                    onClick={(e) => handleNavClick(e, item.href)}
+                  >
+                    {item.name}
+                  </a>
+                  {item.name === "Solutions" && (
+                    <div className="pl-4 mt-2 space-y-2 border-l-2 border-border">
+                      <Link
+                        to="/solutions/smartcare-labs"
+                        className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 flex items-center"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        <FlaskConical className="h-4 w-4 mr-2" />
+                        Smartcare Labs
+                      </Link>
+                      <Link
+                        to="/solutions/higo-device"
+                        className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 flex items-center"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        <Stethoscope className="h-4 w-4 mr-2" />
+                        Higo Device and App
+                      </Link>
+                    </div>
+                  )}
+                </div>
               ))}
               {isAdmin && (
                 <Link 
