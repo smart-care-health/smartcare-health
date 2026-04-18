@@ -98,9 +98,10 @@ const SmartcareLabs = () => {
               AI-powered lab interpretation for laboratories and healthcare professionals
             </p>
             <p className="text-lg text-muted-foreground mb-4 max-w-3xl mx-auto">
-              Smartcare Labs helps laboratories and healthcare professionals generate clear,
-              structured, and accessible interpretations of laboratory results through an
-              AI-powered platform designed for real-world healthcare environments.
+              Smartcare Labs, powered by BloodGPT, helps laboratories and healthcare
+              professionals generate clear, structured, and accessible interpretations of
+              laboratory results through an AI-powered platform designed for real-world
+              healthcare environments.
             </p>
             <p className="text-lg text-muted-foreground mb-10 max-w-3xl mx-auto">
               Built for use in Nigeria and across Africa, Smartcare Labs supports better
@@ -167,6 +168,10 @@ const SmartcareLabs = () => {
               through a secure digital platform and receive structured interpretation outputs
               that can support professional review, workflow efficiency, and clearer
               communication.
+            </p>
+            <p className="text-lg text-muted-foreground mb-6">
+              Smartcare Labs is powered by BloodGPT, an advanced AI platform designed to
+              support the interpretation of laboratory data at scale.
             </p>
             <p className="text-lg text-muted-foreground mb-6">
               Depending on the user context, the platform can support:
@@ -334,10 +339,14 @@ const SmartcareLabs = () => {
             <h3 className="font-heading font-bold text-3xl lg:text-4xl mb-6">
               Building practical, scalable health technology
             </h3>
-            <p className="text-white/90 mb-8 max-w-3xl mx-auto text-lg">
+            <p className="text-white/90 mb-6 max-w-3xl mx-auto text-lg">
               Smartcare Labs is part of our commitment to building practical, scalable health
               technology solutions that improve access, quality, and coordination across
               African healthcare systems.
+            </p>
+            <p className="text-white/90 mb-8 max-w-3xl mx-auto text-lg">
+              Smartcare Labs combines Smartcare's implementation approach with BloodGPT's AI
+              capabilities to deliver practical, scalable diagnostic support.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button asChild size="lg" className="bg-white text-primary hover:bg-white/90">
