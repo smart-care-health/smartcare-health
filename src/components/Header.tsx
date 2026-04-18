@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -8,9 +8,23 @@ import { Menu, X, Activity, User, LogOut } from "lucide-react";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, profile, isAdmin, signOut } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const handleSignOut = async () => {
     await signOut();
+  };
+
+  const handleNavClick = (e: React.MouseEvent, href: string) => {
+    e.preventDefault();
+    const id = href.replace("#", "");
+    if (location.pathname === "/") {
+      const element = document.getElementById(id);
+      element?.scrollIntoView({ behavior: "smooth" });
+    } else {
+      navigate(`/${href}`);
+    }
+    setIsMenuOpen(false);
   };
 
   const navItems = [
@@ -42,11 +56,7 @@ const Header = () => {
               <a
                 key={item.name}
                 href={item.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  const element = document.querySelector(item.href);
-                  element?.scrollIntoView({ behavior: 'smooth' });
-                }}
+                onClick={(e) => handleNavClick(e, item.href)}
                 className="text-foreground hover:text-primary transition-colors duration-200 font-medium cursor-pointer"
               >
                 {item.name}
@@ -96,12 +106,7 @@ const Header = () => {
                   key={item.name}
                   href={item.href}
                   className="text-foreground hover:text-primary transition-colors duration-200 font-medium cursor-pointer"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    const element = document.querySelector(item.href);
-                    element?.scrollIntoView({ behavior: 'smooth' });
-                    setIsMenuOpen(false);
-                  }}
+                  onClick={(e) => handleNavClick(e, item.href)}
                 >
                   {item.name}
                 </a>
