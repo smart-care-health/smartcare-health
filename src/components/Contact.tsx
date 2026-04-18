@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useState, useEffect, useRef, useCallback } from "react";
+import { useLocation } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 
 // Form validation schema
@@ -30,6 +31,7 @@ const Contact = () => {
   const turnstileRef = useRef<HTMLDivElement>(null);
   const widgetIdRef = useRef<string | null>(null);
   const { toast } = useToast();
+  const location = useLocation();
   
   const {
     register,
@@ -286,6 +288,7 @@ const Contact = () => {
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="higo-pilot">Participation in the Higo Pilot (Lagos or Akwa Ibom only)</SelectItem>
+                        <SelectItem value="smartcare-labs">Request Access to Smartcare Labs</SelectItem>
                         <SelectItem value="healthcare-provider">Healthcare Provider or Facility Inquiry</SelectItem>
                         <SelectItem value="government">Government or Public Sector Inquiry</SelectItem>
                         <SelectItem value="technology">Technology or Implementation Partnership</SelectItem>
