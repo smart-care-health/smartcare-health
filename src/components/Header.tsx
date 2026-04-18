@@ -78,20 +78,29 @@ const Header = () => {
                         </div>
                       </DropdownMenuItem>
                       <DropdownMenuItem asChild className="cursor-pointer">
-                        <Link to="/solutions/smartcare-labs">
-                          <FlaskConical className="h-4 w-4 mr-2 text-primary" />
+                        <Link to="/solutions/remote-diagnostic-devices">
+                          <Stethoscope className="h-4 w-4 mr-2 text-primary" />
                           <div>
-                            <div className="font-medium">Smartcare Labs</div>
-                            <div className="text-xs text-muted-foreground">Innovation in primary healthcare</div>
+                            <div className="font-medium">Remote Diagnostic Devices</div>
+                            <div className="text-xs text-muted-foreground">Connected diagnostic technologies</div>
                           </div>
                         </Link>
                       </DropdownMenuItem>
                       <DropdownMenuItem asChild className="cursor-pointer">
                         <Link to="/solutions/higo-device">
-                          <Stethoscope className="h-4 w-4 mr-2 text-primary" />
+                          <HeartPulse className="h-4 w-4 mr-2 text-primary" />
                           <div>
                             <div className="font-medium">Higo Device and App</div>
                             <div className="text-xs text-muted-foreground">Remote diagnostic technology</div>
+                          </div>
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem asChild className="cursor-pointer">
+                        <Link to="/solutions/smartcare-labs">
+                          <FlaskConical className="h-4 w-4 mr-2 text-primary" />
+                          <div>
+                            <div className="font-medium">Smartcare Labs</div>
+                            <div className="text-xs text-muted-foreground">Innovation in primary healthcare</div>
                           </div>
                         </Link>
                       </DropdownMenuItem>
