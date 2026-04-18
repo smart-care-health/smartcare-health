@@ -170,20 +170,28 @@ const Header = () => {
                   {item.name === "Solutions" && (
                     <div className="pl-4 mt-2 space-y-2 border-l-2 border-border">
                       <Link
-                        to="/solutions/smartcare-labs"
+                        to="/solutions/remote-diagnostic-devices"
                         className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 flex items-center"
                         onClick={() => setIsMenuOpen(false)}
                       >
-                        <FlaskConical className="h-4 w-4 mr-2" />
-                        Smartcare Labs
+                        <Stethoscope className="h-4 w-4 mr-2" />
+                        Remote Diagnostic Devices
                       </Link>
                       <Link
                         to="/solutions/higo-device"
                         className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 flex items-center"
                         onClick={() => setIsMenuOpen(false)}
                       >
-                        <Stethoscope className="h-4 w-4 mr-2" />
+                        <HeartPulse className="h-4 w-4 mr-2" />
                         Higo Device and App
+                      </Link>
+                      <Link
+                        to="/solutions/smartcare-labs"
+                        className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 flex items-center"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        <FlaskConical className="h-4 w-4 mr-2" />
+                        Smartcare Labs
                       </Link>
                     </div>
                   )}
