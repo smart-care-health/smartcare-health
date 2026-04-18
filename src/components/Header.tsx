@@ -106,12 +106,7 @@ const Header = () => {
                   key={item.name}
                   href={item.href}
                   className="text-foreground hover:text-primary transition-colors duration-200 font-medium cursor-pointer"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    const element = document.querySelector(item.href);
-                    element?.scrollIntoView({ behavior: 'smooth' });
-                    setIsMenuOpen(false);
-                  }}
+                  onClick={(e) => handleNavClick(e, item.href)}
                 >
                   {item.name}
                 </a>
