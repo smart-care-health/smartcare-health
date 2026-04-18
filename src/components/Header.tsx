@@ -9,7 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Menu, X, Activity, User, LogOut, ChevronDown, FlaskConical, Stethoscope } from "lucide-react";
+import { Menu, X, Activity, User, LogOut, ChevronDown, FlaskConical, Stethoscope, HeartPulse } from "lucide-react";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
