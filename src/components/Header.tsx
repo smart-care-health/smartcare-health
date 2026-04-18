@@ -3,7 +3,13 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Menu, X, Activity, User, LogOut } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Menu, X, Activity, User, LogOut, ChevronDown, FlaskConical, Stethoscope } from "lucide-react";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -52,16 +58,58 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                onClick={(e) => handleNavClick(e, item.href)}
-                className="text-foreground hover:text-primary transition-colors duration-200 font-medium cursor-pointer"
-              >
-                {item.name}
-              </a>
-            ))}
+            {navItems.map((item) => {
+              if (item.name === "Solutions") {
+                return (
+                  <DropdownMenu key={item.name}>
+                    <DropdownMenuTrigger className="text-foreground hover:text-primary transition-colors duration-200 font-medium cursor-pointer flex items-center gap-1 outline-none">
+                      Solutions
+                      <ChevronDown className="h-4 w-4" />
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="start" className="w-64 bg-white">
+                      <DropdownMenuItem
+                        onClick={(e) => handleNavClick(e as unknown as React.MouseEvent, "#solutions")}
+                        className="cursor-pointer"
+                      >
+                        <Activity className="h-4 w-4 mr-2 text-primary" />
+                        <div>
+                          <div className="font-medium">All Solutions</div>
+                          <div className="text-xs text-muted-foreground">Overview of our offerings</div>
+                        </div>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem asChild className="cursor-pointer">
+                        <Link to="/solutions/smartcare-labs">
+                          <FlaskConical className="h-4 w-4 mr-2 text-primary" />
+                          <div>
+                            <div className="font-medium">Smartcare Labs</div>
+                            <div className="text-xs text-muted-foreground">Innovation in primary healthcare</div>
+                          </div>
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem asChild className="cursor-pointer">
+                        <Link to="/solutions/higo-device">
+                          <Stethoscope className="h-4 w-4 mr-2 text-primary" />
+                          <div>
+                            <div className="font-medium">Higo Device and App</div>
+                            <div className="text-xs text-muted-foreground">Remote diagnostic technology</div>
+                          </div>
+                        </Link>
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                );
+              }
+              return (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  onClick={(e) => handleNavClick(e, item.href)}
+                  className="text-foreground hover:text-primary transition-colors duration-200 font-medium cursor-pointer"
+                >
+                  {item.name}
+                </a>
+              );
+            })}
             {isAdmin && (
               <Link to="/admin" className="text-foreground hover:text-primary transition-colors duration-200 font-medium flex items-center">
                 Admin
@@ -102,14 +150,35 @@ const Header = () => {
           <div className="lg:hidden mt-4 pb-4 border-t border-border">
             <div className="flex flex-col space-y-4 pt-4">
               {navItems.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className="text-foreground hover:text-primary transition-colors duration-200 font-medium cursor-pointer"
-                  onClick={(e) => handleNavClick(e, item.href)}
-                >
-                  {item.name}
-                </a>
+                <div key={item.name}>
+                  <a
+                    href={item.href}
+                    className="text-foreground hover:text-primary transition-colors duration-200 font-medium cursor-pointer block"
+                    onClick={(e) => handleNavClick(e, item.href)}
+                  >
+                    {item.name}
+                  </a>
+                  {item.name === "Solutions" && (
+                    <div className="pl-4 mt-2 space-y-2 border-l-2 border-border">
+                      <Link
+                        to="/solutions/smartcare-labs"
+                        className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 flex items-center"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        <FlaskConical className="h-4 w-4 mr-2" />
+                        Smartcare Labs
+                      </Link>
+                      <Link
+                        to="/solutions/higo-device"
+                        className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 flex items-center"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        <Stethoscope className="h-4 w-4 mr-2" />
+                        Higo Device and App
+                      </Link>
+                    </div>
+                  )}
+                </div>
               ))}
               {isAdmin && (
                 <Link 
