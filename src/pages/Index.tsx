@@ -12,10 +12,11 @@ const Index = () => {
   const location = useLocation();
 
   useEffect(() => {
-    if (location.hash === "#contact") {
+    if (location.hash) {
+      const id = location.hash.replace("#", "");
       // Wait briefly for sections to render before scrolling
       const timer = setTimeout(() => {
-        const el = document.getElementById("contact");
+        const el = document.getElementById(id);
         if (el) {
           el.scrollIntoView({ behavior: "smooth", block: "start" });
         }
