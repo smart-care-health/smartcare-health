@@ -96,6 +96,14 @@ const Contact = () => {
     };
   }, [renderWidget]);
 
+  // Pre-select inquiry type from URL ?inquiry=labs
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    if (params.get("inquiry") === "labs") {
+      setValue("inquiryType", "smartcare-labs");
+    }
+  }, [location.search, setValue]);
+
   const onSubmit = async (data: ContactFormData) => {
     if (!turnstileToken) {
       toast({
@@ -282,7 +290,7 @@ const Contact = () => {
 
                   <div className="space-y-2">
                     <Label htmlFor="inquiryType">Inquiry Type</Label>
-                    <Select onValueChange={(value) => setValue("inquiryType", value)}>
+                    <Select value={watch("inquiryType") || ""} onValueChange={(value) => setValue("inquiryType", value)}>
                       <SelectTrigger>
                         <SelectValue placeholder="Select inquiry type" />
                       </SelectTrigger>

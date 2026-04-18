@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import { 
   Stethoscope, 
   Monitor, 
@@ -7,6 +8,7 @@ import {
   Database, 
   Network, 
   Shield,
+  FlaskConical,
   ArrowRight 
 } from "lucide-react";
 
@@ -32,6 +34,14 @@ const Solutions = () => {
       description: "Connect hospitals, clinics, and health workers across the continent through our unified digital ecosystem for coordinated care delivery.",
       features: ["Real-time data sharing", "Referral management", "Resource optimization", "Quality assurance"],
       status: "Coming Soon"
+    },
+    {
+      icon: FlaskConical,
+      title: "Smartcare Labs",
+      description: "AI-powered lab interpretation for laboratories and healthcare professionals — generating clear, structured outputs to support better diagnostic communication.",
+      features: ["AI interpretation support", "Structured outputs", "Workflow efficiency", "Built for African healthcare"],
+      status: "Now Available",
+      link: "/solutions/smartcare-labs"
     }
   ];
 
@@ -71,15 +81,16 @@ const Solutions = () => {
         </div>
 
         {/* Main Solutions */}
-        <div className="grid lg:grid-cols-3 gap-8 mb-16">
+        <div className="grid md:grid-cols-2 gap-8 mb-16">
           {solutions.map((solution, index) => (
-            <Card key={index} className="group hover:shadow-xl transition-all duration-300 border-0 bg-white/50 backdrop-blur-sm">
+            <Card key={index} className="group hover:shadow-xl transition-all duration-300 border-0 bg-white/50 backdrop-blur-sm flex flex-col">
               <CardHeader className="pb-4">
                 <div className="flex items-start justify-between mb-4">
                   <div className="bg-gradient-to-r from-primary to-accent p-3 rounded-xl">
                     <solution.icon className="h-6 w-6 text-white" />
                   </div>
                   <span className={`text-xs px-3 py-1 rounded-full font-medium ${
+                    solution.status === "Now Available" ? "bg-health-success/10 text-health-success" :
                     solution.status === "Currently Deployed" ? "bg-health-success/10 text-health-success" :
                     solution.status === "In Development" ? "bg-accent/10 text-accent" :
                     "bg-primary/10 text-primary"
@@ -91,11 +102,11 @@ const Solutions = () => {
                   {solution.title}
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="space-y-4 flex-1 flex flex-col">
                 <p className="text-muted-foreground">
                   {solution.description}
                 </p>
-                <div className="space-y-2">
+                <div className="space-y-2 flex-1">
                   {solution.features.map((feature, idx) => (
                     <div key={idx} className="flex items-center text-sm">
                       <div className="w-1.5 h-1.5 bg-accent rounded-full mr-3" />
@@ -103,6 +114,13 @@ const Solutions = () => {
                     </div>
                   ))}
                 </div>
+                {solution.link && (
+                  <Button asChild variant="outline" className="w-full mt-4">
+                    <Link to={solution.link}>
+                      Learn More <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </Button>
+                )}
               </CardContent>
             </Card>
           ))}
