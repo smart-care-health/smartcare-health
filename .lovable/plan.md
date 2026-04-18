@@ -1,38 +1,44 @@
 
 
-## Plan: Fix cross-page navigation
+## Plan: Higo Device and App solution page
 
-### Issue 1 — Header nav doesn't work on sub-pages
+### New asset
+- Copy `user-uploads://higo-device.png` → `src/assets/higo-device.png` (imported as ES module for bundling).
 
-In `src/components/Header.tsx`, both desktop and mobile nav items currently use anchor links with `e.preventDefault()` + `document.querySelector` to scroll. On `/solutions/smartcare-labs` and `/higo-pilot/*` pages, those section IDs don't exist, so clicks do nothing.
+### New file: `src/pages/HigoDevice.tsx` — `/solutions/higo-device`
+Single solution page following the SmartcareLabs pattern (Header, Footer, gradient badges, `font-heading`, `container mx-auto px-6`, `py-20` spacing, Card/Button).
 
-**Fix**: Make the nav items route-aware using `useLocation` + `useNavigate`:
-- If the user is on `/`, keep current smooth-scroll behavior.
-- If the user is on any other route, navigate to `/` with the section hash (e.g. `/#solutions`), then scroll once the homepage mounts.
+**Sections (exact provided copy):**
+1. **Breadcrumb** — `Solutions → Remote Diagnostic Devices → Higo Device and App` (small text, top of page below Header, links to `/#solutions`)
+2. **Hero** — 2-column on desktop (text left / device image right), single column on mobile (image first). Image on a soft `bg-muted/50` rounded panel with subtle shadow + generous padding so the dark device background contrasts well. Optional caption "Higo Diagnostic Device and Modular Attachments". CTAs: "Learn About the Pilot" (→ `/higo-pilot`) and "Contact Us" (→ `/#contact`).
+3. **What is the Higo System** — headline + intro + 3-card grid (Device / Mobile App / Physician Platform) with icons (Stethoscope, Smartphone, Monitor).
+4. **The Higo Device** — 2-column with smaller reuse of the device image on the side, bullet list of capture types (heart/lung sounds, throat/ear images, basic exam data).
+5. **The Higo System in Practice** — 4-step numbered workflow (similar visual to pilot HowItWorks steps but compact).
+6. **Why This Matters** — headline + bullet list of benefits with check icons.
+7. **Smartcare's Role** — headline + bullet list of local implementation responsibilities.
+8. **Current Deployment (Pilot Link)** — accent gradient card with headline, content, and "Learn More About the Higo Pilot" CTA → `/higo-pilot`.
+9. **Final Section** — gradient banner matching SmartcareLabs final CTA style with both buttons (Learn About the Pilot, Contact Us).
 
-Apply the same logic to both the desktop nav loop and the mobile menu loop.
+Icons used: `Stethoscope`, `Smartphone`, `Monitor`, `Activity`, `CheckCircle2`, `ArrowRight`, `MapPin`, `Users` (lucide-react).
 
-### Issue 2 — Extend Index.tsx scroll handler to all hashes
+### Modified files
 
-`src/pages/Index.tsx` currently only scrolls when the hash is `#contact`. Generalise it so any hash (`#home`, `#solutions`, `#partnerships`, `#vision`, `#contact`) triggers a smooth scroll to the matching element on mount.
+**`src/App.tsx`**
+- Import `HigoDevice` and add route `<Route path="/solutions/higo-device" element={<HigoDevice />} />` before catch-all.
 
-### Issue 3 — Sub-pages don't start at the top
+**`src/components/Solutions.tsx`**
+- Update the existing "Remote Diagnostic Devices" card:
+  - Change `status: "Coming Soon"` → `status: "Now Available"`
+  - Add `link: "/solutions/higo-device"` so it gets the "Learn More" button (same pattern as Smartcare Labs card).
+  - Optionally update description to mention Higo as the first deployed solution within the category.
 
-When navigating from the homepage Solutions card to `/solutions/smartcare-labs` (or any pilot page), React Router preserves the previous scroll position, so the new page opens partway down.
+### Image handling
+- Hero image rendered with `aspect-auto`, `max-h-[500px]`, `object-contain`, on a `bg-gradient-to-br from-muted/40 to-muted/70` rounded-2xl container with `p-8 lg:p-12` padding, `shadow-lg` for soft elevation. Full device + attachments visible, no cropping/stretching.
+- Smaller reuse in Section 3 (~`max-h-72`) on similar muted panel, right column on desktop.
 
-**Fix**: Add a tiny `ScrollToTop` helper component in `src/App.tsx` that listens to `pathname` changes and calls `window.scrollTo(0, 0)` — but only when there is no hash (so hash-based scrolls on `/` still work).
-
-```text
-src/
-├── App.tsx               ← add <ScrollToTop /> inside <BrowserRouter>
-├── pages/Index.tsx       ← generalise hash scroll for all sections
-└── components/Header.tsx ← route-aware nav links (desktop + mobile)
-```
-
-### Files modified
-- `src/App.tsx` — add small `ScrollToTop` component mounted inside the router
-- `src/components/Header.tsx` — route-aware navigation for desktop + mobile menus
-- `src/pages/Index.tsx` — handle any section hash, not just `#contact`
-
-No design, layout, or styling changes.
+### Design notes
+- All CTAs to contact use `<Link to="/#contact">` (existing scroll handler in `Index.tsx` already supports this).
+- All CTAs to pilot use `<Link to="/higo-pilot">`.
+- Navigation header reused — no nav changes per spec.
+- Mobile-first: breadcrumb wraps; hero stacks image-first; grids collapse to single column.
 
