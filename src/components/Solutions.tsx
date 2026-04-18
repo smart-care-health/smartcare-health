@@ -17,9 +17,10 @@ const Solutions = () => {
     {
       icon: Stethoscope,
       title: "Remote Diagnostic Devices",
-      description: "Cutting-edge portable diagnostic tools designed for underserved communities, enabling real-time health assessments in remote locations.",
+      description: "Cutting-edge portable diagnostic tools designed for underserved communities, enabling real-time health assessments in remote locations. The Higo Device and App is the first deployed solution in this category.",
       features: ["AI-powered diagnostics", "Cloud connectivity", "Multi-parameter monitoring", "Battery efficient design"],
-      status: "Coming Soon"
+      status: "Now Available",
+      link: "/solutions/higo-device"
     },
     {
       icon: Database,
