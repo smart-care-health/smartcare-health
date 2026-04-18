@@ -4,77 +4,91 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import {
+  Brain,
+  Zap,
+  Target,
+  Network,
+  Globe2,
+  Upload,
+  Cpu,
+  FileText,
+  Stethoscope,
+  CheckCircle2,
   FlaskConical,
   Hospital,
-  Stethoscope,
+  Video,
+  ShieldCheck,
   Building2,
-  Microscope,
-  Users,
-  CheckCircle2,
   ArrowRight,
 } from "lucide-react";
+import smartcareLabsLogo from "@/assets/smartcare-labs-logo.jpeg";
 
 const SmartcareLabs = () => {
-  const audiences = [
+  const whyCards = [
     {
-      icon: FlaskConical,
-      title: "Laboratories",
-      description:
-        "For medical laboratories that want to improve the speed, structure, and consistency of result interpretation services.",
+      icon: Brain,
+      title: "Powered by BloodGPT",
+      description: "Advanced AI built for biomarker interpretation at scale.",
     },
     {
-      icon: Hospital,
-      title: "Hospitals and Clinics",
-      description:
-        "For provider organisations looking to support better review and communication of laboratory findings within patient care workflows.",
+      icon: Zap,
+      title: "Faster Turnaround Times",
+      description: "Reduce delays in clinical decision-making.",
+    },
+    {
+      icon: Target,
+      title: "Improved Diagnostic Accuracy",
+      description: "Structured, consistent interpretation outputs.",
+    },
+    {
+      icon: Network,
+      title: "Scalable Across Systems",
+      description: "From single labs to national healthcare networks.",
+    },
+    {
+      icon: Globe2,
+      title: "Built for African Healthcare",
+      description: "Practical, deployable, and reliable in real-world settings.",
+    },
+  ];
+
+  const steps = [
+    {
+      icon: Upload,
+      title: "Submit Results",
+      description: "Upload or input laboratory results.",
+    },
+    {
+      icon: Cpu,
+      title: "AI Processing",
+      description: "Results are processed by the BloodGPT clinical intelligence engine.",
+    },
+    {
+      icon: FileText,
+      title: "Structured Output",
+      description: "A clear interpretation is generated instantly.",
     },
     {
       icon: Stethoscope,
-      title: "Healthcare Professionals",
-      description:
-        "For qualified professionals who need clearer, more accessible interpretation support as part of routine decision-making.",
-    },
-    {
-      icon: Building2,
-      title: "Institutional and Strategic Partners",
-      description:
-        "For health agencies, professional bodies, insurers, and ecosystem partners interested in expanding access to high-quality diagnostic support infrastructure.",
+      title: "Clinical Action",
+      description: "Clinicians review and act with confidence.",
     },
   ];
 
-  const supportedUsers = [
-    "Medical laboratories seeking a more efficient interpretation workflow",
-    "Hospitals and clinics that want faster, more structured result support",
-    "Healthcare practitioners who need clearer interpretation outputs",
-    "Institutional and ecosystem partners exploring scalable diagnostic support tools",
+  const orgBenefits = [
+    "Reduce diagnostic bottlenecks",
+    "Improve clinician efficiency",
+    "Standardize interpretation quality across teams",
+    "Enable remote and distributed care models",
+    "Strengthen data-driven decision-making",
   ];
 
-  const smarterFeatures = [
-    "AI-powered interpretation support for laboratory results",
-    "Structured, easy-to-read outputs",
-    "A platform suitable for laboratories, healthcare providers, and institutional partners",
-    "A more efficient workflow for reviewing and communicating diagnostic information",
-  ];
-
-  const benefits = [
-    "Better communication around laboratory findings",
-    "Improved operational efficiency",
-    "Broader access to quality diagnostic support",
-    "Stronger digital health capacity across care settings",
-  ];
-
-  const practicalFocus = [
-    "How laboratories and healthcare professionals actually work",
-    "How onboarding and support are managed in practice",
-    "How trust is built through credible local partnerships",
-    "How digital tools can fit into real healthcare workflows in Nigeria and other African markets",
-  ];
-
-  const partnerBenefits = [
-    "Local coordination and market familiarity",
-    "Structured onboarding and support",
-    "A credible implementation approach",
-    "A platform designed for growth across multiple healthcare use cases",
+  const useCases = [
+    { icon: FlaskConical, title: "Diagnostic Laboratories" },
+    { icon: Hospital, title: "Hospitals & Clinics" },
+    { icon: Video, title: "Telemedicine Platforms" },
+    { icon: ShieldCheck, title: "Health Insurance Providers" },
+    { icon: Building2, title: "Public Health Programs" },
   ];
 
   return (
@@ -85,137 +99,71 @@ const SmartcareLabs = () => {
       <section className="pt-32 pb-20 bg-gradient-to-br from-primary/5 via-background to-accent/5">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-6">
-              🧪 Smartcare Labs
+            <div className="flex justify-center mb-8">
+              <div className="bg-white rounded-2xl shadow-sm p-6 inline-flex items-center justify-center">
+                <img
+                  src={smartcareLabsLogo}
+                  alt="Smartcare Labs powered by BloodGPT"
+                  loading="eager"
+                  className="max-w-sm w-full h-auto"
+                />
+              </div>
             </div>
-            <h1 className="font-heading font-bold text-4xl lg:text-6xl text-foreground mb-6">
+            <h1 className="font-heading font-bold text-4xl lg:text-6xl text-foreground mb-4">
               Smartcare{" "}
               <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                 Labs
               </span>
             </h1>
             <p className="text-xl lg:text-2xl text-foreground/80 mb-6 font-medium">
-              AI-powered lab interpretation for laboratories and healthcare professionals
-            </p>
-            <p className="text-lg text-muted-foreground mb-4 max-w-3xl mx-auto">
-              Smartcare Labs, powered by BloodGPT, helps laboratories and healthcare
-              professionals generate clear, structured, and accessible interpretations of
-              laboratory results through an AI-powered platform designed for real-world
-              healthcare environments.
+              AI-Powered Diagnostic Intelligence for Modern Healthcare
             </p>
             <p className="text-lg text-muted-foreground mb-10 max-w-3xl mx-auto">
-              Built for use in Nigeria and across Africa, Smartcare Labs supports better
-              communication of results, improved workflow efficiency, and more consistent
-              interpretation support for laboratories, clinicians, and health system partners.
+              Smartcare Labs is a digital diagnostics platform powered by BloodGPT, enabling
+              laboratories, hospitals, and healthcare providers to interpret results faster,
+              improve diagnostic accuracy, and scale clinical decision-making with confidence.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button asChild variant="hero" size="lg">
                 <Link to="/?inquiry=labs#contact">
-                  Request Access <ArrowRight className="ml-2 h-4 w-4" />
+                  Request Access to Smartcare Labs <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg">
-                <Link to="/#contact">Partner With Us</Link>
+                <Link to="/?inquiry=labs#contact">Partner with Smartcare</Link>
               </Button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Section 1 */}
+      {/* Why Smartcare Labs */}
       <section className="py-20">
         <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="font-heading font-bold text-3xl lg:text-4xl text-foreground mb-6">
-              A smarter way to support{" "}
-              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                lab result interpretation
-              </span>
-            </h2>
-            <p className="text-lg text-muted-foreground mb-6">
-              Laboratory results are essential to clinical decision-making, but interpretation
-              can be inconsistent, delayed, or difficult to communicate clearly across different
-              care settings.
-            </p>
-            <p className="text-lg text-muted-foreground mb-6">
-              Smartcare Labs is designed to help address that gap by providing:
-            </p>
-            <ul className="space-y-3 mb-6">
-              {smarterFeatures.map((item, idx) => (
-                <li key={idx} className="flex items-start">
-                  <div className="w-2 h-2 bg-accent rounded-full mt-2.5 mr-4 shrink-0" />
-                  <span className="text-muted-foreground text-lg">{item}</span>
-                </li>
-              ))}
-            </ul>
-            <p className="text-lg text-muted-foreground">
-              Smartcare Labs is part of Smartcare's broader vision to strengthen healthcare
-              delivery through practical, locally relevant digital health solutions.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 2 */}
-      <section className="py-20 bg-muted/30">
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="font-heading font-bold text-3xl lg:text-4xl text-foreground mb-6">
-              What Smartcare Labs does
-            </h2>
-            <p className="text-lg text-muted-foreground mb-6">
-              Smartcare Labs enables participating users to submit laboratory result data
-              through a secure digital platform and receive structured interpretation outputs
-              that can support professional review, workflow efficiency, and clearer
-              communication.
-            </p>
-            <p className="text-lg text-muted-foreground mb-6">
-              Smartcare Labs is powered by BloodGPT, an advanced AI platform designed to
-              support the interpretation of laboratory data at scale.
-            </p>
-            <p className="text-lg text-muted-foreground mb-6">
-              Depending on the user context, the platform can support:
-            </p>
-            <ul className="space-y-3 mb-6">
-              {supportedUsers.map((item, idx) => (
-                <li key={idx} className="flex items-start">
-                  <CheckCircle2 className="h-5 w-5 text-accent mt-1 mr-3 shrink-0" />
-                  <span className="text-muted-foreground text-lg">{item}</span>
-                </li>
-              ))}
-            </ul>
-            <p className="text-lg text-muted-foreground">
-              The goal is not simply digitisation, but better access to useful interpretation
-              support within everyday healthcare practice.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 3 */}
-      <section className="py-20">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-12">
+          <div className="text-center mb-12 max-w-3xl mx-auto">
             <h2 className="font-heading font-bold text-3xl lg:text-4xl text-foreground mb-4">
-              Who Smartcare Labs is for
+              Why Smartcare Labs
             </h2>
+            <p className="text-lg text-muted-foreground">
+              Built to deliver speed, accuracy, and scale across modern healthcare systems.
+            </p>
           </div>
-          <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-            {audiences.map((aud, idx) => (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {whyCards.map((card, idx) => (
               <Card
                 key={idx}
                 className="border-0 bg-white/50 backdrop-blur-sm hover:shadow-xl transition-all duration-300"
               >
                 <CardHeader>
                   <div className="bg-gradient-to-r from-primary to-accent p-3 rounded-xl w-fit mb-4">
-                    <aud.icon className="h-6 w-6 text-white" />
+                    <card.icon className="h-6 w-6 text-white" />
                   </div>
                   <CardTitle className="font-heading text-xl text-foreground">
-                    {aud.title}
+                    {card.title}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground">{aud.description}</p>
+                  <p className="text-muted-foreground">{card.description}</p>
                 </CardContent>
               </Card>
             ))}
@@ -223,109 +171,108 @@ const SmartcareLabs = () => {
         </div>
       </section>
 
-      {/* Section 4 */}
+      {/* How It Works */}
       <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="font-heading font-bold text-3xl lg:text-4xl text-foreground mb-6">
-              Why this matters
+          <div className="text-center mb-12 max-w-3xl mx-auto">
+            <h2 className="font-heading font-bold text-3xl lg:text-4xl text-foreground mb-4">
+              From Data to Decision —{" "}
+              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                In Minutes
+              </span>
             </h2>
-            <p className="text-lg text-muted-foreground mb-6">
-              Across many healthcare settings, access to timely and well-structured lab
-              interpretation remains uneven. This can affect workflow, turnaround time, and
-              the clarity with which results are communicated to clinicians and patients.
-            </p>
-            <p className="text-lg text-muted-foreground mb-6">
-              Smartcare Labs is built around a simple idea: useful digital health tools should
-              be practical, credible, and relevant to the realities of healthcare delivery in
-              our environment.
-            </p>
-            <p className="text-lg text-muted-foreground mb-6">
-              By making interpretation support more accessible and more structured, Smartcare
-              Labs aims to contribute to:
-            </p>
-            <ul className="space-y-3">
-              {benefits.map((item, idx) => (
-                <li key={idx} className="flex items-start">
-                  <div className="w-2 h-2 bg-accent rounded-full mt-2.5 mr-4 shrink-0" />
-                  <span className="text-muted-foreground text-lg">{item}</span>
-                </li>
-              ))}
-            </ul>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+            {steps.map((step, idx) => (
+              <div key={idx} className="relative">
+                <Card className="border-0 bg-white/70 backdrop-blur-sm h-full hover:shadow-xl transition-all duration-300">
+                  <CardHeader>
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="bg-gradient-to-r from-primary to-accent p-3 rounded-xl">
+                        <step.icon className="h-6 w-6 text-white" />
+                      </div>
+                      <span className="font-heading font-bold text-3xl text-primary/20">
+                        0{idx + 1}
+                      </span>
+                    </div>
+                    <CardTitle className="font-heading text-lg text-foreground">
+                      {step.title}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground text-sm">{step.description}</p>
+                  </CardContent>
+                </Card>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Section 5 */}
+      {/* What This Means for Your Organization */}
       <section className="py-20">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto">
-            <h2 className="font-heading font-bold text-3xl lg:text-4xl text-foreground mb-6">
-              Built for practical use in our context
-            </h2>
-            <p className="text-lg text-muted-foreground mb-6">
-              Smartcare Labs is introduced with a strong focus on local relevance, usability,
-              and partner-driven implementation.
-            </p>
-            <p className="text-lg text-muted-foreground mb-6">
-              That means paying attention not only to technology, but also to:
-            </p>
-            <ul className="space-y-3 mb-6">
-              {practicalFocus.map((item, idx) => (
-                <li key={idx} className="flex items-start">
-                  <div className="w-2 h-2 bg-accent rounded-full mt-2.5 mr-4 shrink-0" />
-                  <span className="text-muted-foreground text-lg">{item}</span>
-                </li>
+            <div className="text-center mb-12">
+              <h2 className="font-heading font-bold text-3xl lg:text-4xl text-foreground mb-4">
+                What This Means for Your Organization
+              </h2>
+              <p className="text-lg text-muted-foreground">
+                Operational impact across teams, workflows, and care delivery.
+              </p>
+            </div>
+            <div className="grid md:grid-cols-2 gap-4">
+              {orgBenefits.map((benefit, idx) => (
+                <div
+                  key={idx}
+                  className="flex items-start gap-3 p-4 rounded-xl bg-white/50 backdrop-blur-sm border border-border/50"
+                >
+                  <CheckCircle2 className="h-5 w-5 text-accent mt-0.5 shrink-0" />
+                  <span className="text-foreground">{benefit}</span>
+                </div>
               ))}
-            </ul>
-            <p className="text-lg text-muted-foreground mb-10">
-              Our approach is grounded in implementation, not theory.
-            </p>
-
-            {/* Mid-page CTA */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4 border-t border-border/50">
-              <div className="pt-8 flex flex-col sm:flex-row gap-4 justify-center w-full">
-                <Button asChild variant="hero" size="lg">
-                  <Link to="/?inquiry=labs#contact">
-                    Request Access <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
-                <Button asChild variant="outline" size="lg">
-                  <Link to="/#contact">Partner With Us</Link>
-                </Button>
-              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Section 6 */}
+      {/* Who It's For */}
       <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="font-heading font-bold text-3xl lg:text-4xl text-foreground mb-6">
-              Why partner with Smartcare
+          <div className="text-center mb-12">
+            <h2 className="font-heading font-bold text-3xl lg:text-4xl text-foreground mb-4">
+              Who It's For
             </h2>
-            <p className="text-lg text-muted-foreground mb-6">
-              Smartcare brings local market understanding, healthcare ecosystem engagement,
-              and implementation support to the deployment of practical digital health
-              solutions.
-            </p>
-            <p className="text-lg text-muted-foreground mb-6">
-              For Smartcare Labs, that means partners benefit from:
-            </p>
-            <ul className="space-y-3 mb-6">
-              {partnerBenefits.map((item, idx) => (
-                <li key={idx} className="flex items-start">
-                  <CheckCircle2 className="h-5 w-5 text-accent mt-1 mr-3 shrink-0" />
-                  <span className="text-muted-foreground text-lg">{item}</span>
-                </li>
-              ))}
-            </ul>
-            <p className="text-lg text-muted-foreground">
-              Whether you are a laboratory, professional association, healthcare provider, or
-              institutional stakeholder, we welcome conversations on how Smartcare Labs can
-              support your goals.
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
+            {useCases.map((uc, idx) => (
+              <Card
+                key={idx}
+                className="border-0 bg-white/50 backdrop-blur-sm hover:shadow-xl transition-all duration-300 text-center"
+              >
+                <CardContent className="pt-8 pb-6 flex flex-col items-center">
+                  <div className="bg-gradient-to-r from-primary to-accent p-3 rounded-xl mb-4">
+                    <uc.icon className="h-6 w-6 text-white" />
+                  </div>
+                  <p className="font-heading font-semibold text-foreground">{uc.title}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Strategic Positioning */}
+      <section className="py-20">
+        <div className="container mx-auto px-6">
+          <div className="max-w-3xl mx-auto text-center">
+            <p className="font-heading text-2xl lg:text-3xl text-foreground leading-relaxed">
+              Smartcare Labs combines Smartcare's healthcare infrastructure approach with the
+              intelligence of{" "}
+              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent font-bold">
+                BloodGPT
+              </span>{" "}
+              to deliver scalable, high-quality diagnostics across Africa.
             </p>
           </div>
         </div>
@@ -334,24 +281,18 @@ const SmartcareLabs = () => {
       {/* Final CTA */}
       <section className="py-20">
         <div className="container mx-auto px-6">
-          <div className="bg-gradient-to-r from-primary to-accent p-8 lg:p-12 rounded-2xl text-white text-center max-w-5xl mx-auto">
-            <Microscope className="h-12 w-12 mx-auto mb-6 text-white/90" />
+          <div className="bg-gradient-to-r from-primary to-accent p-8 lg:p-14 rounded-2xl text-white text-center max-w-5xl mx-auto">
             <h3 className="font-heading font-bold text-3xl lg:text-4xl mb-6">
-              Building practical, scalable health technology
+              Ready to Transform Diagnostic Delivery?
             </h3>
-            <p className="text-white/90 mb-6 max-w-3xl mx-auto text-lg">
-              Smartcare Labs is part of our commitment to building practical, scalable health
-              technology solutions that improve access, quality, and coordination across
-              African healthcare systems.
-            </p>
-            <p className="text-white/90 mb-8 max-w-3xl mx-auto text-lg">
-              Smartcare Labs combines Smartcare's implementation approach with BloodGPT's AI
-              capabilities to deliver practical, scalable diagnostic support.
+            <p className="text-white/90 mb-8 max-w-2xl mx-auto text-lg">
+              Join the laboratories, hospitals, and partners scaling diagnostic intelligence
+              with Smartcare Labs.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button asChild size="lg" className="bg-white text-primary hover:bg-white/90">
                 <Link to="/?inquiry=labs#contact">
-                  Request Access <ArrowRight className="ml-2 h-4 w-4" />
+                  Request Access to Smartcare Labs <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
               <Button
@@ -360,7 +301,7 @@ const SmartcareLabs = () => {
                 variant="outline"
                 className="border-white text-white hover:bg-white/10 bg-transparent"
               >
-                <Link to="/#contact">Partner With Us</Link>
+                <Link to="/?inquiry=labs#contact">Partner with Smartcare</Link>
               </Button>
             </div>
           </div>
