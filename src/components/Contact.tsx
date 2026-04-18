@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useState, useEffect, useRef, useCallback } from "react";
+import { useLocation } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 
 // Form validation schema
@@ -30,6 +31,7 @@ const Contact = () => {
   const turnstileRef = useRef<HTMLDivElement>(null);
   const widgetIdRef = useRef<string | null>(null);
   const { toast } = useToast();
+  const location = useLocation();
   
   const {
     register,
@@ -93,6 +95,14 @@ const Contact = () => {
       }
     };
   }, [renderWidget]);
+
+  // Pre-select inquiry type from URL ?inquiry=labs
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    if (params.get("inquiry") === "labs") {
+      setValue("inquiryType", "smartcare-labs");
+    }
+  }, [location.search, setValue]);
 
   const onSubmit = async (data: ContactFormData) => {
     if (!turnstileToken) {
@@ -280,12 +290,13 @@ const Contact = () => {
 
                   <div className="space-y-2">
                     <Label htmlFor="inquiryType">Inquiry Type</Label>
-                    <Select onValueChange={(value) => setValue("inquiryType", value)}>
+                    <Select value={watch("inquiryType") || ""} onValueChange={(value) => setValue("inquiryType", value)}>
                       <SelectTrigger>
                         <SelectValue placeholder="Select inquiry type" />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="higo-pilot">Participation in the Higo Pilot (Lagos or Akwa Ibom only)</SelectItem>
+                        <SelectItem value="smartcare-labs">Request Access to Smartcare Labs</SelectItem>
                         <SelectItem value="healthcare-provider">Healthcare Provider or Facility Inquiry</SelectItem>
                         <SelectItem value="government">Government or Public Sector Inquiry</SelectItem>
                         <SelectItem value="technology">Technology or Implementation Partnership</SelectItem>
