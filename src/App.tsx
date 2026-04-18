@@ -9,6 +9,7 @@ import ProtectedRoute from "@/components/ProtectedRoute";
 import Index from "./pages/Index";
 import SmartcareLabs from "./pages/SmartcareLabs";
 import HigoDevice from "./pages/HigoDevice";
+import RemoteDiagnosticDevices from "./pages/RemoteDiagnosticDevices";
 import Auth from "./pages/Auth";
 import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
