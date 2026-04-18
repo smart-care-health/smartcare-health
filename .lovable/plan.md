@@ -1,38 +1,61 @@
 
 
-## Plan: Remote Diagnostic Devices category page
+## Plan: Conversion-optimized Smartcare Labs page redesign
 
-### New file: `src/pages/RemoteDiagnosticDevices.tsx` — `/solutions/remote-diagnostic-devices`
+Full rewrite of `src/pages/SmartcareLabs.tsx` to a more focused, conversion-driven layout. Brand logo added as an asset.
 
-A concise category-level gateway page following the same design pattern as `HigoDevice.tsx` and `SmartcareLabs.tsx` (Header, Footer, gradient badge, `font-heading`, `container mx-auto px-6`, `py-20` spacing, Card/Button).
+### New asset
+- Copy `user-uploads://Smartcare_Labs_powered_by_BloodGPT_logo.jpeg` → `src/assets/smartcare-labs-logo.jpeg` (imported as ES module).
 
-**Sections (exact provided copy):**
+### Page structure (`src/pages/SmartcareLabs.tsx` — rewritten)
 
-1. **Breadcrumb** — `Solutions → Remote Diagnostic Devices`
-2. **Hero** — gradient badge "🩺 Remote Diagnostic Devices", title, subtitle, body paragraphs. Single CTA: "Explore Higo Device and App" → `/solutions/higo-device`.
-3. **What We Do** — headline + intro + 4-item bullet list (data capture, remote review, workflow efficiency, expertise access) with accent dots. Optional small icon row (Activity, Stethoscope, Network, Users).
-4. **Our Current Deployment** — featured Card highlighting Higo Device and App, with a "Now Available" badge, brief description, and the CTA "Explore Higo Device and App" → `/solutions/higo-device`.
-5. **Looking Ahead** — headline + content. 3-card grid teasing future categories (Imaging, Laboratory Diagnostics, Point-of-Care Tools) with subtle "Coming Soon" treatment using icons (Scan, FlaskConical, Activity).
-6. **Final CTA banner** — gradient banner matching existing patterns with closing line and two CTAs: "Explore Higo Device and App" (`/solutions/higo-device`) and "Contact Us" (`/#contact`).
+1. **Hero** (centered, soft white/gradient background)
+   - Logo image centered above headline, max-width ~`360px`, on a `bg-white` rounded panel with generous padding so the logo's blue/teal renders cleanly against the page.
+   - H1: "Smartcare Labs"
+   - Subheadline: "AI-Powered Diagnostic Intelligence for Modern Healthcare"
+   - Descriptor paragraph (powered-by-BloodGPT positioning).
+   - Two CTAs above the fold:
+     - Primary `variant="hero"` → "Request Access to Smartcare Labs" → `/?inquiry=labs#contact`
+     - Secondary `variant="outline"` → "Partner with Smartcare" → `/?inquiry=labs#contact`
 
-### Routing note
-The user's brief shows `/higo-device-and-app`, but the existing Higo page lives at `/solutions/higo-device`. All "Explore Higo" CTAs will use `/solutions/higo-device` to keep links consistent and avoid breakage.
+2. **Why Smartcare Labs** (5-card grid, 2-3 cols responsive)
+   - Cards: BloodGPT-powered, Faster Turnaround, Diagnostic Accuracy, Scalable, Built for African Contexts.
+   - Icons: `Brain`, `Zap`, `Target`, `Network`, `Globe2`.
 
-### Modified files
+3. **How It Works** ("From Data to Decision — In Minutes")
+   - 4-step horizontal numbered flow with connecting visual on desktop, stacked on mobile.
+   - Icons: `Upload`, `Cpu`, `FileText`, `Stethoscope`.
 
-**`src/App.tsx`**
-- Import `RemoteDiagnosticDevices`
-- Add `<Route path="/solutions/remote-diagnostic-devices" element={<RemoteDiagnosticDevices />} />` before catch-all.
+4. **What This Means for Your Organization** (5 benefit bullets with check icons in a clean two-column list).
 
-**`src/components/Solutions.tsx`**
-- Update the existing "Remote Diagnostic Devices" card so its "Learn More" link points to `/solutions/remote-diagnostic-devices` (the new category page) instead of jumping straight to the Higo product page. The Higo card remains accessible from the category page and from the header dropdown.
+5. **Who It's For** (5 use-case cards in responsive grid)
+   - Diagnostic Labs, Hospitals & Clinics, Telemedicine Platforms, Health Insurance, Public Health Programs.
+   - Icons: `FlaskConical`, `Hospital`, `Video`, `ShieldCheck`, `Building2`.
 
-**`src/components/Header.tsx`**
-- Add a new entry in the Solutions dropdown (desktop + mobile sub-items) for "Remote Diagnostic Devices" → `/solutions/remote-diagnostic-devices`, placed above the Higo Device sub-link to reflect category → product hierarchy. Icon: `Stethoscope` (Higo can shift to `Activity` or keep Stethoscope; will pick distinct icons to avoid duplication — Stethoscope for the category, `Smartphone` or `HeartPulse` for Higo).
+6. **Strategic Positioning** — short, centered single-paragraph statement on muted background.
+
+7. **Final CTA banner** — gradient banner ("Ready to Transform Diagnostic Delivery?") with both CTAs (same routing as hero).
+
+### CTA routing (already supported)
+All CTAs use `<Link to="/?inquiry=labs#contact">`. `Contact.tsx` already:
+- Reads `?inquiry=labs` and pre-selects the "Request Access to Smartcare Labs" dropdown option (line 99-105).
+- Renders at `#contact` and `Index.tsx` smooth-scrolls to the hash.
+
+No changes needed to `Contact.tsx`, `Index.tsx`, `Header.tsx`, or routing.
+
+### Removed sections (vs current page)
+- "A smarter way to support lab result interpretation"
+- "What Smartcare Labs does"
+- "Why this matters"
+- "Built for practical use in our context"
+- "Why partner with Smartcare"
+- "Building practical, scalable health technology" final card
+
+These are replaced by the leaner conversion-focused structure above. Tone shifts from explanatory to confident/outcome-focused. No mention of pilot or testing.
 
 ### Design notes
-- Mobile-first; grids collapse to single column.
-- Reuse `Card` with `border-0 bg-white/50 backdrop-blur-sm` and gradient buttons via `variant="hero"`.
-- Future-deployment cards rendered with muted styling + "Coming Soon" pill, consistent with existing solution status badges.
-- No new assets required.
+- Maintain existing tokens: `font-heading`, `container mx-auto px-6`, `py-20`, `Card border-0 bg-white/50 backdrop-blur-sm`, primary→accent gradient text and buttons.
+- Logo: `<img>` with `alt="Smartcare Labs powered by BloodGPT"`, `loading="eager"`, sized via Tailwind (`max-w-sm w-full h-auto`), inside a clean `bg-white rounded-2xl shadow-sm p-6` container; no decorative clutter behind it.
+- Subtle hover transitions on cards (already standard).
+- Mobile-first; all grids collapse to single column.
 
