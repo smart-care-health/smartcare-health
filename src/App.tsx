@@ -9,6 +9,7 @@ import ProtectedRoute from "@/components/ProtectedRoute";
 import Index from "./pages/Index";
 import SmartcareLabs from "./pages/SmartcareLabs";
 import HigoDevice from "./pages/HigoDevice";
+import RemoteDiagnosticDevices from "./pages/RemoteDiagnosticDevices";
 import Auth from "./pages/Auth";
 import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
@@ -45,6 +46,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/solutions/smartcare-labs" element={<SmartcareLabs />} />
+            <Route path="/solutions/remote-diagnostic-devices" element={<RemoteDiagnosticDevices />} />
             <Route path="/solutions/higo-device" element={<HigoDevice />} />
             <Route path="/auth" element={<Auth />} />
             <Route 

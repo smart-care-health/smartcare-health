@@ -9,7 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Menu, X, Activity, User, LogOut, ChevronDown, FlaskConical, Stethoscope } from "lucide-react";
+import { Menu, X, Activity, User, LogOut, ChevronDown, FlaskConical, Stethoscope, HeartPulse } from "lucide-react";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -78,20 +78,29 @@ const Header = () => {
                         </div>
                       </DropdownMenuItem>
                       <DropdownMenuItem asChild className="cursor-pointer">
-                        <Link to="/solutions/smartcare-labs">
-                          <FlaskConical className="h-4 w-4 mr-2 text-primary" />
+                        <Link to="/solutions/remote-diagnostic-devices">
+                          <Stethoscope className="h-4 w-4 mr-2 text-primary" />
                           <div>
-                            <div className="font-medium">Smartcare Labs</div>
-                            <div className="text-xs text-muted-foreground">Innovation in primary healthcare</div>
+                            <div className="font-medium">Remote Diagnostic Devices</div>
+                            <div className="text-xs text-muted-foreground">Connected diagnostic technologies</div>
                           </div>
                         </Link>
                       </DropdownMenuItem>
                       <DropdownMenuItem asChild className="cursor-pointer">
                         <Link to="/solutions/higo-device">
-                          <Stethoscope className="h-4 w-4 mr-2 text-primary" />
+                          <HeartPulse className="h-4 w-4 mr-2 text-primary" />
                           <div>
                             <div className="font-medium">Higo Device and App</div>
                             <div className="text-xs text-muted-foreground">Remote diagnostic technology</div>
+                          </div>
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem asChild className="cursor-pointer">
+                        <Link to="/solutions/smartcare-labs">
+                          <FlaskConical className="h-4 w-4 mr-2 text-primary" />
+                          <div>
+                            <div className="font-medium">Smartcare Labs</div>
+                            <div className="text-xs text-muted-foreground">Innovation in primary healthcare</div>
                           </div>
                         </Link>
                       </DropdownMenuItem>
@@ -161,20 +170,28 @@ const Header = () => {
                   {item.name === "Solutions" && (
                     <div className="pl-4 mt-2 space-y-2 border-l-2 border-border">
                       <Link
-                        to="/solutions/smartcare-labs"
+                        to="/solutions/remote-diagnostic-devices"
                         className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 flex items-center"
                         onClick={() => setIsMenuOpen(false)}
                       >
-                        <FlaskConical className="h-4 w-4 mr-2" />
-                        Smartcare Labs
+                        <Stethoscope className="h-4 w-4 mr-2" />
+                        Remote Diagnostic Devices
                       </Link>
                       <Link
                         to="/solutions/higo-device"
                         className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 flex items-center"
                         onClick={() => setIsMenuOpen(false)}
                       >
-                        <Stethoscope className="h-4 w-4 mr-2" />
+                        <HeartPulse className="h-4 w-4 mr-2" />
                         Higo Device and App
+                      </Link>
+                      <Link
+                        to="/solutions/smartcare-labs"
+                        className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 flex items-center"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        <FlaskConical className="h-4 w-4 mr-2" />
+                        Smartcare Labs
                       </Link>
                     </div>
                   )}

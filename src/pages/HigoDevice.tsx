@@ -103,7 +103,7 @@ const HigoDevice = () => {
               <BreadcrumbSeparator />
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
-                  <Link to="/#solutions">Remote Diagnostic Devices</Link>
+                  <Link to="/solutions/remote-diagnostic-devices">Remote Diagnostic Devices</Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
