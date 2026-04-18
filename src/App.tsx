@@ -46,6 +46,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/solutions/smartcare-labs" element={<SmartcareLabs />} />
+            <Route path="/solutions/remote-diagnostic-devices" element={<RemoteDiagnosticDevices />} />
             <Route path="/solutions/higo-device" element={<HigoDevice />} />
             <Route path="/auth" element={<Auth />} />
             <Route 
