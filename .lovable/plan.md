@@ -1,61 +1,61 @@
 
+## Plan: Smartcare Labs — "How It Works" enterprise deep-dive page
 
-## Plan: Conversion-optimized Smartcare Labs page redesign
+### New file: `src/pages/SmartcareLabsHowItWorks.tsx`
 
-Full rewrite of `src/pages/SmartcareLabs.tsx` to a more focused, conversion-driven layout. Brand logo added as an asset.
+Route: `/solutions/smartcare-labs/how-it-works`
 
-### New asset
-- Copy `user-uploads://Smartcare_Labs_powered_by_BloodGPT_logo.jpeg` → `src/assets/smartcare-labs-logo.jpeg` (imported as ES module).
+Same shell as existing solution pages (`Header`, `Footer`, `container mx-auto px-6`, `py-20`, `font-heading`, `Card border-0 bg-white/50 backdrop-blur-sm`, gradient `variant="hero"` buttons). Slightly more technical/architectural tone than the overview page.
 
-### Page structure (`src/pages/SmartcareLabs.tsx` — rewritten)
+Sections:
 
-1. **Hero** (centered, soft white/gradient background)
-   - Logo image centered above headline, max-width ~`360px`, on a `bg-white` rounded panel with generous padding so the logo's blue/teal renders cleanly against the page.
-   - H1: "Smartcare Labs"
-   - Subheadline: "AI-Powered Diagnostic Intelligence for Modern Healthcare"
-   - Descriptor paragraph (powered-by-BloodGPT positioning).
-   - Two CTAs above the fold:
-     - Primary `variant="hero"` → "Request Access to Smartcare Labs" → `/?inquiry=labs#contact`
-     - Secondary `variant="outline"` → "Partner with Smartcare" → `/?inquiry=labs#contact`
+1. **Hero** — centered, more enterprise/architectural feel than overview hero (no logo block; instead an abstract systems/workflow visual built with CSS — concentric/node diagram using Tailwind shapes + lucide icons, no new asset required).
+   - H1: "How Smartcare Labs Works"
+   - Subtitle: "A deeper look at the platform behind AI-powered lab interpretation"
+   - Body copy as supplied (Smartcare-led, BloodGPT as interpretation tech).
+   - CTAs:
+     - Primary `variant="hero"` → "Talk to Smartcare" → `/?inquiry=labs#contact`
+     - Secondary `variant="outline"` → "Request Access" → `/?inquiry=labs#contact`
+     - Tertiary text link (`variant="link"`) → "← Back to Smartcare Labs Overview" → `/solutions/smartcare-labs`
 
-2. **Why Smartcare Labs** (5-card grid, 2-3 cols responsive)
-   - Cards: BloodGPT-powered, Faster Turnaround, Diagnostic Accuracy, Scalable, Built for African Contexts.
-   - Icons: `Brain`, `Zap`, `Target`, `Network`, `Globe2`.
+2. **What Smartcare Labs Does** — 5 feature cards (icons: `FileBarChart`, `MessageSquare`, `Stethoscope`, `Repeat`, `Sparkles`).
 
-3. **How It Works** ("From Data to Decision — In Minutes")
-   - 4-step horizontal numbered flow with connecting visual on desktop, stacked on mobile.
-   - Icons: `Upload`, `Cpu`, `FileText`, `Stethoscope`.
+3. **How the Platform Works** — 4-step workflow rendered as a connected architecture diagram. Desktop: horizontal nodes with connector lines between cards (absolutely positioned thin gradient line + arrow icons). Mobile: vertical stack with vertical connectors. Icons: `Inbox`, `Database`, `Brain`, `Send`. Each card numbered 01–04 with title + descriptive paragraph as supplied.
 
-4. **What This Means for Your Organization** (5 benefit bullets with check icons in a clean two-column list).
+4. **Why This Matters for Enterprise Labs** — 4 benefit blocks in 2-col grid. Icons: `FileCheck2`, `Users`, `TrendingUp`, `Award`.
 
-5. **Who It's For** (5 use-case cards in responsive grid)
-   - Diagnostic Labs, Hospitals & Clinics, Telemedicine Platforms, Health Insurance, Public Health Programs.
-   - Icons: `FlaskConical`, `Hospital`, `Video`, `ShieldCheck`, `Building2`.
+5. **Deployment and Integration Options** — 4 cards. Icons: `Layout`, `Plug`, `ServerCog`, `GitBranch`.
 
-6. **Strategic Positioning** — short, centered single-paragraph statement on muted background.
+6. **Data Flow, Privacy, and Control** — two-column layout: left = body copy; right = supporting bullet list with check icons. Muted background.
 
-7. **Final CTA banner** — gradient banner ("Ready to Transform Diagnostic Delivery?") with both CTAs (same routing as hero).
+7. **Smartcare-Led Deployment in Africa** — emphasis section using gradient accent border / left-aligned narrative + bulleted leadership responsibilities. Closing line clarifies BloodGPT as interpretation tech, Smartcare leads regional initiative. Visually distinct background panel (`bg-gradient-to-br from-primary/5 to-accent/5 rounded-2xl`).
 
-### CTA routing (already supported)
-All CTAs use `<Link to="/?inquiry=labs#contact">`. `Contact.tsx` already:
-- Reads `?inquiry=labs` and pre-selects the "Request Access to Smartcare Labs" dropdown option (line 99-105).
-- Renders at `#contact` and `Index.tsx` smooth-scrolls to the hash.
+8. **Who This Page Is For** — 6-item audience grid (3 cols on desktop, 2 on tablet, 1 on mobile). Icons from lucide (`FlaskConical`, `Network`, `Hospital`, `Building2`, `Layers`, `Handshake`).
 
-No changes needed to `Contact.tsx`, `Index.tsx`, `Header.tsx`, or routing.
+9. **Closing CTA banner** — same gradient banner pattern as overview page bottom CTA, with three buttons: "Talk to Smartcare", "Request Access", "Partner With Us" — all → `/?inquiry=labs#contact`. Headline + body as supplied.
 
-### Removed sections (vs current page)
-- "A smarter way to support lab result interpretation"
-- "What Smartcare Labs does"
-- "Why this matters"
-- "Built for practical use in our context"
-- "Why partner with Smartcare"
-- "Building practical, scalable health technology" final card
+### Edits
 
-These are replaced by the leaner conversion-focused structure above. Tone shifts from explanatory to confident/outcome-focused. No mention of pilot or testing.
+**`src/App.tsx`** — add route:
+```tsx
+<Route path="/solutions/smartcare-labs/how-it-works" element={<SmartcareLabsHowItWorks />} />
+```
+(import added)
+
+**`src/pages/SmartcareLabs.tsx`** — add new tertiary CTA in hero, beneath the existing two buttons:
+- Render below the `flex-col sm:flex-row gap-4` button row, as a small centered `variant="link"` (or ghost) button with arrow icon: "See how Smartcare Labs Works" → `/solutions/smartcare-labs/how-it-works`. Visually subordinate (muted color, no gradient, smaller text).
+
+### Positioning & tone guardrails
+- Smartcare Health Solutions framed as the lead throughout; BloodGPT only mentioned as interpretation technology in hero body + Section 6.
+- No mention of pilot anywhere.
+- Measured language in Section 5 (no regulatory overstatement).
+- Copy used verbatim from the user's spec.
 
 ### Design notes
-- Maintain existing tokens: `font-heading`, `container mx-auto px-6`, `py-20`, `Card border-0 bg-white/50 backdrop-blur-sm`, primary→accent gradient text and buttons.
-- Logo: `<img>` with `alt="Smartcare Labs powered by BloodGPT"`, `loading="eager"`, sized via Tailwind (`max-w-sm w-full h-auto`), inside a clean `bg-white rounded-2xl shadow-sm p-6` container; no decorative clutter behind it.
-- Subtle hover transitions on cards (already standard).
-- Mobile-first; all grids collapse to single column.
+- Reuse existing tokens; no new colors, no new fonts, no new image assets.
+- Workflow diagram (Section 2) built with Tailwind + lucide — gradient connector lines via `bg-gradient-to-r from-primary to-accent h-px` with chevron icons at junctions; on mobile collapses to vertical stack with `Plus`/`ArrowDown` connectors.
+- Section 6 uses an asymmetric two-column layout to feel different from the overview page's symmetric grids.
+- All grids mobile-first, collapsing to single column.
 
+### No changes to
+`Contact.tsx`, `Header.tsx`, `Solutions.tsx`, routing logic. `?inquiry=labs` is already wired to preselect the labs option.

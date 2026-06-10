@@ -8,6 +8,7 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import Index from "./pages/Index";
 import SmartcareLabs from "./pages/SmartcareLabs";
+import SmartcareLabsHowItWorks from "./pages/SmartcareLabsHowItWorks";
 import HigoDevice from "./pages/HigoDevice";
 import RemoteDiagnosticDevices from "./pages/RemoteDiagnosticDevices";
 import Auth from "./pages/Auth";
@@ -46,6 +47,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/solutions/smartcare-labs" element={<SmartcareLabs />} />
+            <Route path="/solutions/smartcare-labs/how-it-works" element={<SmartcareLabsHowItWorks />} />
             <Route path="/solutions/remote-diagnostic-devices" element={<RemoteDiagnosticDevices />} />
             <Route path="/solutions/higo-device" element={<HigoDevice />} />
             <Route path="/auth" element={<Auth />} />
