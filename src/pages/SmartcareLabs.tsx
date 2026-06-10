@@ -133,6 +133,13 @@ const SmartcareLabs = () => {
                 <Link to="/?inquiry=labs#contact">Partner with Smartcare</Link>
               </Button>
             </div>
+            <div className="mt-6">
+              <Button asChild variant="link" className="text-muted-foreground">
+                <Link to="/solutions/smartcare-labs/how-it-works">
+                  See how Smartcare Labs Works <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
           </div>
         </div>
       </section>
